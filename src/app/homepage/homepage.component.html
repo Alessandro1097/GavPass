@@ -1,3 +1,26 @@
-<p>
-  homepage works!
-</p>
+<div [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <img src="../assets/logo.png" alt="" width="200" style="margin-left: 10px">
+    <input type="text" class="search-style" placeholder="Cerca" />
+    <img src="../assets/user.png" alt="" width="30" style="margin-right: 10px;">
+    <p class="cursor-pointer white-text">example@tuttomail.com</p>
+  </mat-toolbar>
+
+  <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+      <mat-card class="example-card cursor-pointer" *ngFor="let card of cards">
+        <mat-card-content>
+          <span style="color: white; font-size: 18px;">{{card.type}}</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-sidenav-container>
+</div>
