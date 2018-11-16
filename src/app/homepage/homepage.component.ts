@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, OnDestroy} from '@angular/core';
 import {CARDS} from '../mock-card';
+import {FIELDS} from '../navbar-mock';
 
 @Component({
   selector: 'app-homepage',
@@ -14,7 +15,7 @@ export class HomepageComponent implements OnDestroy {
 
   mobileQuery: MediaQueryList;
 
-  fillerNav = Array.from({length: 1}, (_, i) => `Nav Item super mega birbante ${i + 1}`);
+  fields = FIELDS;
 
   private _mobileQueryListener: () => void;
 
