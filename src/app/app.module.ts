@@ -8,11 +8,14 @@ import {DemoMaterialModule} from './material-module';
 import {MatNativeDateModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { CardComponent } from './card/card.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent
+    HomepageComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
