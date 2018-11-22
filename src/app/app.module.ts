@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent, DialogOverviewExampleDialog} from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 import {MatNativeDateModule} from '@angular/material';
@@ -20,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CardDetailComponent,
     HomepageComponent,
     DashboardComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
+  entryComponents: [AppComponent, DialogOverviewExampleDialog],
   providers: [],
   bootstrap: [AppComponent]
 })
