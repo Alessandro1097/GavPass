@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~font-awesome/css/font-awesome.css";
+
+body {
+  margin: 0;
+}
+
+p {
+  color: black;
+  font-size: 20px;
+}
+
+.navbar {
+  background-color: #3f51b5;
+  height: 64px;
+  padding: 0;
+}
+
+.button-hamburger {
+  background-color: #217bcc;
+  border: none;
+  height: 64px;
+}
+
+.button-hamburger:hover {
+  background-color: #1f72bc;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+.search-style {
+  height: 35px;
+  width: 500px;
+  border: 0 solid #ccc;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: auto;
+  display: block;
+  background-color: white;
+  padding-left: 10px;
+  color: rgb(51, 51, 51);
+  font-size: 18px;
+}
+
+input[type="text"].search-style::-webkit-input-placeholder {
+  color: rgb(121, 121, 121);
+  font-size: 18px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Modal styles */
+.top-bar {
+  background-color: #3f51b5;
+  padding: 20px 0 20px 0;
+  display: flex;
+  position: relative;
+}
+.title-modal {
+  color: white;
+  margin: 0;
+}
+.close-modal-button {
+  position: absolute;
+  right: 24px;
+  background-color: #3f51b5;
+  border: none;
+  cursor: pointer;
+}
+.padding-modal {
+  padding: 24px;
+}
+.mat-dialog-container {
+  padding: 0 !important;
+}
+.form-url {
+  width: 100%;
+  margin-top: 15px;
+}
+.user-container {
+  display: flex;
+  justify-content: space-between;
+}
+.name-width {
+  width: 45%;
+}
+.site-section {
+  display: flex;
+  justify-content: space-between;
+}
+.note-section {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.button-section {
+  display: flex;
+  justify-content: flex-end;
+}
+.button-space {
+  margin-right: 20px !important;
+}

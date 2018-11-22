@@ -1,0 +1,13 @@
+<h2 style="margin-left: 20px">My category</h2>
+  <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <div *ngFor="let card of cards">
+      <a routerLink="/detail/{{card.id}}" style="text-decoration: none">
+        <mat-card class="example-card" >
+          <mat-card-content>
+            <span style="color: white; font-size: 18px;">{{card.type}}</span>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+<app-card-detail [card]="selectedCard"></app-card-detail>
