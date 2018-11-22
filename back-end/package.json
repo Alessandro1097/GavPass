@@ -1,0 +1,26 @@
+{
+  "name": "gavpass",
+  "version": "1.0.0",
+  "description": "GavPass",
+  "main": "Main.js",
+  "dependencies": {
+    "mongodb": "^3.1.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alessandro1097/GavPass.git"
+  },
+  "keywords": [
+    "password"
+  ],
+  "author": "Gai Andrea e Cavuoti Alessandro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alessandro1097/GavPass/issues"
+  },
+  "homepage": "https://github.com/Alessandro1097/GavPass#readme"
+}
