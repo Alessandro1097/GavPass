@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnDestroy, Inject} from '@angular/core';
 import {FIELDS} from './navbar-mock';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {CARDS} from './mock-card';
 
 export interface DialogData {
   animal: string;
@@ -42,13 +43,15 @@ export class AppComponent implements OnDestroy {
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
+  templateUrl: 'dialog-add-category.html',
 })
 export class DialogOverviewExampleDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  cardCategories = CARDS;
 
   onNoClick(): void {
     this.dialogRef.close();

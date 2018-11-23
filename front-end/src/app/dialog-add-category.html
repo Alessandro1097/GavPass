@@ -1,5 +1,5 @@
 <div class="top-bar">
-  <h3 class="title-modal" style="margin:auto">Aggiungi un sito</h3>
+  <h3 class="title-modal" style="margin:auto">Aggiungi una categoria</h3>
   <button class="close-modal-button" (click)="closeDialog()">
     <img src="../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
   </button>
@@ -13,10 +13,10 @@
       <input matInput #input  placeholder="Nome:">
     </mat-form-field>
     <mat-form-field class="name-width">
-      <mat-select placeholder="Favorite food">
-        <mat-option>Ciao</mat-option>
-        <mat-option>Ciao</mat-option>
-        <mat-option>Ciao</mat-option>
+      <mat-select placeholder="Choose category">
+        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.other">
+          {{cardCategory.type}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
