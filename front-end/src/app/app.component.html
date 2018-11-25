@@ -2,7 +2,7 @@
 <div [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary">
     <button mat-icon-button ><mat-icon>menu</mat-icon></button>
-    <a routerLink="/homepage">
+    <a routerLink="/cards">
       <img src="../assets/logo.png" alt="" width="200" style="margin-left: 10px" class="cursor-pointer">
     </a>
     <input type="text" class="search-style" placeholder="Cerca" />
@@ -10,11 +10,10 @@
     <p class="cursor-pointer white-text">example@tuttomail.com</p>
   </mat-toolbar>
 
-  <button mat-fab class="float" (click)="openAddDialog()">
-    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-  </button>
-
-  <!-- TODO: fix sidebar that doesn't show up -->
+  <!-- TODO: fix sidebar that doesn't show up! Fuck! -->
+  <nav>
+    <a routerLink="/cards">Card</a>
+  </nav>
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
@@ -22,6 +21,9 @@
         <a mat-list-item routerLink="." *ngFor="let field of fields">{{field.description}}</a>
       </mat-nav-list>
     </mat-sidenav>
+    <button mat-fab class="float" (click)="openAddDialog()">
+      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+    </button>
   </mat-sidenav-container>
 </div>
 

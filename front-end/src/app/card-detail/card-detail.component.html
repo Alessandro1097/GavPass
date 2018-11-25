@@ -1,5 +1,7 @@
 <div *ngIf="card" style="background-color: #fafafa; padding: 30px;">
 
+  <button (click)="goBack()">go back</button>
+
   <h2>{{card.other | uppercase}} Details</h2>
   <div>{{card.type}}</div>
 
@@ -21,5 +23,4 @@
                         class="example-tree-progress-bar"></mat-progress-bar>
     </mat-tree-node>
   </mat-tree>
-
 </div>

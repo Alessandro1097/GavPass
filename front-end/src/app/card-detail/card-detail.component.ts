@@ -23,6 +23,7 @@ export class DynamicDatabase {
     ['Fruits', ['Apple', 'Orange', 'Banana']],
     ['Vegetables', ['Tomato', 'Potato', 'Onion']],
     ['Apple', ['Fuji', 'Macintosh']],
+    ['Fuji', ['ci', 'ci', 'ci']],
     ['Onion', ['Yellow', 'White', 'Purple']],
     ['Backend', ['Maven', 'Java', 'Spring']]
   ]);
@@ -148,5 +149,9 @@ export class CardDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.cardService.getCard(id)
       .subscribe(card => this.card = card);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
