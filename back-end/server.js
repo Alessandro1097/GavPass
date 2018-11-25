@@ -11,14 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // to get the DATA from a post
 
 var port = process.env.PORT || 312;        // Set the port
-var router = express.Router();              // Get an instance of the express Router
+var router = express.Router();             // Get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
     res.json({ message: 'Fucking APIs!' });   
 });
 
-router.get('/Categories', function(req, res) {
+router.get('/categories', function(req, res) {
 
     var obj = { name: "John", age: 30, city: "New York" };
     var myJSONobject = JSON.stringify(obj);
