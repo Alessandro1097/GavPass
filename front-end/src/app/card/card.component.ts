@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {cardType} from '../type-card-container';
 import {CardService} from '../card.service';
+import {ActivatedRoute} from '@angular/router';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-card',

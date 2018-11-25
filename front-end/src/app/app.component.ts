@@ -32,7 +32,7 @@ export class AppComponent implements OnDestroy {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '70%',
+      width: '60%',
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -10,7 +10,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { CardComponent } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CardDetailComponent } from './card-detail/card-detail.component';
-import { HomepageComponent } from './homepage/homepage.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     CardComponent,
     CardDetailComponent,
-    HomepageComponent,
     DashboardComponent,
     DialogOverviewExampleDialog
   ],
