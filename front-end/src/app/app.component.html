@@ -10,21 +10,21 @@
     <p class="cursor-pointer white-text">example@tuttomail.com</p>
   </mat-toolbar>
 
-  <!-- TODO: fix sidebar that doesn't show up! Fuck! -->
-  <nav>
-    <a routerLink="/cards">Card</a>
-  </nav>
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="height: 500px; width: 500px;">
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="width: 300px;">
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let field of fields">{{field.description}}</a>
+        <a mat-list-item routerLink="/cards" *ngFor="let field of fields">{{field.description}}</a>
       </mat-nav-list>
     </mat-sidenav>
-    <button mat-fab class="float" (click)="openAddDialog()">
-      <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-    </button>
+    <mat-sidenav-content>
+      <nav>
+        <a routerLink="/cards">Card</a>
+      </nav>
+      <router-outlet></router-outlet>
+      <button mat-fab class="float" (click)="openAddDialog()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-<router-outlet></router-outlet>
