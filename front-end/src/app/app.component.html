@@ -14,13 +14,11 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="width: 300px;">
       <mat-nav-list>
-        <a mat-list-item routerLink="/cards" *ngFor="let field of fields">{{field.description}}</a>
+        <a mat-list-item routerLink="/cards">Siti</a>
+        <a mat-list-item routerLink=".">Note</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <nav>
-        <a routerLink="/cards">Card</a>
-      </nav>
       <router-outlet></router-outlet>
       <button mat-fab class="float" (click)="openAddDialog()">
         <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>

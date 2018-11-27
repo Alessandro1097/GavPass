@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component, OnDestroy, Inject} from '@angular/core';
-import {FIELDS} from './navbar-mock';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {CARDS} from './mock-card';
@@ -15,7 +14,6 @@ export interface DialogData {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
-  fields = FIELDS;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
