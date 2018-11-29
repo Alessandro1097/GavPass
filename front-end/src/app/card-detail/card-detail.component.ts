@@ -118,7 +118,7 @@ export class DynamicDataSource {
 })
 export class CardDetailComponent implements OnInit {
   @Input() card: cardType;
-
+  cards: cardType[];
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
@@ -130,6 +130,18 @@ export class CardDetailComponent implements OnInit {
 
     this.dataSource.data = database.initialData();
   }
+
+  objectKeys = Object.keys;
+  jsonObj = {
+    '1' : [ {"title" : "Libero" , "desc" : "Gmail" }],
+    '2' : [ {"title" : "Udacity" , "desc" : "Trello" }],
+    '3' : [ {"title" : "Coursera" , "desc" : "Udemy" }],
+    '4' : [ {"title" : "Hearthstone" , "desc" : "Fifa2018" }],
+    '5' : [ {"title" : "Netflix" , "desc" : "Sky" }],
+    '6' : [ {"title" : "Amazon" , "desc" : "Apple" }],
+    '7' : [ {'title': 'Facebook', 'desc': 'Instagram'}]
+  }
+
 
   treeControl: FlatTreeControl<DynamicFlatNode>;
 

@@ -1,26 +1,21 @@
 <div *ngIf="card" style="background-color: #fafafa; padding: 30px;">
-
   <button (click)="goBack()">go back</button>
-
-  <h2>{{card.other | uppercase}} Details</h2>
-  <div>{{card.type}}</div>
-
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-      <button mat-icon-button disabled></button>
-      {{node.item}}
-    </mat-tree-node>
-    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-      <button mat-icon-button
-              [attr.aria-label]="'toggle ' + node.filename" matTreeNodeToggle>
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      {{node.item}}
-      <mat-progress-bar *ngIf="node.isLoading"
-                        mode="indeterminate"
-                        class="example-tree-progress-bar"></mat-progress-bar>
-    </mat-tree-node>
-  </mat-tree>
+  <h2>{{card.type}} section</h2>
+  <mat-list>
+    <h3 mat-subheader>Folders</h3>
+    <mat-divider></mat-divider>
+    <mat-list-item style="background-color: white; cursor: pointer;" *ngFor='let key of objectKeys(jsonObj)'>
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line *ngFor='let obj of jsonObj[key]'>
+        {{ obj.title }}
+      </h4>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <h3 mat-subheader>Notes</h3>
+    <mat-list-item style="background-color: white; cursor: pointer;">
+      <mat-icon mat-list-icon>note</mat-icon>
+      <h4 mat-line>Mail libero</h4>
+      <p mat-line> 3/3/3 </p>
+    </mat-list-item>
+  </mat-list>
 </div>

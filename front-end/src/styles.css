@@ -78,7 +78,7 @@ p {
   cursor: pointer;
 }
 .padding-modal {
-  padding: 24px;
+  padding: 24px 35px;
 }
 .mat-dialog-container {
   padding: 0 !important;
