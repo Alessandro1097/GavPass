@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {cardType} from '../type-card-container';
 import {CardService} from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {CARDS} from '../mock-card';
 import {DialogData} from '../app.component';
 
 @Component({
@@ -28,7 +27,7 @@ export class CardComponent implements OnInit {
   }
 
   openAddDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(DialogAddCategoryDialog, {
       width: '60%',
     });
 
@@ -39,20 +38,14 @@ export class CardComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-add-category.html',
+  selector: './dialog-add-category-dialog',
+  templateUrl: './dialog-add-category.html',
 })
-export class DialogOverviewExampleDialog {
+export class DialogAddCategoryDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogAddCategoryDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  cardCategories = CARDS;
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 
   closeDialog(){
     this.dialogRef.close();

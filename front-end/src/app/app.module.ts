@@ -7,9 +7,9 @@ import {DemoMaterialModule} from '../material-module';
 import {MatNativeDateModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CardComponent, DialogOverviewExampleDialog } from './card/card.component';
+import { CardComponent, DialogAddCategoryDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CardDetailComponent } from './card-detail/card-detail.component';
+import { CardDetailComponent , DialogAddSiteDialog} from './card-detail/card-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -18,7 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CardComponent,
     CardDetailComponent,
     DashboardComponent,
-    DialogOverviewExampleDialog
+    DialogAddCategoryDialog,
+    DialogAddSiteDialog
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  entryComponents: [CardComponent, DialogOverviewExampleDialog],
+  entryComponents: [CardComponent, DialogAddCategoryDialog, CardDetailComponent, DialogAddSiteDialog],
   providers: [],
   bootstrap: [AppComponent]
 })
