@@ -7,3 +7,13 @@
   align-items: center;
   background-image: -webkit-linear-gradient(30deg, white 50%, #3f51b5 50%);
 }
+
+.float {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#3f51b5;
+  color:#FFF;
+}
