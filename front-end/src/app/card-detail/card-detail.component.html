@@ -1,13 +1,20 @@
 <div *ngIf="card" style="background-color: #fafafa; padding: 30px;">
-  <button (click)="goBack()">go back</button>
+  <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
   <h2>{{card.type}} section</h2>
   <mat-list>
     <h3 mat-subheader>Folders</h3>
     <mat-divider></mat-divider>
-    <mat-list-item style="background-color: white; cursor: pointer;" *ngFor='let key of objectKeys(jsonObj)'>
+    <mat-list-item style="background-color: white; cursor: pointer;" (click)="openSiteDetails()">
       <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line *ngFor='let obj of jsonObj[key]'>
-        {{ obj.title }}
+      <h4 mat-line>
+        {{card.prova[0]}}
+      </h4>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item style="background-color: white; cursor: pointer;" (click)="openSiteDetails()">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>
+        {{card.prova[1]}}
       </h4>
       <mat-divider></mat-divider>
     </mat-list-item>

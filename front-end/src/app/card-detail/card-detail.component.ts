@@ -56,6 +56,10 @@ export class CardDetailComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  openSiteDetails(): void {
+    console.log(this.jsonObj['4']);
+  }
 }
 
 @Component({
