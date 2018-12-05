@@ -21,6 +21,10 @@ p {
   font-size: 20px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar {
   background-color: #3f51b5;
   height: 64px;
@@ -68,7 +72,7 @@ p {
 }
 .title-modal {
   color: white;
-  margin: 0;
+  margin: auto;
 }
 .close-modal-button {
   position: absolute;
@@ -78,7 +82,7 @@ p {
   cursor: pointer;
 }
 .padding-modal {
-  padding: 24px;
+  padding: 24px 35px;
 }
 .mat-dialog-container {
   padding: 0 !important;

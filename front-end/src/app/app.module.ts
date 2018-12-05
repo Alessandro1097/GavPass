@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {AppComponent, DialogOverviewExampleDialog} from './app.component';
+import {AppComponent} from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 import {MatNativeDateModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CardComponent } from './card/card.component';
+import { CardComponent, DialogAddCategoryDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CardDetailComponent } from './card-detail/card-detail.component';
+import { CardDetailComponent , DialogAddSiteDialog} from './card-detail/card-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NoteComponent } from './note/note.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CardComponent,
     CardDetailComponent,
     DashboardComponent,
-    DialogOverviewExampleDialog
+    DialogAddCategoryDialog,
+    DialogAddSiteDialog,
+    NoteComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  entryComponents: [AppComponent, DialogOverviewExampleDialog],
+  entryComponents: [CardComponent, DialogAddCategoryDialog, CardDetailComponent, DialogAddSiteDialog],
   providers: [],
   bootstrap: [AppComponent]
 })

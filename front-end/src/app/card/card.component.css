@@ -1,8 +1,33 @@
 .example-card {
-  margin: 50px 50px;
+  margin: 20px 80px 80px 0;
   width: 300px;
   height: 100px;
-  background-color: #8cbbe5;
   display: flex;
+  color: rgba(0, 0, 0, 0.55);
   align-items: center;
+  background-image: -webkit-linear-gradient(30deg, white 50%, #3f51b5 50%);
+}
+
+.float {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#3f51b5;
+  color:#FFF;
+}
+
+.category-space {
+  margin-left: 20px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.title-card {
+  font-size: 18px;
 }
