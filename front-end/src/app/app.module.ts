@@ -11,6 +11,7 @@ import { CardComponent, DialogAddCategoryDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CardDetailComponent , DialogAddSiteDialog} from './card-detail/card-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NoteComponent } from './note/note.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CardDetailComponent,
     DashboardComponent,
     DialogAddCategoryDialog,
-    DialogAddSiteDialog
+    DialogAddSiteDialog,
+    NoteComponent
   ],
   imports: [
     BrowserModule,

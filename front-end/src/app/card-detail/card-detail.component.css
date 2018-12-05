@@ -16,3 +16,13 @@
   border: none;
   background-color: transparent;
 }
+
+.card-section {
+  background-color: #fafafa;
+  padding: 30px;
+}
+
+.attributes-card {
+  background-color: white;
+  cursor: pointer;
+}

@@ -22,17 +22,6 @@ export class CardDetailComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  objectKeys = Object.keys;
-  jsonObj = {
-    '1' : [ {"title" : "Libero" , "desc" : "Gmail" }],
-    '2' : [ {"title" : "Udacity" , "desc" : "Trello" }],
-    '3' : [ {"title" : "Coursera" , "desc" : "Udemy" }],
-    '4' : [ {"title" : "Hearthstone" , "desc" : "Fifa2018" }],
-    '5' : [ {"title" : "Netflix" , "desc" : "Sky" }],
-    '6' : [ {"title" : "Amazon" , "desc" : "Apple" }],
-    '7' : [ {'title': 'Facebook', 'desc': 'Instagram'}]
-  };
-
   ngOnInit() {
     this.getCards();
   }
@@ -57,8 +46,18 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  openSiteDetails(): void {
-    console.log(this.jsonObj['4']);
+  // TODO: write a function that create a modal that allow to see the attributes detail
+  openSiteDetails1(): void {
+    for (let i = 0; i < this.card.attributes.length; i++) {
+      let newDiv = document.createElement("p");
+      let newContext = document.createTextNode(this.card.attributes[i]);
+      newDiv.appendChild(newContext);
+      document.getElementById("div1").appendChild(newDiv);
+    }
+  }
+
+  openSiteDetails2(): void {
+    console.log(this.card.attributes[1]);
   }
 }
 

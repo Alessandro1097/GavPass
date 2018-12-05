@@ -1,6 +1,6 @@
 export class cardType {
   type: string;
   other: string;
-  prova: string[];
+  attributes: string[];
   id: number;
 }
