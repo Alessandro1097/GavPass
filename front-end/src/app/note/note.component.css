@@ -1,0 +1,19 @@
+.float {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#3f51b5;
+  color:#FFF;
+}
+
+.attributes-card {
+  background-color: white;
+  cursor: pointer;
+}
+
+.card-section {
+  background-color: #fafafa;
+  padding: 30px;
+}

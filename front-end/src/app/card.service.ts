@@ -17,4 +17,6 @@ export class CardService {
   getCard(id: number): Observable<cardType> {
     return of(CARDS.find(card => card.id === id));
   }
+
+
 }

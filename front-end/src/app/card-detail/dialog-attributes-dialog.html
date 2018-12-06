@@ -1,27 +1,29 @@
-<div class="top-bar">
-  <h3 class="title-modal">Aggiungi un sito</h3>
+<div class="top-bar" xmlns="http://www.w3.org/1999/html">
+  <h3 class="title-modal">Modifica sito</h3>
   <button class="close-modal-button" (click)="closeDialog()">
     <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
   </button>
 </div>
-
 <div class="padding-modal">
 
   <mat-form-field class="form-url">
     <input matInput #input placeholder="URL:">
   </mat-form-field>
+
   <div class="user-container">
     <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome:">
+      <input matInput #input placeholder="Nome:" [value]="data.dataAttributes">
     </mat-form-field>
     <mat-form-field class="name-width">
-      <mat-select placeholder="Scegli categoria">
+      <input matInput #input placeholder="Scegli categoria:" [value]="data.dataType" (click)="setCategory()" *ngIf="!categoryShow">
+      <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:">
         <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.other">
           {{cardCategory.type}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+
   <div class="site-section">
     <mat-form-field class="name-width">
       <input matInput #input placeholder="Nome utente:">
@@ -40,3 +42,5 @@
   </div>
 
 </div>
+
+

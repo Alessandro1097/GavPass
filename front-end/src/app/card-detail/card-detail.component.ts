@@ -6,6 +6,7 @@ import { CardService } from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
 import {CARDS} from '../mock-card';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-card-detail',
@@ -46,19 +47,22 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  // TODO: write a function that create a modal that allow to see the attributes detail
-  openSiteDetails1(): void {
-    for (let i = 0; i < this.card.attributes.length; i++) {
-      let newDiv = document.createElement("p");
-      let newContext = document.createTextNode(this.card.attributes[i]);
-      newDiv.appendChild(newContext);
-      document.getElementById("div1").appendChild(newDiv);
-    }
+  // TODO: open dialog with the data of the selected item
+  openModalAttribute(attributes): void {
+    //console.log(attributes);
+    const dialogRef = this.dialog.open(DialogAttributesDialog, {
+      width: '60%',
+      data: {
+        dataAttributes: attributes,
+        dataType: this.card.type
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  openSiteDetails2(): void {
-    console.log(this.card.attributes[1]);
-  }
 }
 
 @Component({
@@ -77,4 +81,27 @@ export class DialogAddSiteDialog {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  selector: './dialog-attributes-dialog',
+  templateUrl: './dialog-attributes-dialog.html',
+})
+export class DialogAttributesDialog{
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogAttributesDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  cardCategories = CARDS;
+
+  categoryShow = false;
+
+  setCategory(): void {
+    this.categoryShow = true;
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

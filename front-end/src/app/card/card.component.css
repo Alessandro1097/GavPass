@@ -1,5 +1,5 @@
 .example-card {
-  margin: 20px 80px 80px 0;
+  margin: 20px 40px 80px 40px;
   width: 300px;
   height: 100px;
   display: flex;
@@ -30,4 +30,9 @@
 
 .title-card {
   font-size: 18px;
+}
+
+.card-section {
+  background-color: #fafafa;
+  padding: 30px;
 }

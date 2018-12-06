@@ -1,10 +1,12 @@
 <div *ngIf="card" class="card-section">
-  <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
-  <h2>{{card.type}} section</h2>
+  <div style="display: flex">
+    <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
+    <h2>{{card.type}} section</h2>
+  </div>
   <mat-list>
     <h3 mat-subheader>Folders</h3>
     <mat-divider></mat-divider>
-    <mat-list-item class="attributes-card" *ngFor="let attributes of card.attributes">
+    <mat-list-item class="attributes-card" *ngFor="let attributes of card.attributes" (click)="openModalAttribute(attributes)">
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>
         {{attributes}}

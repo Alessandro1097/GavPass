@@ -1,3 +1,18 @@
-<p>
-  note works!
-</p>
+<div class="card-section">
+  <h2>My note</h2>
+  <mat-list>
+    <h3 mat-subheader>Notes</h3>
+    <mat-divider></mat-divider>
+    <mat-list-item class="attributes-card">
+      <mat-icon mat-list-icon>note</mat-icon>
+      <h4 mat-line>
+        prova
+      </h4>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+
+  <button mat-fab class="float" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
