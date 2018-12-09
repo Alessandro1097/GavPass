@@ -6,6 +6,7 @@
   <mat-list>
     <h3 mat-subheader>Folders</h3>
     <mat-divider></mat-divider>
+
     <mat-list-item class="attributes-card" *ngFor="let attributes of card.attributes" (click)="openModalAttribute(attributes)">
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>

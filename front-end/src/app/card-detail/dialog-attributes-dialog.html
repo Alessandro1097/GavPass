@@ -7,7 +7,7 @@
 <div class="padding-modal">
 
   <mat-form-field class="form-url">
-    <input matInput #input placeholder="URL:">
+    <input matInput #input placeholder="URL:" [value]="data.dataUrl">
   </mat-form-field>
 
   <div class="user-container">
@@ -17,7 +17,7 @@
     <mat-form-field class="name-width">
       <input matInput #input placeholder="Scegli categoria:" [value]="data.dataType" (click)="setCategory()" *ngIf="!categoryShow">
       <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:">
-        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.other">
+        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.id">
           {{cardCategory.type}}
         </mat-option>
       </mat-select>

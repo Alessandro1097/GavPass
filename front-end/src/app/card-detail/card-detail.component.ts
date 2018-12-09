@@ -47,14 +47,15 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  // TODO: open dialog with the data of the selected item
+  // TODO: fix the URL
   openModalAttribute(attributes): void {
-    //console.log(attributes);
+    console.log(attributes);
     const dialogRef = this.dialog.open(DialogAttributesDialog, {
       width: '60%',
       data: {
         dataAttributes: attributes,
-        dataType: this.card.type
+        dataType: this.card.type,
+        dataUrl: this.card.url
       }
     });
 
@@ -62,7 +63,6 @@ export class CardDetailComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-
 }
 
 @Component({
