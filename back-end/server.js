@@ -55,12 +55,12 @@ app.use('/api', router);
 
 app.listen(port);
 
-// Timeout 30 secs
+// Timeout 60 secs
 console.log('Connected on port ' + port);
 setTimeout( function () {
     console.error("Bye");
     process.exit(1); 
-  }, 30*1000);
+  }, 60*1000);
 
 // server.close();
 
