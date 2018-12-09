@@ -60,34 +60,9 @@ console.log('Connected on port ' + port);
 setTimeout( function () {
     console.error("Bye");
     process.exit(1); 
-  }, 15*1000);
+  }, 30*1000);
 
 // server.close();
-
-
-
-class User {
-    constructor() {
-      this.id = 'id_1';
-    }
-
-    set email(email) {
-      this._email = email;
-    }
-
-    get email() {
-      return this._email;
-    }
-  }
-  
-  var newUser = new User();
-  newUser.email = 'Prova';
-
-  var added = userAdd("provasito@tuttomail.com","admin","",0);
-
-  var msg = '1 user has been added ;)';
-  if (added==false) msg = 'Shit! It doesn\'t work!';
-  console.log(msg);
 
   function userAdd(email, pwd, phone, accountType) {
     MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
