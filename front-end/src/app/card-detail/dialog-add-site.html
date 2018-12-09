@@ -16,7 +16,7 @@
     </mat-form-field>
     <mat-form-field class="name-width">
       <mat-select placeholder="Scegli categoria">
-        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.other">
+        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.id">
           {{cardCategory.type}}
         </mat-option>
       </mat-select>
