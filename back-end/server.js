@@ -2,13 +2,17 @@
 // npm install --save express mongodb@2.2.16 body-parser
 
 // Call the packages needed
-var express = require('express');        // Call express
-var app     = express();                 // Define app using Express
+const express = require('express');  // Call express
+const cors = require('cors');        // Call cors
+let app = express();                 // Define app using Express
 
 // Configure app to use bodyParser() 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // to get the DATA from a post
+
+app.use(cors());
+app.options('*', cors());
 
 var port = process.env.PORT || 312;        // Set the port
 var router = express.Router();             // Get an instance of the Express Router

@@ -2,14 +2,14 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/gavpass";
 
-MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+MongoClient.connect(url, function (err, db) {
 
     if (err) throw err;
     var dbo = db.db("gavpass");
 
     dbo.createCollection("users", function (err, res) {
         if (err) throw err;
-        console.log("Collection user created");
+        console.log("Collection users created");
     });
 
     var myobj = { name: "admin@tuttomail.com", pwd: "@@", phone: "", accountType: -1 };
