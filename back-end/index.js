@@ -8,19 +8,19 @@ MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
 
     // Insert 1 document
     var myobj = { name: "admin@tuttomail.com", pwd: "@@", phone: "", accountType: -1 };
-    dbo.collection("user").insertOne(myobj, function (err, res) {
+    dbo.collection("users").insertOne(myobj, function (err, res) {
         if (err) throw err;
         console.log(res.result.n + " document inserted");
     });
 
     // Read record.name
-    dbo.collection("user").findOne({}, function(err, result) {
+    dbo.collection("users").findOne({}, function(err, result) {
         if (err) throw err;
         console.log(result.name);
     });
 
     var myquery = { name: 'admin@tuttomail.com' };
-    dbo.collection("user").deleteOne(myquery, function(err, obj) {
+    dbo.collection("users").deleteOne(myquery, function(err, obj) {
         if (err) throw err;
         console.log(obj.deletedCount + " document deleted");
         db.close();

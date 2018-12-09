@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
 // MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/gavpass";
-var glob_categories;
+var glob_categories, glob_users;
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -30,12 +30,23 @@ MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         console.log(result);
         glob_categories = result;
+    });
+
+    dbo.collection("users").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        glob_users = result;
         db.close();
     });
 });
 
 router.get('/categories', function(req, res) {
     var myJSONobject = JSON.stringify(glob_categories);
+    res.json(myJSONobject);
+});
+
+router.get('/active_users', function(req, res) {
+    var myJSONobject = JSON.stringify(glob_users);
     res.json(myJSONobject);
 });
 
@@ -52,3 +63,46 @@ setTimeout( function () {
   }, 15*1000);
 
 // server.close();
+
+
+
+class User {
+    constructor() {
+      this.id = 'id_1';
+    }
+
+    set email(email) {
+      this._email = email;
+    }
+
+    get email() {
+      return this._email;
+    }
+  }
+  
+  var newUser = new User();
+  newUser.email = 'Prova';
+
+  var added = userAdd("provasito@tuttomail.com","admin","",0);
+
+  var msg = '1 user has been added ;)';
+  if (added==false) msg = 'Shit! It doesn\'t work!';
+  console.log(msg);
+
+  function userAdd(email, pwd, phone, accountType) {
+    MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+
+        if (err) throw err;
+        var dbo = db.db("gavpass");
+    
+        // Insert 1 document
+        var myobj = { email: email, pwd: pwd, phone: phone, accountType: accountType };
+        dbo.collection("users").insertOne(myobj, function (err, res) {
+            if (err) throw err;
+            if (res.result.n==1) return true;
+        });
+    
+        db.close();
+        return false;
+    });
+  }

@@ -7,13 +7,13 @@ MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db("gavpass");
 
-    dbo.createCollection("user", function (err, res) {
+    dbo.createCollection("users", function (err, res) {
         if (err) throw err;
         console.log("Collection user created");
     });
 
     var myobj = { name: "admin@tuttomail.com", pwd: "@@", phone: "", accountType: -1 };
-    dbo.collection("user").insertOne(myobj, function (err, res) {
+    dbo.collection("users").insertOne(myobj, function (err, res) {
         if (err) throw err;
         console.log(res.result.n + " user inserted");
     });
@@ -24,13 +24,97 @@ MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
     });
 
     var categories = [
-        { name: 'Email'},
-        { name: 'Business'},
-        { name: 'Education'},
-        { name: 'Games'},
-        { name: 'Entertainment'},
-        { name: 'Shopping'},
-        { name: 'Social'}
+        {
+            name: 'Email',
+            attributes: [
+                {
+                    site: "Libero",
+                    url: "https://www.libero.it/"
+                },
+                {
+                    site: "Gmail",
+                    url: "https://www.gmail.com/"
+                }
+            ]
+        },
+        {
+            name: 'Business',
+            attributes: [
+                {
+                    site: "Trenitalia",
+                    url: "https://www.trenitalia.com/"
+                },
+                {
+                    site: "Trello",
+                    url: "httpss://www.trello.com/"
+                }
+            ]
+        },
+        {
+            name: 'Education',
+            attributes: [
+                {
+                    site: "Coursera",
+                    url: "https://www.coursera.org/"
+                },
+                {
+                    site: "Udemy",
+                    url: "https://www.udemy.com/"
+                }
+            ]
+        },
+        {
+            name: 'Games',
+            attributes: [
+                {
+                    site: "Hearthstone",
+                    url: "https://www.playhearthstone.com/"
+                },
+                {
+                    site: "Fifa",
+                    url: "https://www.fifa.com/"
+                }
+            ]
+        },
+        {
+            name: 'Entertainment',
+            attributes: [
+                {
+                    site: "Netflix",
+                    url: "https://www.netflix.com/"
+                },
+                {
+                    site: "YouTube",
+                    url: "https://www.youtube.com/"
+                }
+            ]
+        },
+        {
+            name: 'Shopping',
+            attributes: [
+                {
+                    site: "Zalando",
+                    url: "https://www.zalando.it/"
+                },
+                {
+                    site: "Amazon",
+                    url: "https://www.amazon.it/"
+                }
+            ]
+        },
+        {
+            name: 'Social',
+            attributes: [
+                {
+                    site: "Facebook",
+                    url: "https://it-it.facebook.com/"
+                },
+                {
+                    site: "Instagram",
+                    url: "https://www.instagram.com/"
+                }
+            ]
+        }
       ];
 
       dbo.collection("categories").insertMany(categories, function(err, res) {
