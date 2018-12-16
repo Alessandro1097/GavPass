@@ -19,9 +19,7 @@ var router = express.Router();             // Get an instance of the Express Rou
 router.get('/', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.json([{ category: 'Email', id: '1', site: [{ siteName: "Google", url:"www.google.com" }, { siteName: "Udemy", url:"www.udemy.com" }]},
-              { category: 'Business', id: '2', site: [{ siteName: "Trello", url:"www.trello.com" }, { siteName: "Facebook", url:"www.facebook.com" }]}
-    ]);
+    res.json("API OK");
 });
 
 // MongoDB
