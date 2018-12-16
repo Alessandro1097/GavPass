@@ -5,7 +5,6 @@ import { Location } from '@angular/common';
 import { CardService } from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
-import {CARDS} from '../mock-card';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -54,8 +53,8 @@ export class CardDetailComponent implements OnInit {
       width: '60%',
       data: {
         dataAttributes: attributes,
-        dataType: this.card.type,
-        dataUrl: this.card.url
+        dataType: this.card.name,
+        dataUrl: this.card.attributes
       }
     });
 
@@ -75,8 +74,6 @@ export class DialogAddSiteDialog {
     public dialogRef: MatDialogRef<DialogAddSiteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  cardCategories = CARDS;
-
   closeDialog(): void {
     this.dialogRef.close();
   }
@@ -93,7 +90,6 @@ export class DialogAttributesDialog{
     public dialogRef: MatDialogRef<DialogAttributesDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  cardCategories = CARDS;
 
   categoryShow = false;
 

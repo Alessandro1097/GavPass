@@ -1,8 +1,12 @@
-<div *ngIf="card" class="card-section">
+<div class="card-section">
+
+  <div>{{cards}}</div>
+  <!--
   <div style="display: flex">
     <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
-    <h2>{{card.type}} section</h2>
+    <h2>{{card.name}} section</h2>
   </div>
+
   <mat-list>
     <h3 mat-subheader>Folders</h3>
     <mat-divider></mat-divider>
@@ -14,7 +18,7 @@
       </h4>
       <mat-divider></mat-divider>
     </mat-list-item>
-  </mat-list>
+  </mat-list>-->
 
   <button mat-fab class="float" (click)="openDialog()">
     <mat-icon>add</mat-icon>

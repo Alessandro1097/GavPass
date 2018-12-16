@@ -12,13 +12,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // to get the DATA from a post
 
 app.use(cors());
-app.options('*', cors());
 
 var port = process.env.PORT || 312;        // Set the port
 var router = express.Router();             // Get an instance of the Express Router
 
 router.get('/', function(req, res) {
-    res.json({ message: 'Fucking APIs!' });   
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.json([{ category: 'Email', id: '1', site: [{ siteName: "Google", url:"www.google.com" }, { siteName: "Udemy", url:"www.udemy.com" }]},
+              { category: 'Business', id: '2', site: [{ siteName: "Trello", url:"www.trello.com" }, { siteName: "Facebook", url:"www.facebook.com" }]}
+    ]);
 });
 
 // MongoDB
@@ -32,21 +35,19 @@ MongoClient.connect(url, function(err, db) {
 
     dbo.collection("categories").find({}).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result);
         glob_categories = result;
     });
 
     dbo.collection("users").find({}).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result);
         glob_users = result;
         db.close();
     });
 });
 
 router.get('/categories', function(req, res) {
-    var myJSONobject = JSON.stringify(glob_categories);
-    res.json(myJSONobject);
+    //var myJSONobject = JSON.stringify(glob_categories);
+    res.json(glob_categories);
 });
 
 router.get('/active_users', function(req, res) {
@@ -60,11 +61,11 @@ app.use('/api', router);
 app.listen(port);
 
 // Timeout 60 secs
-console.log('Connected on port ' + port);
-setTimeout( function () {
-    console.error("Bye");
-    process.exit(1); 
-  }, 60*1000);
+//console.log('Connected on port ' + port);
+//setTimeout( function () {
+//    console.error("Bye");
+//    process.exit(1);
+//  }, 1000*1000);
 
 // server.close();
 
