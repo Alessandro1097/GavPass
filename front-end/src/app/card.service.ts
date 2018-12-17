@@ -31,7 +31,7 @@ export class CardService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      //log(`${operation} failed: ${error.message}`);
+      log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -49,8 +49,8 @@ export class CardService {
     return of(CARDS.find(card => card.id === id));
   }**/
 
-  getCard(id: number): Observable<cardType> {
-    const url = `${this.cardUrl}/${id}`;
+  getCard(_id: number): Observable<cardType> {
+    const url = `${this.cardUrl}/${_id}`;
     return this.http.get<cardType>(url);
   }
 }

@@ -3,7 +3,6 @@ import {cardType} from '../type-card-container';
 import {CardService} from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
-import {apiProvaNode} from '../apiProvaNode';
 
 @Component({
   selector: 'app-card',
@@ -28,6 +27,7 @@ export class CardComponent implements OnInit {
   getCards(): void {
     this.cardService.getCards().subscribe(cards => this.cards = cards);
   }
+
   /**
   getApiNode(): void {
     this.cardService.getApiNode().subscribe(apiNode => this.apiNode = apiNode);

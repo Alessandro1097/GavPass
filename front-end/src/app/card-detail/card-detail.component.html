@@ -1,6 +1,13 @@
-<div class="card-section">
+<div *ngIf="card" class="card-section">
 
-  <div>{{cards}}</div>
+  <h2>Category: {{card.name}}</h2>
+  <h2>ID: {{card._id}}</h2>
+
+  <div *ngFor="let prova of card.attributes">
+    <h3>Site: {{prova.site}}</h3>
+    <h3>Url: {{prova.url}}</h3>
+  </div>
+
   <!--
   <div style="display: flex">
     <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>

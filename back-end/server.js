@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
 // MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/gavpass";
-var glob_categories, glob_users;
+var glob_categories, glob_users, glob_categories_id;
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -34,6 +34,13 @@ MongoClient.connect(url, function(err, db) {
     dbo.collection("categories").find({}).toArray(function(err, result) {
         if (err) throw err;
         glob_categories = result;
+    });
+
+    dbo.collection("categories").findOne({}, function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      glob_categories_id = result;
+      db.close();
     });
 
     dbo.collection("users").find({}).toArray(function(err, result) {
@@ -46,6 +53,12 @@ MongoClient.connect(url, function(err, db) {
 router.get('/categories', function(req, res) {
     //var myJSONobject = JSON.stringify(glob_categories);
     res.json(glob_categories);
+});
+
+router.get('/categories/:_id', function(req, res) {
+  //var myJSONobject = JSON.stringify(glob_categories);
+  console.log("Inside the id categories");
+  res.json(glob_categories_id);
 });
 
 router.get('/active_users', function(req, res) {
