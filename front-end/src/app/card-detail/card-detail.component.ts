@@ -6,6 +6,7 @@ import { CardService } from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
 import {FormControl} from '@angular/forms';
+import 'rxjs-compat/add/operator/do';
 
 @Component({
   selector: 'app-card-detail',
@@ -23,13 +24,14 @@ export class CardDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCards();
+    this.getCard();
   }
 
-  getCards(): void {
-    const _id = +this.route.snapshot.paramMap.get('_id');
-    this.cardService.getCard(_id)
+  getCard(): void {
+    const name = this.route.snapshot.paramMap.get('name');
+    this.cardService.getCard(name)
       .subscribe(card => this.card = card);
+    console.log(this);
   }
 
   goBack(): void {

@@ -25,28 +25,27 @@ router.get('/', function(req, res) {
 // MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/gavpass";
-var glob_categories, glob_users, glob_categories_id;
+var glob_categories, glob_users, glob_categories_id, test;
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("gavpass");
 
-    dbo.collection("categories").find({}).toArray(function(err, result) {
+    dbo.collection("categories").find().toArray(function(err, result) {
         if (err) throw err;
         glob_categories = result;
     });
 
     dbo.collection("categories").findOne({}, function(err, result) {
       if (err) throw err;
-      console.log(result);
       glob_categories_id = result;
-      db.close();
+      console.log(result);
     });
 
     dbo.collection("users").find({}).toArray(function(err, result) {
-        if (err) throw err;
-        glob_users = result;
-        db.close();
+      if (err) throw err;
+      glob_users = result;
+      db.close();
     });
 });
 
@@ -55,7 +54,7 @@ router.get('/categories', function(req, res) {
     res.json(glob_categories);
 });
 
-router.get('/categories/:_id', function(req, res) {
+router.get('/categories/:id', function(req, res) {
   //var myJSONobject = JSON.stringify(glob_categories);
   console.log("Inside the id categories");
   res.json(glob_categories_id);
@@ -82,17 +81,14 @@ app.listen(port);
 
   function userAdd(email, pwd, phone, accountType) {
     MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
-
         if (err) throw err;
         var dbo = db.db("gavpass");
-    
         // Insert 1 document
         var myobj = { email: email, pwd: pwd, phone: phone, accountType: accountType };
         dbo.collection("users").insertOne(myobj, function (err, res) {
             if (err) throw err;
             if (res.result.n==1) return true;
         });
-    
         db.close();
         return false;
     });

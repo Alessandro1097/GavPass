@@ -13,35 +13,14 @@ import {log} from 'util';
 export class CardService {
 
   //private heroesUrl = 'https://jsonplaceholder.typicode.com/todos/1';  // URL to web api
-  private cardUrl = 'http://localhost:312/api/categories';  // URL to web api
+  private cardUrl = 'http://localhost:3000/api/setupGavpass';  // URL to web api
 
   constructor(private http: HttpClient) { }
 
-  // API to get the data, .do(console.log) => log the content of the observable
-  /**getApiNode(): Observable<apiProvaNode[]> {
-    return this.http.get<apiProvaNode[]>(this.cardUrl);
-  }**/
-
   // return of(HEROES.find(hero => hero.id === id));
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
   getCards(): Observable<cardType[]> {
-    return this.http.get<cardType[]>(this.cardUrl).pipe(
-      catchError(this.handleError('getHeroes', []))
-    );
+    return this.http.get<cardType[]>(this.cardUrl).do(console);
   }
 
   /**
@@ -49,8 +28,9 @@ export class CardService {
     return of(CARDS.find(card => card.id === id));
   }**/
 
-  getCard(_id: number): Observable<cardType> {
-    const url = `${this.cardUrl}/${_id}`;
+  getCard(name: string): Observable<cardType> {
+    const url = `${this.cardUrl}/${name}`;
+    console.log(url);
     return this.http.get<cardType>(url);
   }
 }
