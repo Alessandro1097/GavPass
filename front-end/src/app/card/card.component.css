@@ -1,7 +1,7 @@
 .example-card {
-  margin: 20px 40px 80px 40px;
+  margin: 40px 40px 40px 40px;
   width: 300px;
-  height: 100px;
+  height: 150px;
   display: flex;
   color: rgba(0, 0, 0, 0.55);
   align-items: center;

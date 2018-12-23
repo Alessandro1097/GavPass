@@ -13,7 +13,7 @@ import {log} from 'util';
 export class CardService {
 
   //private heroesUrl = 'https://jsonplaceholder.typicode.com/todos/1';  // URL to web api
-  private cardUrl = 'http://localhost:3000/api/setupGavpass';  // URL to web api
+  private cardUrl = 'http://localhost:3000/api/setupGavpass/fullapi';  // URL to web api
 
   constructor(private http: HttpClient) { }
 
