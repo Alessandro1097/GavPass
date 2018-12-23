@@ -5,8 +5,8 @@ import { Location } from '@angular/common';
 import { CardService } from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
-import {CARDS} from '../mock-card';
 import {FormControl} from '@angular/forms';
+import 'rxjs-compat/add/operator/do';
 
 @Component({
   selector: 'app-card-detail',
@@ -24,13 +24,14 @@ export class CardDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCards();
+    this.getCard();
   }
 
-  getCards(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.cardService.getCard(id)
+  getCard(): void {
+    const name = this.route.snapshot.paramMap.get('name');
+    this.cardService.getCard(name)
       .subscribe(card => this.card = card);
+    console.log(this);
   }
 
   goBack(): void {
@@ -54,8 +55,8 @@ export class CardDetailComponent implements OnInit {
       width: '60%',
       data: {
         dataAttributes: attributes,
-        dataType: this.card.type,
-        dataUrl: this.card.url
+        dataType: this.card.name,
+        dataUrl: this.card.attributes
       }
     });
 
@@ -75,8 +76,6 @@ export class DialogAddSiteDialog {
     public dialogRef: MatDialogRef<DialogAddSiteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  cardCategories = CARDS;
-
   closeDialog(): void {
     this.dialogRef.close();
   }
@@ -93,7 +92,6 @@ export class DialogAttributesDialog{
     public dialogRef: MatDialogRef<DialogAttributesDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  cardCategories = CARDS;
 
   categoryShow = false;
 

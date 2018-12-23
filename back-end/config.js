@@ -117,7 +117,7 @@ MongoClient.connect(url, function (err, db) {
         }
       ];
 
-      dbo.collection("categories").insertMany(categories, function(err, res) {
+  dbo.collection("categories").insertMany(categories, function(err, res) {
         if (err) throw err;
         console.log("Number of categories inserted: " + res.insertedCount);
       });

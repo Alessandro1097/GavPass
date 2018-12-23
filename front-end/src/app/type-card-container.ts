@@ -1,6 +1,5 @@
 export class cardType {
-  type: string;
-  attributes: string[];
-  id: number;
-  url: string[];
+  _id: number;
+  name: string;
+  attributes: { site: string; url: string; };
 }
