@@ -1,35 +1,20 @@
 <div *ngIf="card" class="card-section">
 
-  <h2>Category: {{card.name}}</h2>
-  <h2>ID: {{card._id}}</h2>
-
   <div *ngFor="let prova of card">
-    {{prova.name}}
-    <div *ngFor="let prova2 of prova.attributes">
-      {{prova2.site}}
-      {{prova2.url}}
+    <div style="display: flex">
+      <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
+      <h2>Category: {{prova.name}}</h2>
     </div>
-  </div>
-
-  <!--
-  <div style="display: flex">
-    <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
-    <h2>{{card.name}} section</h2>
-  </div>
-
-  <mat-list>
-    <h3 mat-subheader>Folders</h3>
-    <mat-divider></mat-divider>
-
-    <mat-list-item class="attributes-card" *ngFor="let attributes of card.attributes" (click)="openModalAttribute(attributes)">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line>
-        {{attributes}}
-      </h4>
+    <mat-list>
+      <h3 mat-subheader>Folders</h3>
       <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>-->
-
+      <mat-list-item class="attributes-card" *ngFor="let prova2 of prova.attributes" (click)="openModalAttribute()">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>{{prova2.site}}</h4>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
   <button mat-fab class="float" (click)="openDialog()">
     <mat-icon>add</mat-icon>
   </button>
