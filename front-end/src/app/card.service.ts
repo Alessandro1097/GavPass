@@ -10,6 +10,7 @@ import 'rxjs-compat/add/operator/do';
 export class CardService {
 
   private categoriesList = 'http://localhost:3000/api/Categories';
+  private categoriesData = 'http://localhost:3000/api/Categories/findByName';
   private categoriesName = 'http://localhost:3000/api/Categories/name';
 
   constructor(private http: HttpClient) { }
@@ -23,7 +24,7 @@ export class CardService {
   }
 
   getCard(name: string): Observable<cardType> {
-    const url = `${this.categoriesList}/${name}`;
+    const url = `${this.categoriesData}/${name}`;
     console.log(url);
     return this.http.get<cardType>(url);
   }
