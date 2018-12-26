@@ -9,21 +9,21 @@ import 'rxjs-compat/add/operator/do';
 })
 export class CardService {
 
-  private cardUrl = 'http://localhost:3000/api/setupGavpass/fullapi';
-  private categoriesName = 'http://localhost:3000/api/setupGavpass/fullapi/categoriesName';
+  private categoriesList = 'http://localhost:3000/api/Categories';
+  private categoriesName = 'http://localhost:3000/api/Categories/name';
 
   constructor(private http: HttpClient) { }
   // Get all the information of the card
   getCards(): Observable<cardType[]> {
-    return this.http.get<cardType[]>(this.cardUrl).do(console);
+    return this.http.get<cardType[]>(this.categoriesList).do(console);
   }
-  // Get name all list of the categories name
+  // Get all list of the categories name
   getCategoriesName(): Observable<cardType[]> {
     return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
 
   getCard(name: string): Observable<cardType> {
-    const url = `${this.cardUrl}/${name}`;
+    const url = `${this.categoriesList}/${name}`;
     console.log(url);
     return this.http.get<cardType>(url);
   }
