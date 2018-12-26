@@ -34,6 +34,7 @@ module.exports = function (app) {
       res.send(gavpass);
     });
   });
+
   app.post('/api/gavpass/fullapi', function (req, res) {
     if(req.body.id) {
       GavPass.findByIdAndUpdate(req.body.id, {
@@ -53,6 +54,7 @@ module.exports = function (app) {
       });
     }
   });
+  
   app.delete('/api/gavpass/fullapi', function (res, req) {
     GavPass.findByIdAndRemove(req.body.id, function (err) {
       if (err) throw err;
