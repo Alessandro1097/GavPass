@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
 
-  // get all api
+
   app.get('/api/setupGavpass/fullapi', function (req, res) {
     GavPass.find({}, function (err, gavpass) {
       if(err) throw err;
