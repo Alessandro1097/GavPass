@@ -3,27 +3,27 @@
   "version": "1.0.0",
   "description": "GavPass",
   "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "mongodb": "^2.2.36"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alessandro1097/GavPass.git"
+    "url": "git+https://github.com/Alessandro1097/link-utili-angularjs.git"
   },
   "keywords": [
     "password"
   ],
-  "author": "Gai Andrea e Cavuoti Alessandro",
+  "author": "Gai Andrea e Alessandro Cavuoti",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Alessandro1097/GavPass/issues"
+    "url": "https://github.com/Alessandro1097/link-utili-angularjs/issues"
   },
-  "homepage": "https://github.com/Alessandro1097/GavPass#readme"
+  "homepage": "https://github.com/Alessandro1097/link-utili-angularjs#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongodb": "^2.2.16",
+    "mongoose": "^5.4.1"
+  }
 }

@@ -99,6 +99,12 @@ export class DialogModifySite{
     public dialogRef: MatDialogRef<DialogModifySite>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  categoryShow = false;
+
+  setCategory(): void {
+    this.categoryShow = true;
+  }
+
   closeDialog(): void {
     this.dialogRef.close();
   }

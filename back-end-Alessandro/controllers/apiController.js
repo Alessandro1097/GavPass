@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
 
-  // get all api
+
   app.get('/api/setupGavpass/fullapi', function (req, res) {
     GavPass.find({}, function (err, gavpass) {
       if(err) throw err;
@@ -14,11 +14,12 @@ module.exports = function (app) {
   });
 
   app.get('/api/setupGavpass/fullapi/categoriesName', function (req, res) {
-    GavPass.find({ }, { _id: 0, name:1 }, function (err, gavpass) {
+    GavPass.find({ }, { _id: 0, name: 1 }, function (err, gavpass) {
       if(err) throw err;
       res.send(gavpass);
     });
   });
+  
   // find by name
   app.get('/api/setupGavpass/fullapi/:name', function (req, res) {
     GavPass.find({ name: req.params.name}, function (err, gavpass) {
@@ -33,6 +34,7 @@ module.exports = function (app) {
       res.send(gavpass);
     });
   });
+
   app.post('/api/gavpass/fullapi', function (req, res) {
     if(req.body.id) {
       GavPass.findByIdAndUpdate(req.body.id, {
@@ -52,6 +54,7 @@ module.exports = function (app) {
       });
     }
   });
+  
   app.delete('/api/gavpass/fullapi', function (res, req) {
     GavPass.findByIdAndRemove(req.body.id, function (err) {
       if (err) throw err;
