@@ -14,11 +14,12 @@ module.exports = function (app) {
   });
 
   app.get('/api/setupGavpass/fullapi/categoriesName', function (req, res) {
-    GavPass.find({ }, { _id: 0, name:1 }, function (err, gavpass) {
+    GavPass.find({ }, { _id: 0, name: 1 }, function (err, gavpass) {
       if(err) throw err;
       res.send(gavpass);
     });
   });
+  
   // find by name
   app.get('/api/setupGavpass/fullapi/:name', function (req, res) {
     GavPass.find({ name: req.params.name}, function (err, gavpass) {
