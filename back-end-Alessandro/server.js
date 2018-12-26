@@ -12,8 +12,8 @@ app.use(cors());
 app.options('*', cors());
 app.set('view engine', 'ejs');
 
-mongoose.connect(config.getDbConnectionString());
 setupGavpass(app);
 apiController(app);
+mongoose.connect(config.getDbConnectionString());
 
 app.listen(port);

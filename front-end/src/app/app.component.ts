@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, Component, OnDestroy, Inject} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 
-
 export interface DialogData {
-  animal: string;
-  name: string;
+  _id: number,
+  name: string
 }
 
 @Component({

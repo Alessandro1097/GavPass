@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CardService } from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {DialogData} from '../app.component';
-import {FormControl} from '@angular/forms';
 import 'rxjs-compat/add/operator/do';
+import {DialogData} from '../app.component';
 
 @Component({
   selector: 'app-card-detail',
@@ -31,21 +30,21 @@ export class CardDetailComponent implements OnInit {
     const name = this.route.snapshot.paramMap.get('name');
     this.cardService.getCard(name)
       .subscribe(card => this.card = card);
-    console.log(this);
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  openDialog(): void {
+  openDialog(card): void {
     const dialogRef = this.dialog.open(DialogAddSiteDialog, {
       width: '60%',
+      data: {
+        name: card
+      }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    console.log(dialogRef);
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   // TODO: fix the URL
@@ -91,7 +90,6 @@ export class DialogAttributesDialog{
   constructor(
     public dialogRef: MatDialogRef<DialogAttributesDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
 
   categoryShow = false;
 
