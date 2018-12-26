@@ -7,9 +7,9 @@ import {DemoMaterialModule} from '../material-module';
 import {MatNativeDateModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CardComponent, DialogAddCategoryDialog } from './card/card.component';
+import { CardComponent, DialogAddSiteDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
-import {CardDetailComponent, DialogAddSiteDialog, DialogAttributesDialog} from './card-detail/card-detail.component';
+import {CardDetailComponent, DialogAttributesDialog, DialogModifySite} from './card-detail/card-detail.component';
 import { NoteComponent } from './note/note.component';
 
 @NgModule({
@@ -17,10 +17,10 @@ import { NoteComponent } from './note/note.component';
     AppComponent,
     CardComponent,
     CardDetailComponent,
-    DialogAddCategoryDialog,
     DialogAddSiteDialog,
     NoteComponent,
-    DialogAttributesDialog
+    DialogAttributesDialog,
+    DialogModifySite
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { NoteComponent } from './note/note.component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  entryComponents: [CardComponent, DialogAddCategoryDialog, CardDetailComponent, DialogAddSiteDialog, DialogAttributesDialog],
+  entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, DialogAttributesDialog, DialogModifySite],
   providers: [],
   bootstrap: [AppComponent]
 })

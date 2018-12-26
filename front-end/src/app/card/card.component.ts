@@ -13,49 +13,49 @@ export class CardComponent implements OnInit {
 
   constructor(private cardService: CardService, public dialog: MatDialog) { }
 
-  selectedCard: cardType;
-
   cards: cardType[];
-
-  //apiNode: apiProvaNode[];
+  cardsName: cardType[];
 
   ngOnInit() {
     this.getCards();
-    //this.getApiNode();
+    this.getCategoriesName();
   }
 
   getCards(): void {
     this.cardService.getCards().subscribe(cards => this.cards = cards);
   }
 
-  /**
-  getApiNode(): void {
-    this.cardService.getApiNode().subscribe(apiNode => this.apiNode = apiNode);
+  getCategoriesName(): void {
+    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName)
   }
-  **/
-  openAddDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddCategoryDialog, {
-      width: '60%',
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddSiteDialog, {
+      width: '60%',
+      data : {
+        name: this.cardsName
+      }
     });
+    console.log(dialogRef);
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }
 
 @Component({
-  selector: './dialog-add-category-dialog',
-  templateUrl: './dialog-add-category.html',
+  selector: './dialog-add-site-dialog',
+  templateUrl: './dialog-add-site.html',
 })
-export class DialogAddCategoryDialog {
+
+export class DialogAddSiteDialog{
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddCategoryDialog>,
+    public dialogRef: MatDialogRef<DialogAddSiteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  closeDialog(){
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
 }
+
+

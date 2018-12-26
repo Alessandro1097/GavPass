@@ -15,6 +15,7 @@ import {DialogData} from '../app.component';
 export class CardDetailComponent implements OnInit {
   @Input() card: cardType;
   cards: cardType[];
+
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
@@ -36,20 +37,22 @@ export class CardDetailComponent implements OnInit {
     this.location.back();
   }
 
-  openDialog(card): void {
-    const dialogRef = this.dialog.open(DialogAddSiteDialog, {
+  openModifySite(cardName): void {
+    console.log(cardName);
+    const dialogRef = this.dialog.open(DialogModifySite, {
       width: '60%',
       data: {
-        name: card
+        currentCategory: cardName
       }
     });
     console.log(dialogRef);
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog openModifySite was closed');
+    });
   }
 
   // TODO: fix the URL
   openModalAttribute(attributes): void {
-    console.log(attributes);
     const dialogRef = this.dialog.open(DialogAttributesDialog, {
       width: '60%',
       data: {
@@ -60,25 +63,9 @@ export class CardDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog openModalAttribute was closed');
     });
   }
-}
-
-@Component({
-  selector: './dialog-add-site-dialog',
-  templateUrl: './dialog-add-site.html',
-})
-export class DialogAddSiteDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogAddSiteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
-
 }
 
 @Component({
@@ -96,6 +83,21 @@ export class DialogAttributesDialog{
   setCategory(): void {
     this.categoryShow = true;
   }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: './dialog-modify-site',
+  templateUrl: './dialog-modify-site-inside.html',
+})
+export class DialogModifySite{
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogModifySite>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   closeDialog(): void {
     this.dialogRef.close();

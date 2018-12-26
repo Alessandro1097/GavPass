@@ -10,11 +10,16 @@ import 'rxjs-compat/add/operator/do';
 export class CardService {
 
   private cardUrl = 'http://localhost:3000/api/setupGavpass/fullapi';  // URL to web api
+  private categoriesName = 'http://localhost:3000/api/setupGavpass/fullapi/categoriesName';
 
   constructor(private http: HttpClient) { }
 
   getCards(): Observable<cardType[]> {
     return this.http.get<cardType[]>(this.cardUrl).do(console);
+  }
+
+  getCategoriesName(): Observable<cardType[]> {
+    return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
 
   getCard(name: string): Observable<cardType> {

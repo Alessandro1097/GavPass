@@ -1,0 +1,42 @@
+<div class="top-bar">
+  <h3 class="title-modal">Aggiungi un sito</h3>
+  <button class="close-modal-button" (click)="closeDialog()">
+    <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
+  </button>
+</div>
+
+<div class="padding-modal">
+
+  <mat-form-field class="form-url">
+    <input matInput #input placeholder="URL:">
+  </mat-form-field>
+  <div class="user-container">
+    <mat-form-field class="name-width">
+      <input matInput #input placeholder="Nome:">
+    </mat-form-field>
+    <mat-form-field class="name-width">
+      <mat-select placeholder="Scegli categoria">
+        <mat-option *ngFor="let categoriesName of data.name" [value]="categoriesName.name">
+          {{categoriesName.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="site-section">
+    <mat-form-field class="name-width">
+      <input matInput #input placeholder="Nome utente:">
+    </mat-form-field>
+    <mat-form-field class="name-width">
+      <input matInput #input placeholder="Password:" type="password">
+    </mat-form-field>
+  </div>
+  <mat-form-field class="note-section">
+    <textarea matInput placeholder="Note"></textarea>
+  </mat-form-field>
+
+  <div class="button-section">
+    <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Salva</button>
+  </div>
+
+</div>
