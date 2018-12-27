@@ -11,5 +11,4 @@ var categorySchema = new Schema({
 
 });
 
-// UNDONE - Gavpass??
-module.exports = mongoose.model('Gavpass', categorySchema);
+module.exports = mongoose.model('categories', categorySchema);
