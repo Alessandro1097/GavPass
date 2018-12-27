@@ -17,8 +17,8 @@
     <mat-form-field class="name-width">
       <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()" *ngIf="!categoryShow">
       <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:">
-        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.id">
-          {{cardCategory.type}}
+        <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory.name">
+          {{currentCategory.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>

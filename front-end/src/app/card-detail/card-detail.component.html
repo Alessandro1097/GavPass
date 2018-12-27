@@ -2,13 +2,15 @@
 
   <div *ngFor="let cardDetail of card">
     <div style="display: flex">
-      <button (click)="goBack()" class="button-back cursor-pointer"><mat-icon>arrow_back</mat-icon></button>
-      <h2>Category: {{cardDetail.name}}</h2>
+      <button mat-icon-button class="button-back cursor-pointer" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2 style="margin-top: 8px">Category: {{cardDetail.name}}</h2>
     </div>
     <mat-list>
       <h3 mat-subheader>Folders</h3>
       <mat-divider></mat-divider>
-      <mat-list-item class="attributes-card" *ngFor="let cardAttributes of cardDetail.attributes" (click)="openModalAttribute(cardAttributes)">
+      <mat-list-item class="attributes-card" *ngFor="let cardAttributes of cardDetail.attributes" (click)="openModalAttribute(cardDetail.name, cardAttributes)">
         <mat-icon mat-list-icon>folder</mat-icon>
         <h4 mat-line>{{cardAttributes.site}}</h4>
         <mat-divider></mat-divider>

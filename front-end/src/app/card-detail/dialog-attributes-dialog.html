@@ -7,18 +7,18 @@
 <div class="padding-modal">
 
   <mat-form-field class="form-url">
-    <input matInput #input placeholder="URL:" [value]="data.dataUrl">
+    <input matInput #input placeholder="URL:" [value]="data.attributes.url">
   </mat-form-field>
 
   <div class="user-container">
     <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome:" [value]="data.dataAttributes">
+      <input matInput #input placeholder="Nome:" [value]="data.attributes.site">
     </mat-form-field>
     <mat-form-field class="name-width">
-      <input matInput #input placeholder="Scegli categoria:" [value]="data.dataType" (click)="setCategory()" *ngIf="!categoryShow">
+      <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()" *ngIf="!categoryShow">
       <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:">
-        <mat-option *ngFor="let cardCategory of cardCategories" [value]="cardCategory.id">
-          {{cardCategory.type}}
+        <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory.name">
+          {{currentCategory.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -15,6 +15,7 @@ import {DialogData} from '../app.component';
 export class CardDetailComponent implements OnInit {
   @Input() card: cardType;
   cards: cardType[];
+  cardsName: cardType[];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class CardDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getCard();
+    this.getCategoriesName();
   }
 
   getCard(): void {
@@ -33,35 +35,37 @@ export class CardDetailComponent implements OnInit {
       .subscribe(card => this.card = card);
   }
 
+  getCategoriesName(): void {
+    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName)
+  }
+
   goBack(): void {
     this.location.back();
   }
 
-  openModifySite(cardName): void {
-    console.log(cardName);
+  openModifySite(currentName): void {
     const dialogRef = this.dialog.open(DialogModifySite, {
       width: '60%',
       data: {
-        currentCategory: cardName
+        currentCategory: currentName,
+        listCategories: this.cardsName
       }
     });
-    console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModifySite was closed');
     });
   }
 
-  // TODO: fix the URL
-  openModalAttribute(attributes): void {
+  openModalAttribute(currentName, cardAttributes): void {
     const dialogRef = this.dialog.open(DialogAttributesDialog, {
       width: '60%',
       data: {
-        dataAttributes: attributes,
-        dataType: this.card.name,
-        dataUrl: this.card.attributes
+        currentCategory: currentName,
+        listCategories: this.cardsName,
+        attributes: cardAttributes
       }
     });
-
+    console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
     });
