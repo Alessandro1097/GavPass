@@ -65,7 +65,6 @@ export class CardDetailComponent implements OnInit {
         attributes: cardAttributes
       }
     });
-    console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
     });
