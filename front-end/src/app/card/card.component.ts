@@ -1,8 +1,10 @@
+import { AddSite } from './../class/add-site-main-page';
 import {Component, Inject, OnInit} from '@angular/core';
 import {cardType} from '../type-card-container';
 import {CardService} from '../card.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../app.component';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-card',
@@ -26,7 +28,7 @@ export class CardComponent implements OnInit {
   }
 
   getCategoriesName(): void {
-    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName)
+    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
   }
 
   openDialog(): void {
@@ -46,16 +48,31 @@ export class CardComponent implements OnInit {
   templateUrl: './dialog-add-site.html',
 })
 
-export class DialogAddSiteDialog{
+export class DialogAddSiteDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddSiteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  modelAddSite = new AddSite('', '', '', '', '');
+
+  url = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  category = new FormControl('', [Validators.required]);
+  username  = new FormControl('', [Validators.required]);
+  password  = new FormControl('', [Validators.required]);
+
   closeDialog(): void {
     this.dialogRef.close();
   }
 
+  getErrorMessage() {
+    return this.url.hasError('required') ? 'You must enter a value' :
+        this.url.hasError('email') ? 'Not a valid email' :
+            '';
+  }
+
+  get dataInfo() { return JSON.stringify(this.data.name); }
+  get diagnostic() { return JSON.stringify(this.modelAddSite); }
+
 }
-
-

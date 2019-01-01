@@ -6,7 +6,7 @@ html, body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   background-color: #fafafa;
   margin: 0;
 }
@@ -112,4 +112,9 @@ a {
 }
 .button-space {
   margin-right: 20px !important;
+}
+
+.params-required {
+  color: #f44336;
+  font-size: 14px;
 }

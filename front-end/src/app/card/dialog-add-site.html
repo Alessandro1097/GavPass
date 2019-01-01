@@ -6,37 +6,43 @@
 </div>
 
 <div class="padding-modal">
+  <form #addSiteForm="ngForm">
+    <mat-form-field class="form-url">
+      <input matInput #input placeholder="URL:" [formControl]="url" required>
+      <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <div class="user-container">
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Nome:" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name-width">
+        <mat-select placeholder="Scegli categoria" [formControl]="category" required>
+          <mat-option *ngFor="let categoriesName of data.name" value="categoriesName.name">
+            {{categoriesName.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="category.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="site-section">
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Nome utente:" [formControl]="username" required>
+        <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Password:" type="password" [formControl]="password" required>
+        <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="note-section">
+      <textarea matInput placeholder="Note"></textarea>
+    </mat-form-field>
 
-  <mat-form-field class="form-url">
-    <input matInput #input placeholder="URL:">
-  </mat-form-field>
-  <div class="user-container">
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome:">
-    </mat-form-field>
-    <mat-form-field class="name-width">
-      <mat-select placeholder="Scegli categoria">
-        <mat-option *ngFor="let categoriesName of data.name" [value]="categoriesName.name">
-          {{categoriesName.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="site-section">
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome utente:">
-    </mat-form-field>
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Password:" type="password">
-    </mat-form-field>
-  </div>
-  <mat-form-field class="note-section">
-    <textarea matInput placeholder="Note"></textarea>
-  </mat-form-field>
-
-  <div class="button-section">
-    <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
-    <button mat-raised-button color="primary" (click)="closeDialog()">Salva</button>
-  </div>
+    <div class="button-section">
+      <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
+      <button mat-raised-button color="primary" (click)="closeDialog()">Salva</button>
+    </div>
+  </form>
 
 </div>
