@@ -1,7 +1,7 @@
 module.exports = function (app) {
-    var Categories = require('./Categories');
+    var Categories = require('./categories.controller');
     Categories(app);
 
-    var Users = require('./Users');
+    var Users = require('./users.controller');
     Users(app);
 };

@@ -1,4 +1,5 @@
 var collection = require('./models/User');
+const Role = require('./models/Role');
 
 module.exports = function (app) {
 
@@ -9,58 +10,21 @@ module.exports = function (app) {
     var recordset = [
       {
         email: "master",
-        psw: "master",
+        pwd: "master",
         phone: "330212182",
-        accountType: 99
+        role: Role.Admin
       },
       {
         email: "andrea@tuttomail.com",
-        psw: "andrea",
+        pwd: "andrea",
         phone: "330212182",
-        accountType: 0
+        role: Role.User
       }
     ];
 
     collection.create(recordset, function (err, results) {
+      if (err) throw err;
       res.send(results);
     });
   });
-
-  // Find by Name
-  app.get('/api/setup/login/:email', function (req, res) {
-
-    // Create a setup
-    var tmpSetup = new collection ({
-      email: "dd@tuttomail.com",
-      psw: "simone",
-      phone: "123",
-      accountType: 0
-    });
-
-    tmpSetup.save(function (err) {
-
-        if (err) throw err;
-
-        collection.findOne({ email: 'master' }, function (err, result) {
-
-            if (err) throw err;
-
-            var esito = "";
-
-            // test a matching password
-            result.comparePassword('Password123', function (err, isMatch) {
-                if (err) throw err;
-                esito = isMatch; // -&gt; Password123: true
-            });
-
-            // test a failing password
-            result.comparePassword('123Password', function (err, isMatch) {
-                if (err) throw err;
-                esito = isMatch; // -&gt; Password123: true
-            });
-
-            res.send(result + " con esito: " + esito);
-        })
-    });
-});
 };
