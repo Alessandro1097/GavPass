@@ -1,11 +1,12 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {cardType} from '../type-card-container';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { cardType } from '../type-card-container';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CardService } from '../card.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import 'rxjs-compat/add/operator/do';
-import {DialogData} from '../app.component';
+import { DialogData } from '../app.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-card-detail',
@@ -22,7 +23,7 @@ export class CardDetailComponent implements OnInit {
     private cardService: CardService,
     private location: Location,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getCard();
@@ -69,17 +70,24 @@ export class CardDetailComponent implements OnInit {
       console.log('The dialog openModalAttribute was closed');
     });
   }
+
 }
 
 @Component({
   selector: './dialog-attributes-dialog',
   templateUrl: './dialog-attributes-dialog.html',
 })
-export class DialogAttributesDialog{
+export class DialogAttributesDialog {
+
+  url = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  category = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<DialogAttributesDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
 
@@ -90,17 +98,30 @@ export class DialogAttributesDialog{
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  getErrorMessage() {
+    return this.url.hasError('required') ? 'You must enter a value' :
+      this.url.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+
 }
 
 @Component({
   selector: './dialog-modify-site',
   templateUrl: './dialog-modify-site-inside.html',
 })
-export class DialogModifySite{
+export class DialogModifySite {
+
+  url = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
+  category = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<DialogModifySite>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
 
@@ -111,4 +132,11 @@ export class DialogModifySite{
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  getErrorMessage() {
+    return this.url.hasError('required') ? 'You must enter a value' :
+      this.url.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+
 }

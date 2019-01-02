@@ -5,40 +5,47 @@
   </button>
 </div>
 <div class="padding-modal">
-
-  <mat-form-field class="form-url">
-    <input matInput #input placeholder="URL:">
-  </mat-form-field>
-
-  <div class="user-container">
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome:">
+  <form>
+    <mat-form-field class="form-url">
+      <input matInput #input placeholder="URL:" [formControl]="url" required>
+      <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()" *ngIf="!categoryShow">
-      <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:">
-        <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory.name">
-          {{currentCategory.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
-  <div class="site-section">
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Nome utente:">
-    </mat-form-field>
-    <mat-form-field class="name-width">
-      <input matInput #input placeholder="Password:" type="password">
-    </mat-form-field>
-  </div>
-  <mat-form-field class="note-section">
-    <textarea matInput placeholder="Note"></textarea>
-  </mat-form-field>
+    <div class="user-container">
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Nome:" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()"
+          *ngIf="!categoryShow" required>
+        <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:" [formControl]="category"
+          required>
+          <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory.name">
+            {{currentCategory.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="category.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
 
-  <div class="button-section">
-    <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
-    <button mat-raised-button color="primary">Salva</button>
-  </div>
+    <div class="site-section">
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Nome utente:" [formControl]="username" required>
+        <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name-width">
+        <input matInput #input placeholder="Password:" type="password" [formControl]="password" required>
+        <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="note-section">
+      <textarea matInput placeholder="Note"></textarea>
+    </mat-form-field>
 
+    <div class="button-section">
+      <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
+      <button mat-raised-button color="primary">Salva</button>
+    </div>
+  </form>
 </div>
