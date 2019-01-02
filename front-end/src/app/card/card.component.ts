@@ -1,10 +1,9 @@
-import { AddSite } from './../class/add-site-main-page';
-import {Component, Inject, OnInit} from '@angular/core';
-import {cardType} from '../type-card-container';
-import {CardService} from '../card.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {DialogData} from '../app.component';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { cardType } from '../type-card-container';
+import { CardService } from '../card.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { DialogData } from '../app.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-card',
@@ -34,12 +33,12 @@ export class CardComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddSiteDialog, {
       width: '60%',
-      data : {
+      data: {
         name: this.cardsName
       }
     });
     console.log(dialogRef);
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => { });
   }
 }
 
@@ -50,17 +49,16 @@ export class CardComponent implements OnInit {
 
 export class DialogAddSiteDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogAddSiteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  modelAddSite = new AddSite('', '', '', '', '');
-
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
-  username  = new FormControl('', [Validators.required]);
-  password  = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogAddSiteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -68,11 +66,10 @@ export class DialogAddSiteDialog {
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
-        this.url.hasError('email') ? 'Not a valid email' :
-            '';
+      this.url.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   get dataInfo() { return JSON.stringify(this.data.name); }
-  get diagnostic() { return JSON.stringify(this.modelAddSite); }
 
 }
