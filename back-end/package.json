@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Alessandro1097/link-utili-angularjs#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",

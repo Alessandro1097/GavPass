@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var categorySchema = new Schema({
+var mySchema = new Schema({
 
   name: String,
+  userid: String,
   attributes: [{
     site: String,
     url: String
@@ -11,4 +12,4 @@ var categorySchema = new Schema({
 
 });
 
-module.exports = mongoose.model('categories', categorySchema);
+module.exports = mongoose.model('categories', mySchema);
