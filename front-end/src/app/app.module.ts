@@ -11,6 +11,7 @@ import { CardComponent, DialogAddSiteDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
 import {CardDetailComponent, DialogAttributesDialog, DialogModifySite} from './card-detail/card-detail.component';
 import { NoteComponent } from './note/note.component';
+import {MatDialogModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NoteComponent } from './note/note.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatDialogModule
   ],
   entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, DialogAttributesDialog, DialogModifySite],
   providers: [],

@@ -37,7 +37,7 @@ export class CardDetailComponent implements OnInit {
   }
 
   getCategoriesName(): void {
-    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName)
+    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
   }
 
   goBack(): void {

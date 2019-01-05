@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { CardService } from './../card.service';
+import { Component, Inject, OnInit, Input } from '@angular/core';
 import { cardType } from '../type-card-container';
-import { CardService } from '../card.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -37,7 +37,6 @@ export class CardComponent implements OnInit {
         name: this.cardsName
       }
     });
-    console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => { });
   }
 }
@@ -47,17 +46,27 @@ export class CardComponent implements OnInit {
   templateUrl: './dialog-add-site.html',
 })
 
-export class DialogAddSiteDialog {
+export class DialogAddSiteDialog implements OnInit {
+  @Input() card: cardType;
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  cards: cardType[];
+
+  ngOnInit() {
+    this.getCards();
+  }
+
+  getCards(): void {
+    this.cardService.getCards().subscribe(cards => this.cards = cards);
+  }
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddSiteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private cardService: CardService) { }
 
 
   closeDialog(): void {
@@ -70,6 +79,15 @@ export class DialogAddSiteDialog {
         '';
   }
 
+  /*goBack(): void {
+    this.location.back();
+  }*/
+
+  saveSite(): void {
+    this.cardService.updateCard(this.card).subscribe(() => this.dialogRef.close());
+  }
+
   get dataInfo() { return JSON.stringify(this.data.name); }
+  get datae() { return JSON.stringify(this.cards); }
 
 }
