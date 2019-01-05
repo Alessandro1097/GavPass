@@ -1,7 +1,9 @@
-﻿const config = require('../topSecret/secret.json');
-const jwt = require('jsonwebtoken');
+﻿// Request of the model
+var users = require('../models/User');
 
-var Users = require('../models/User');
+// Authentication
+const config = require('../topSecret/secret.json');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     authenticate,
@@ -10,7 +12,7 @@ module.exports = {
 };
 
 async function authenticate({ user_email, user_pwd }) {
-    Users.find({ email: user_email, pwd: user_pwd }, function (err, result) {
+    users.find({ email: user_email, pwd: user_pwd }, function (err, result) {
         if (err) throw err;
 
         const token = jwt.sign({ sub: result.id, role: result.role }, config.secret);
@@ -27,7 +29,7 @@ async function authenticate({ user_email, user_pwd }) {
 
 // Select
 async function getAll() {
-    return Users.find({}, function (err, result) {
+    return users.find({}, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -35,10 +37,10 @@ async function getAll() {
 
 // Get by ID
 async function getById(id) {
-    Users.findById({ _id: id }, function (err, result) {
+    users.findById({ _id: id }, function (err, result) {
         if (err) throw err;
 
         const { pwd, ...userWithoutPassword } = result;
         return userWithoutPassword;
     });
-}
+};

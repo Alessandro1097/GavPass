@@ -1,68 +1,56 @@
-// Request of the model
-var categories = require('../models/Category');
+// Request of the service
+const service = require('./category.service');
 
 module.exports = function (app) {
 
     // Select
-    app.get('/api/Categories', function (req, res) {
-        categories.find({}, function (err, result) {
-            if(err) throw err;
-            res.send(result);
-        });
+    app.get('/api/Categories', function (req, res, next) {
+        service.getAll()
+            .then(result => res.json(result))
+            .catch(err => next(err));
     });
 
     // Get Name
-    app.get('/api/Categories/name', function (req, res) {
-        categories.find({ }, { _id: 0, name: 1 }, function (err, result) {
-            if(err) throw err;
-            res.send(result);
-        });
-    });
-    
-    // Find by Name
-    app.get('/api/Categories/findByName/:name', function (req, res) {
-        categories.find({ name: req.params.name }, function (err, result) {
-            if(err) throw err;
-            res.send(result);
-        });
+    app.get('/api/Categories/name', function (req, res, next) {
+        service.getName()
+            .then(result => res.json(result))
+            .catch(err => next(err));
     });
 
-    // Find by Id
-    app.get('/api/Categories/findById/:id', function (req, res) {
-        categories.findById({ _id: req.params.id }, function (err, result) {
-            if(err) throw err;
-            res.send(result);
-        });
+    // Get by ID
+    app.get('/api/Categories/getById/:id', function (req, res, next) {
+        service.getById(req.params.id)
+            .then(result => res.json(result))
+            .catch(err => next(err));
+    });
+
+    // Get by Name
+    app.get('/api/Categories/getByName/:name', function (req, res, next) {
+        service.getByName(req.params.name)
+            .then(result => res.json(result))
+            .catch(err => next(err));
     });
 
     // Save
-    app.post('/api/Categories/save', function (req, res) {
+    app.post('/api/Categories/save', function (req, res, next) {
         if(req.body.id) {
             // Update
-            categories.findByIdAndUpdate(req.body.id, {
-                name: req.body.name, attributes: req.body.attributes
-            }, function (err) {
-                if (err) throw err;
-                res.send('1 document updated');
-            });
+            service.update(req.body.id, req.body.name, req.body.attributes)
+                .then(result => result ? res.send('1 document updated') : res.send('Error'))
+                .catch(err => next(err));
         } else {
             // Insert
-            var newGavpass = categories({
-                name: req.body.name,
-                attributes: req.body.attributes
-            });
-            newGavpass.save(function (err) {
-                if (err) throw err;
-                res.send('1 document inserted');
-            });
+            service.insert(req.body.name, req.body.attributes)
+                .then(result => result ? res.send('1 document inserted') : res.send('Error'))
+                .catch(err => next(err));
+
         }
     });
-    
+
     // Delete
-    app.delete('/api/Categories/delete', function (res, req) {
-        categories.findByIdAndRemove(req.body.id, function (err) {
-            if (err) throw err;
-            res.send('1 document deleted');
-        });
+    app.delete('/api/Categories/delete', function (req, res, next) {
+        service.deleteById(req.body.id)
+            .then(result => result ? res.send('1 document deleted') : res.send('Error'))
+            .catch(err => next(err));
     });
 };
