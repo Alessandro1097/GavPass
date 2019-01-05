@@ -1,3 +1,5 @@
+var ObjectId = require('mongodb').ObjectID;
+
 // Request of the model
 var categories = require('../models/Category');
 
@@ -29,7 +31,8 @@ async function getName() {
 
 // Get by ID
 async function getById(id) {
-    return categories.findById({ _id: id }, function (err, result) {
+
+    return categories.findById({ _id: new ObjectId(id) }, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -50,29 +53,29 @@ async function insert(name, attributes) {
         attributes: attributes
     });
 
-    newRec.save(function (err) {
+    newRec.save(function (err, result) {
         if (err) throw err;
         /* 1 document inserted */
-        return true;
+        return result;
     });
 };
 
 // Update
 async function update(id, name, attributes) {
-    categories.findByIdAndUpdate(id, {
+    categories.findByIdAndUpdate(new ObjectId(id), {
         name: name, attributes: attributes
-    }, function (err) {
+    }, function (err, result) {
         if (err) throw err;
         /* 1 document updated */
-        return true;
+        return result;
     });
 };
 
 // Delete by ID
 async function deleteById(id) {
-    return categories.findByIdAndRemove(id, function (err) {
+    return categories.findByIdAndRemove(new ObjectId(id), function (err, result) {
         if (err) throw err;
         /* 1 document deleted */
-        return true;
+        return result;
     });
 };

@@ -37,7 +37,7 @@ async function getAll() {
 
 // Get by ID
 async function getById(id) {
-    users.findById({ _id: id }, function (err, result) {
+    users.findById({ _id: new ObjectId(id) }, function (err, result) {
         if (err) throw err;
 
         const { pwd, ...userWithoutPassword } = result;

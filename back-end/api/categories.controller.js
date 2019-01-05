@@ -36,14 +36,13 @@ module.exports = function (app) {
         if(req.body.id) {
             // Update
             service.update(req.body.id, req.body.name, req.body.attributes)
-                .then(result => result ? res.send('1 document updated') : res.send('Error'))
+                .then(res.send('1 document updated'))
                 .catch(err => next(err));
         } else {
             // Insert
             service.insert(req.body.name, req.body.attributes)
-                .then(result => result ? res.send('1 document inserted') : res.send('Error'))
+                .then(res.send('1 document inserted'))
                 .catch(err => next(err));
-
         }
     });
 
