@@ -14,9 +14,9 @@ const httpOptions = {
 export class CardService {
 
   private categoriesList = 'http://localhost:3000/api/Categories';
-  private categoriesData = 'http://localhost:3000/api/Categories/findByName';
+  private categoriesData = 'http://localhost:3000/api/Categories/getByName';
   private categoriesName = 'http://localhost:3000/api/Categories/name';
-  private categoriesId = '/api/Categories/findById';
+  private categoriesId = '/api/Categories/getById';
 
   constructor(private http: HttpClient) { }
   // Get all the information of the card
