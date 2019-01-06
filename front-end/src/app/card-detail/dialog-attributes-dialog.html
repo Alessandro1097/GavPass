@@ -14,7 +14,7 @@
 
     <div class="user-container">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome:" [value]="data.attributes.site" [formControl]="name" required>
+        <input matInput #input placeholder="Nome:" [value]="data.attributes.name" [formControl]="name" required>
         <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
@@ -32,16 +32,16 @@
 
     <div class="site-section">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome utente:" [formControl]="username" required>
+        <input matInput #input placeholder="Nome utente:" [value]="data.attributes.username" [formControl]="username" required>
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Password:" type="password" [formControl]="password" required>
+        <input matInput #input placeholder="Password:" type="password" [value]="data.attributes.pwd" [formControl]="password" required>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field class="note-section">
-      <textarea matInput placeholder="Note"></textarea>
+      <textarea matInput placeholder="Note" [value]="data.attributes.note"></textarea>
     </mat-form-field>
 
     <div class="button-section">

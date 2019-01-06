@@ -1,8 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { cardType } from '../type-card-container';
+import { siteType } from '../type-site';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CardService } from '../card.service';
+import { SiteService } from '../site.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import 'rxjs-compat/add/operator/do';
 import { DialogData } from '../app.component';
@@ -17,10 +19,12 @@ export class CardDetailComponent implements OnInit {
   @Input() card: cardType;
   cards: cardType[];
   cardsName: cardType[];
+  sites: siteType[];
 
   constructor(
     private route: ActivatedRoute,
     private cardService: CardService,
+    private siteService: SiteService,
     private location: Location,
     public dialog: MatDialog
   ) { }
@@ -28,6 +32,7 @@ export class CardDetailComponent implements OnInit {
   ngOnInit() {
     this.getCard();
     this.getCategoriesName();
+    this.getSites();
   }
 
   getCard(): void {
@@ -38,6 +43,11 @@ export class CardDetailComponent implements OnInit {
 
   getCategoriesName(): void {
     this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
+  }
+
+  getSites(): void {
+    const name = this.route.snapshot.paramMap.get('name');
+    this.siteService.getSites(name).subscribe(sites => this.sites = sites);
   }
 
   goBack(): void {
@@ -57,13 +67,13 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  openModalAttribute(currentName, cardAttributes): void {
+  openModalAttribute(currentName, siteAttributes): void {
     const dialogRef = this.dialog.open(DialogAttributesDialog, {
       width: '60%',
       data: {
         currentCategory: currentName,
         listCategories: this.cardsName,
-        attributes: cardAttributes
+        attributes: siteAttributes
       }
     });
     dialogRef.afterClosed().subscribe(result => {

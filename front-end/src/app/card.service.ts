@@ -15,15 +15,12 @@ const httpOptions = {
 export class CardService {
 
   private categoriesList = 'http://localhost:3000/api/Categories';
-  private categoriesData = 'http://localhost:3000/api/Categories/getByName';
+  private categoryData = 'http://localhost:3000/api/Categories/getByName';
   private categoriesName = 'http://localhost:3000/api/Categories/name';
-<<<<<<< HEAD
-  private categoriesId = 'http://localhost:3000/api/Categories/save';
-=======
-  private categoriesId = '/api/Categories/getById';
->>>>>>> c2fa9f9144428000aaf0915db61a62bd0e1c4e40
+  private categorySave = 'http://localhost:3000/api/Categories/save';
 
   constructor(private http: HttpClient) { }
+
   // Get all the information of the card
   getCards(): Observable<cardType[]> {
     // return this.http.get<cardType[]>(this.categoriesList).do(console);
@@ -31,19 +28,22 @@ export class CardService {
       catchError(this.handleError('getHeroes', []))
     );
   }
+
   // Get all list of the categories name
   getCategoriesName(): Observable<cardType[]> {
     return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
-  // get card by name
+
+  // Get card by name
   getCard(name: string): Observable<cardType> {
-    const url = `${this.categoriesData}/${name}`;
+    const url = `${this.categoryData}/${name}`;
     console.log(url);
     return this.http.get<cardType>(url);
   }
-  // update by id
+
+  // Update by id
   updateCard(card: cardType): Observable<any> {
-    return this.http.put(this.categoriesId, card, httpOptions);
+    return this.http.put(this.categorySave, card, httpOptions);
   }
 
   /**
