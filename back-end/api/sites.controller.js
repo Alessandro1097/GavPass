@@ -1,5 +1,6 @@
 // Request of the service
 const service = require('./site.service');
+const categoryService = require('./category.service');
 
 module.exports = function (app) {
 
@@ -17,16 +18,23 @@ module.exports = function (app) {
             .catch(err => next(err));
     });
 
-    // Get sites by Category
-    app.get('/api/Sites/getByCategory/:categoryId', function (req, res, next) {
-        service.getByCategory(req.params.categoryId)
-            .then(result => res.json(result))
+    // Get sites by Category name
+    app.get('/api/Sites/getByCategory/:categoryName', function (req, res, next) {
+
+        categoryService.getByName(req.params.categoryName)
+            .then(result => findSites(result, res))
             .catch(err => next(err));
+
+        function findSites(category, res) {
+            service.getByCategory(category._id)
+                .then(result => res.json(result))
+                .catch(err => next(err));
+        }
     });
 
     // Save
     app.post('/api/Sites/save', function (req, res, next) {
-        if(req.body.id) {
+        if (req.body.id) {
             // Update
             service.update(req.body.id, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
                 .then(res.send('1 document updated'))

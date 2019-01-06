@@ -1,4 +1,4 @@
-var ObjectId = require('mongodb').ObjectID;
+var ObjectId = require('mongoose').Types.ObjectId;
 
 // Request of the model
 var sites = require('../models/Site');
@@ -22,7 +22,6 @@ async function getAll() {
 
 // Get by ID
 async function getById(id) {
-
     return sites.findById({ _id: new ObjectId(id) }, function (err, result) {
         if (err) throw err;
         return result;
@@ -31,8 +30,7 @@ async function getById(id) {
 
 // Get sites by Category
 async function getByCategory(categoryId) {
-
-    return sites.find({ category: new ObjectId(categoryId) }, function (err, result) {
+    return sites.find({ category: categoryId }, function (err, result) {
         if (err) throw err;
         return result;
     });

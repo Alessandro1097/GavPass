@@ -31,21 +31,6 @@ module.exports = function (app) {
             .catch(err => next(err));
     });
 
-    // Get sites by Name
-    app.get('/api/Categories/getSites/:name', function (req, res, next) {
-
-        var categories = require('../models/Category');
-        var sites = require('../models/Site');
-
-        categories.find({ name: req.params.name })
-                .populate('sites')
-                .exec(function (err, result) {
-                if (err) throw err;
-                res.send(result);
-                console.log(result);
-            })
-    });
-
     // Save
     app.post('/api/Categories/save', function (req, res, next) {
         if(req.body.id) {
