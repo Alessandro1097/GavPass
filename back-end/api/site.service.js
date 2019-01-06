@@ -37,8 +37,9 @@ async function getByCategory(categoryId) {
 };
 
 // Insert
-async function insert(url, name, category, username, pwd, note) {
+async function insert(user, url, name, category, username, pwd, note) {
     var newRec = sites({
+        user: user,
         url: url,
         name: name,
         category: category,

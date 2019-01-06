@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var mySchema = new Schema({
 
-    name: String,
-    user: String
+    name: { type: String, required: true },
+    user: { type: String, required: true }
 
 });
 

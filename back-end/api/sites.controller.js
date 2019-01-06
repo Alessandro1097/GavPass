@@ -41,7 +41,7 @@ module.exports = function (app) {
                 .catch(err => next(err));
         } else {
             // Insert
-            service.insert(req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
+            service.insert(req.body.user, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
                 .then(res.send('1 document inserted'))
                 .catch(err => next(err));
         }
