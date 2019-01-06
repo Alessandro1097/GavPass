@@ -46,10 +46,10 @@ async function getByName(name) {
 };
 
 // Insert
-async function insert(name, userid) {
+async function insert(name, user) {
     var newRec = categories({
         name: name,
-        userid: userid
+        user: user
     });
 
     newRec.save(function (err, result) {

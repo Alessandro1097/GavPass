@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var mySchema = new Schema({
 
     name: String,
-    userid: String
+    user: String
 
 });
 
