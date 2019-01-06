@@ -2,12 +2,14 @@ var ObjectId = require('mongodb').ObjectID;
 
 // Request of the model
 var categories = require('../models/Category');
+var sites = require('../models/Site');
 
 module.exports = {
     getAll,
     getName,
     getById,
     getByName,
+    getSites,
     insert,
     update,
     deleteById
@@ -23,7 +25,7 @@ async function getAll() {
 
 // Get Name
 async function getName() {
-    return categories.find({ }, { _id: 0, name: 1 }, function (err, result) {
+    return categories.find({}, { _id: 0, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -46,27 +48,62 @@ async function getByName(name) {
     });
 };
 
+// Get sites by Name
+async function getSites(name) {
+
+    var rsQuery = categories.find({ name: name }, function (err, result) {
+        if (err) throw err;
+
+        var attributes = [];
+
+        result.forEach(function (item) {
+            var site = {
+                site: item.name
+                //url: item.sites.url
+            }
+            attributes.push(site);
+        });
+
+        return result;
+    });
+
+    var attributes = [];
+    return rsQuery;
+
+
+    rsQuery.forEach(function (item) {
+        var site = {
+            site: item.sites.name,
+            url: item.sites.url
+        }
+        attributes.push(site);
+    });
+
+    return result = {
+        name: rsQuery[0].name,
+        attributes: attributes
+    }
+};
+
 // Insert
-async function insert(name, attributes) {
+async function insert(name, userid) {
     var newRec = categories({
         name: name,
-        attributes: attributes
+        userid: userid
     });
 
     newRec.save(function (err, result) {
         if (err) throw err;
-        /* 1 document inserted */
         return result;
     });
 };
 
 // Update
-async function update(id, name, attributes) {
+async function update(id, name) {
     categories.findByIdAndUpdate(new ObjectId(id), {
-        name: name, attributes: attributes
+        name: name
     }, function (err, result) {
         if (err) throw err;
-        /* 1 document updated */
         return result;
     });
 };
@@ -75,7 +112,6 @@ async function update(id, name, attributes) {
 async function deleteById(id) {
     return categories.findByIdAndRemove(new ObjectId(id), function (err, result) {
         if (err) throw err;
-        /* 1 document deleted */
         return result;
     });
 };

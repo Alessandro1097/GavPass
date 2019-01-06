@@ -4,4 +4,7 @@ module.exports = function (app) {
 
     var Users = require('./users.controller');
     Users(app);
+
+    var Sites = require('./sites.controller');
+    Sites(app);
 };

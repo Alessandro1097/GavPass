@@ -31,16 +31,31 @@ module.exports = function (app) {
             .catch(err => next(err));
     });
 
+    // Get sites by Name
+    app.get('/api/Categories/getSites/:name', function (req, res, next) {
+
+        var categories = require('../models/Category');
+        var sites = require('../models/Site');
+
+        categories.find({ name: req.params.name })
+                .populate('sites')
+                .exec(function (err, result) {
+                if (err) throw err;
+                res.send(result);
+                console.log(result);
+            })
+    });
+
     // Save
     app.post('/api/Categories/save', function (req, res, next) {
         if(req.body.id) {
             // Update
-            service.update(req.body.id, req.body.name, req.body.attributes)
+            service.update(req.body.id, req.body.name)
                 .then(res.send('1 document updated'))
                 .catch(err => next(err));
         } else {
             // Insert
-            service.insert(req.body.name, req.body.attributes)
+            service.insert(req.body.name, "master")
                 .then(res.send('1 document inserted'))
                 .catch(err => next(err));
         }
@@ -49,7 +64,7 @@ module.exports = function (app) {
     // Delete
     app.delete('/api/Categories/delete', function (req, res, next) {
         service.deleteById(req.body.id)
-            .then(result => result ? res.send('1 document deleted') : res.send('Error'))
+            .then(res.send('1 document deleted'))
             .catch(err => next(err));
     });
 };

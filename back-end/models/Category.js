@@ -3,12 +3,8 @@ var Schema = mongoose.Schema;
 
 var mySchema = new Schema({
 
-  name: String,
-  userid: String,
-  attributes: [{
-    site: String,
-    url: String
-  }]
+    name: String,
+    userid: String
 
 });
 
