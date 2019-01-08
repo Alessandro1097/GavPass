@@ -46,7 +46,6 @@ module.exports = function (app) {
         }
     });
     
-
     // Delete
     app.delete('/api/Categories/delete', function (req, res, next) {
         service.deleteById(req.body.id)
