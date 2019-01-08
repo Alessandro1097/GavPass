@@ -45,6 +45,7 @@ module.exports = function (app) {
                 .catch(err => next(err));
         }
     });
+    
 
     // Delete
     app.delete('/api/Categories/delete', function (req, res, next) {
