@@ -1,9 +1,11 @@
+import { SiteService } from './../site.service';
 import { CardService } from './../card.service';
 import { Component, Inject, OnInit, Input } from '@angular/core';
 import { cardType } from '../type-card-container';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
+import { siteType } from '../type-site';
 
 @Component({
   selector: 'app-card',
@@ -13,8 +15,9 @@ import { FormControl, Validators } from '@angular/forms';
 export class CardComponent implements OnInit {
 
   constructor(private cardService: CardService, public dialog: MatDialog) { }
-
+  // list of all the card and id
   cards: cardType[];
+  // list of all the categories
   cardsName: cardType[];
 
   ngOnInit() {
@@ -48,12 +51,14 @@ export class CardComponent implements OnInit {
 
 export class DialogAddSiteDialog implements OnInit {
   @Input() card: cardType;
+  sites: siteType[];
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  note = new FormControl('', []);
   cards: cardType[];
 
   ngOnInit() {
@@ -66,25 +71,29 @@ export class DialogAddSiteDialog implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddSiteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private cardService: CardService) { }
-
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private cardService: CardService,
+    private siteService: SiteService) { }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  getErrorMessage() {
-    return this.url.hasError('required') ? 'You must enter a value' :
-      this.url.hasError('email') ? 'Not a valid email' :
-        '';
+  // FIXME: finish the post
+  onSubmit() {
+    const url = this.url.value.trim();
+    const name = this.name.value.trim();
+    const category = this.category.value.trim();
+    const username = this.username.value.trim();
+    const pwd = this.password.value.trim();
+    const note = this.note.value.trim();
+    this.siteService.addSite({ url, name, category, username, pwd, note} as siteType)
+      .subscribe(site => {this.sites.push(site);
+    });
   }
 
-  /*goBack(): void {
-    this.location.back();
-  }*/
-
-  saveSite(): void {
-    this.cardService.updateCard(this.card).subscribe(() => this.dialogRef.close());
+  getErrorMessage() {
+    return this.url.hasError('required') ? 'You must enter a value' :
+      this.url.hasError('email') ? 'Not a valid email' : '';
   }
 
   get dataInfo() { return JSON.stringify(this.data.name); }

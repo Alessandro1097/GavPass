@@ -143,6 +143,12 @@ export class DialogModifySite {
     this.dialogRef.close();
   }
 
+  /*
+  saveSite(): void {
+    this.cardService.updateCard(this.card).subscribe(() => this.dialogRef.close());
+  }
+  */
+
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Not a valid email' :

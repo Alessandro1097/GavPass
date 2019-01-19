@@ -23,8 +23,7 @@ export class CardService {
 
   // Get all the information of the card
   getCards(): Observable<cardType[]> {
-    // return this.http.get<cardType[]>(this.categoriesList).do(console);
-    return this.http.get<cardType[]>(this.categoriesList).pipe(
+    return this.http.get<cardType[]>(this.categoriesList).do(console).pipe(
       catchError(this.handleError('getHeroes', []))
     );
   }

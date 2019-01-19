@@ -8,6 +8,7 @@ module.exports = {
     getName,
     getById,
     getByName,
+    getNameId,
     insert,
     update,
     deleteById
@@ -24,6 +25,14 @@ async function getAll() {
 // Get Name
 async function getName() {
     return categories.find({}, { _id: 0, name: 1 }, function (err, result) {
+        if (err) throw err;
+        return result;
+    });
+};
+
+// Get Name & Id
+async function getNameId() {
+    return categories.find({}, { _id: 1, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
     });

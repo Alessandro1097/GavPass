@@ -12,7 +12,7 @@ module.exports = function (app) {
 
     // Get Name
     app.get('/api/Categories/name', function (req, res, next) {
-        service.getName()
+        service.getNameId()
             .then(result => res.json(result))
             .catch(err => next(err));
     });

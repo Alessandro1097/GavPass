@@ -6,19 +6,19 @@
 </div>
 
 <div class="padding-modal">
-  <form>
+  <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
     <mat-form-field class="form-url">
-      <input matInput #input placeholder="URL:" [formControl]="url" required>
+      <input matInput #inputUrl placeholder="URL:" [formControl]="url" required>
       <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <div class="user-container">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome:" [formControl]="name" required>
+        <input matInput #inputName placeholder="Nome:" [formControl]="name" required>
         <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
         <mat-select placeholder="Scegli categoria" [formControl]="category" required>
-          <mat-option *ngFor="let categoriesName of data.name" value="categoriesName.name">
+          <mat-option *ngFor="let categoriesName of data.name" #optionCategory value="{{categoriesName._id}}">
             {{categoriesName.name}}
           </mat-option>
         </mat-select>
@@ -27,21 +27,21 @@
     </div>
     <div class="site-section">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome utente:" [formControl]="username" required>
+        <input matInput #inputUsername placeholder="Nome utente:" [formControl]="username" required>
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Password:" type="password" [formControl]="password" required>
+        <input matInput #inputPassword placeholder="Password:" type="password" [formControl]="password" required>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field class="note-section">
-      <textarea matInput placeholder="Note"></textarea>
+      <textarea matInput #inputNote [formControl]="note" placeholder="Note"></textarea>
     </mat-form-field>
 
     <div class="button-section">
       <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
-      <button mat-raised-button color="primary" (click)="saveSite()">Salva</button>
+      <button mat-raised-button type="submit" color="primary">Salva</button>
     </div>
   </form>
 
