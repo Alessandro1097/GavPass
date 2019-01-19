@@ -1,5 +1,6 @@
 export class siteType {
   _id?: number;
+  user?: string;
   url: string;
   name: string;
   category: string;

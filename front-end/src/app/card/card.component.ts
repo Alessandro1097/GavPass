@@ -53,6 +53,7 @@ export class DialogAddSiteDialog implements OnInit {
   @Input() card: cardType;
   sites: siteType[];
 
+  user = new FormControl('', [Validators.required]);
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
@@ -80,13 +81,14 @@ export class DialogAddSiteDialog implements OnInit {
 
   // FIXME: finish the post
   onSubmit() {
+    const user = "prova@tuttomail.com"; // this.user.value.trim();
     const url = this.url.value.trim();
     const name = this.name.value.trim();
     const category = this.category.value.trim();
     const username = this.username.value.trim();
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
-    this.siteService.addSite({ url, name, category, username, pwd, note} as siteType)
+    this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
       .subscribe(site => {this.sites.push(site);
     });
   }
