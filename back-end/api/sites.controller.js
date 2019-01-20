@@ -37,12 +37,12 @@ module.exports = function (app) {
         if (req.body.id) {
             // Update
             service.update(req.body.id, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
-                .then(res.send('1 document updated'))
+                .then(res.json({ message: '1 document updated' }))
                 .catch(err => next(err));
         } else {
             // Insert
             service.insert(req.body.user, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
-                .then(res.send('1 document inserted'))
+                .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
         }
     });
