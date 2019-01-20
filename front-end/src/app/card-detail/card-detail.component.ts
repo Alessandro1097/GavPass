@@ -55,7 +55,7 @@ export class CardDetailComponent implements OnInit {
   }
 
   openModifySite(currentName): void {
-    const dialogRef = this.dialog.open(DialogModifySite, {
+    const dialogRef = this.dialog.open(DialogModifySiteInside, {
       width: '60%',
       data: {
         currentCategory: currentName,
@@ -68,7 +68,7 @@ export class CardDetailComponent implements OnInit {
   }
 
   openModalAttribute(currentName, siteAttributes): void {
-    const dialogRef = this.dialog.open(DialogAddSiteInsideDialog, {
+    const dialogRef = this.dialog.open(DialogModifySiteInsideDialog, {
       width: '60%',
       data: {
         currentCategory: currentName,
@@ -84,10 +84,10 @@ export class CardDetailComponent implements OnInit {
 }
 
 @Component({
-  selector: './dialog-add-site-inside',
-  templateUrl: './dialog-add-site-inside.html',
+  selector: './dialog-modify-site-inside',
+  templateUrl: './dialog-modify-site-inside.html',
 })
-export class DialogAddSiteInsideDialog {
+export class DialogModifySiteInsideDialog {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -97,7 +97,7 @@ export class DialogAddSiteInsideDialog {
   hide = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddSiteInsideDialog>,
+    public dialogRef: MatDialogRef<DialogModifySiteInsideDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
@@ -111,6 +111,9 @@ export class DialogAddSiteInsideDialog {
   }
 
   // TODO: create post site
+  onSubmit() {
+    console.log(this);
+  }
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
@@ -121,10 +124,10 @@ export class DialogAddSiteInsideDialog {
 }
 
 @Component({
-  selector: './dialog-modify-site',
+  selector: './dialog-add-site-inside',
   templateUrl: './dialog-modify-site-inside.html',
 })
-export class DialogModifySite {
+export class DialogModifySiteInside {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -134,7 +137,7 @@ export class DialogModifySite {
   hide = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogModifySite>,
+    public dialogRef: MatDialogRef<DialogModifySiteInside>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
