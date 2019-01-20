@@ -9,7 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CardComponent, DialogAddSiteDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
-import {CardDetailComponent, DialogAttributesDialog, DialogModifySite} from './card-detail/card-detail.component';
+import {CardDetailComponent, DialogAddSiteInsideDialog, DialogModifySite} from './card-detail/card-detail.component';
 import { NoteComponent } from './note/note.component';
 import {MatDialogModule} from '@angular/material';
 
@@ -20,7 +20,7 @@ import {MatDialogModule} from '@angular/material';
     CardDetailComponent,
     DialogAddSiteDialog,
     NoteComponent,
-    DialogAttributesDialog,
+    DialogAddSiteInsideDialog,
     DialogModifySite
   ],
   imports: [
@@ -34,7 +34,7 @@ import {MatDialogModule} from '@angular/material';
     AppRoutingModule,
     MatDialogModule
   ],
-  entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, DialogAttributesDialog, DialogModifySite],
+  entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, DialogAddSiteInsideDialog, DialogModifySite],
   providers: [],
   bootstrap: [AppComponent]
 })

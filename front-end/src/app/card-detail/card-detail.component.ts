@@ -68,7 +68,7 @@ export class CardDetailComponent implements OnInit {
   }
 
   openModalAttribute(currentName, siteAttributes): void {
-    const dialogRef = this.dialog.open(DialogAttributesDialog, {
+    const dialogRef = this.dialog.open(DialogAddSiteInsideDialog, {
       width: '60%',
       data: {
         currentCategory: currentName,
@@ -84,10 +84,10 @@ export class CardDetailComponent implements OnInit {
 }
 
 @Component({
-  selector: './dialog-attributes-dialog',
-  templateUrl: './dialog-attributes-dialog.html',
+  selector: './dialog-add-site-inside',
+  templateUrl: './dialog-add-site-inside.html',
 })
-export class DialogAttributesDialog {
+export class DialogAddSiteInsideDialog {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -97,7 +97,7 @@ export class DialogAttributesDialog {
   hide = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAttributesDialog>,
+    public dialogRef: MatDialogRef<DialogAddSiteInsideDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
@@ -109,6 +109,8 @@ export class DialogAttributesDialog {
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  // TODO: create post site
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
@@ -144,12 +146,6 @@ export class DialogModifySite {
   closeDialog(): void {
     this.dialogRef.close();
   }
-
-  /*
-  saveSite(): void {
-    this.cardService.updateCard(this.card).subscribe(() => this.dialogRef.close());
-  }
-  */
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
