@@ -89,8 +89,7 @@ export class DialogAddSiteDialog implements OnInit {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
-      .subscribe(site => {this.sites.push(site);
-    });
+      .subscribe(site => site);
   }
 
   getErrorMessage() {
