@@ -31,7 +31,8 @@
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #inputPassword placeholder="Password:" type="password" [formControl]="password" required>
+        <input matInput #inputPassword placeholder="Password:" type="password" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -41,7 +42,7 @@
 
     <div class="button-section">
       <button mat-raised-button class="button-space" (click)="closeDialog()">Annulla</button>
-      <button mat-raised-button type="submit" color="primary">Salva</button>
+      <button mat-raised-button type="submit" color="primary" (click)="closeDialog()">Salva</button>
     </div>
   </form>
 

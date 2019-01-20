@@ -36,7 +36,8 @@
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Password:" type="password" [value]="data.attributes.pwd" [formControl]="password" required>
+        <input matInput #input placeholder="Password:" type="password" [value]="data.attributes.pwd" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>

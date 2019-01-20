@@ -94,6 +94,7 @@ export class DialogAttributesDialog {
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  hide = true;
 
   constructor(
     public dialogRef: MatDialogRef<DialogAttributesDialog>,
@@ -128,6 +129,7 @@ export class DialogModifySite {
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  hide = true;
 
   constructor(
     public dialogRef: MatDialogRef<DialogModifySite>,

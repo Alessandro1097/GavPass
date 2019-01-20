@@ -52,6 +52,8 @@ export class CardComponent implements OnInit {
 export class DialogAddSiteDialog implements OnInit {
   @Input() card: cardType;
   sites: siteType[];
+  cards: cardType[];
+  hide = true;
 
   user = new FormControl('', [Validators.required]);
   url = new FormControl('', [Validators.required]);
@@ -60,7 +62,6 @@ export class DialogAddSiteDialog implements OnInit {
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   note = new FormControl('', []);
-  cards: cardType[];
 
   ngOnInit() {
     this.getCards();
