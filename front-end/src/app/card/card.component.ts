@@ -80,7 +80,6 @@ export class DialogAddSiteDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  // FIXME: finish the post
   onSubmit() {
     const user = "fissoDaFrontEnd@tuttomail.com";
     const url = this.url.value.trim();
