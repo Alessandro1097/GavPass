@@ -36,7 +36,6 @@ export class CardService {
   // Get card by name
   getCard(name: string): Observable<cardType> {
     const url = `${this.categoryData}/${name}`;
-    console.log(url);
     return this.http.get<cardType>(url);
   }
 

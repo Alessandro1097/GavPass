@@ -81,7 +81,7 @@ export class DialogAddSiteDialog implements OnInit {
   }
 
   onSubmit() {
-    const user = "fissoDaFrontEnd@tuttomail.com";
+    const user = 'fissoDaFrontEnd@tuttomail.com';
     const url = this.url.value.trim();
     const name = this.name.value.trim();
     const category = this.category.value.trim();
@@ -97,7 +97,7 @@ export class DialogAddSiteDialog implements OnInit {
       this.url.hasError('email') ? 'Not a valid email' : '';
   }
 
-  get dataInfo() { return JSON.stringify(this.data.name); }
-  get datae() { return JSON.stringify(this.cards); }
+  // get dataInfo() { return JSON.stringify(this.data.name); }
+  // get datae() { return JSON.stringify(this.cards); }
 
 }

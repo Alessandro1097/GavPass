@@ -20,7 +20,6 @@ export class SiteService {
   // Get sites by category name
   getSites(categoryName: string): Observable<siteType[]> {
     const url = `${this.sitesByCategory}/${categoryName}`;
-    console.log(url);
     return this.http.get<siteType[]>(url);
   }
 

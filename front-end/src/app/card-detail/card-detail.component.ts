@@ -54,11 +54,12 @@ export class CardDetailComponent implements OnInit {
     this.location.back();
   }
 
-  openModifySite(currentName): void {
-    const dialogRef = this.dialog.open(DialogModifySiteInside, {
+  openModifySite(currentName, currentId): void {
+    const dialogRef = this.dialog.open(AddSiteInsideComponent, {
       width: '60%',
       data: {
         currentCategory: currentName,
+        currentCategoryId: currentId,
         listCategories: this.cardsName
       }
     });
@@ -68,7 +69,7 @@ export class CardDetailComponent implements OnInit {
   }
 
   openModalAttribute(currentName, siteAttributes): void {
-    const dialogRef = this.dialog.open(DialogModifySiteInsideDialog, {
+    const dialogRef = this.dialog.open(ModifySiteInsideComponent, {
       width: '60%',
       data: {
         currentCategory: currentName,
@@ -76,6 +77,7 @@ export class CardDetailComponent implements OnInit {
         attributes: siteAttributes
       }
     });
+    console.log(this);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
     });
@@ -84,10 +86,10 @@ export class CardDetailComponent implements OnInit {
 }
 
 @Component({
-  selector: './dialog-modify-site-inside',
-  templateUrl: './dialog-modify-site-inside.html',
+  selector: './app-dialog-modify-site-inside',
+  templateUrl: './modify-site-inside.component.html',
 })
-export class DialogModifySiteInsideDialog {
+export class ModifySiteInsideComponent {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -97,7 +99,7 @@ export class DialogModifySiteInsideDialog {
   hide = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogModifySiteInsideDialog>,
+    public dialogRef: MatDialogRef<ModifySiteInsideComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   categoryShow = false;
@@ -108,11 +110,6 @@ export class DialogModifySiteInsideDialog {
 
   closeDialog(): void {
     this.dialogRef.close();
-  }
-
-  // TODO: create post site
-  onSubmit() {
-    console.log(this);
   }
 
   getErrorMessage() {
@@ -124,21 +121,23 @@ export class DialogModifySiteInsideDialog {
 }
 
 @Component({
-  selector: './dialog-add-site-inside',
-  templateUrl: './dialog-modify-site-inside.html',
+  selector: './app-dialog-add-site-inside',
+  templateUrl: './add-site-inside.component.html',
 })
-export class DialogModifySiteInside {
+export class AddSiteInsideComponent {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
+  currentCategory = new FormControl(this.data.currentCategory, []);
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  note = new FormControl('', []);
   hide = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogModifySiteInside>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    public dialogRef: MatDialogRef<AddSiteInsideComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private siteService: SiteService) { }
 
   categoryShow = false;
 
@@ -148,6 +147,26 @@ export class DialogModifySiteInside {
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  // create post of the site inside the card detail
+  onSubmit() {
+    const user = 'fissoDaFrontEnd@tuttomail.com';
+    const url = this.url.value.trim();
+    const name = this.name.value.trim();
+    let category = this.category.value.trim();
+    const username = this.username.value.trim();
+    const pwd = this.password.value.trim();
+    const note = this.note.value.trim();
+    const data = this.data.currentCategoryId;
+    if (category === '') {
+      category = data;
+      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
+      .subscribe(site => site);
+    } else {
+      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
+      .subscribe(site => site);
+    }
   }
 
   getErrorMessage() {

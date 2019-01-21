@@ -6,7 +6,7 @@
 </div>
 <!--FIXME: fix problem with data already there-->
 <div class="padding-modal">
-  <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+  <form>
     <mat-form-field class="form-url">
       <input matInput #input placeholder="URL:" [value]="data.attributes.url" [formControl]="url" required>
       <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>

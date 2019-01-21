@@ -5,7 +5,7 @@
   </button>
 </div>
 <div class="padding-modal">
-  <form>
+  <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
     <mat-form-field class="form-url">
       <input matInput #input placeholder="URL:" [formControl]="url" required>
       <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
@@ -17,11 +17,11 @@
         <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()"
+        <input matInput #input placeholder="Scegli categoria:" [formControl]="currentCategory" (click)="setCategory()"
           *ngIf="!categoryShow" required>
         <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:" [formControl]="category"
           required>
-          <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory.name">
+          <mat-option *ngFor="let currentCategory of data.listCategories" [value]="currentCategory._id">
             {{currentCategory.name}}
           </mat-option>
         </mat-select>
@@ -41,7 +41,7 @@
       </mat-form-field>
     </div>
     <mat-form-field class="note-section">
-      <textarea matInput placeholder="Note"></textarea>
+      <textarea matInput #inputNote [formControl]="note" placeholder="Note"></textarea>
     </mat-form-field>
 
     <div class="button-section">
