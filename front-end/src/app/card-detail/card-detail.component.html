@@ -8,7 +8,7 @@
   <mat-list>
     <h3 mat-subheader>Sites</h3>
     <mat-divider></mat-divider>
-    <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites" (click)="openModalAttribute(card.name, siteAttributes)">
+    <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites" (click)="openModalAttribute(card.name, card._id, siteAttributes)">
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>{{siteAttributes.name}}</h4>
       <mat-divider></mat-divider>

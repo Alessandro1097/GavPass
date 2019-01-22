@@ -14,7 +14,7 @@ const httpOptions = {
 export class SiteService {
 
   private sitesByCategory = 'http://localhost:3000/api/Sites/getByCategory';
-  private postSitesById = 'http://localhost:3000/api/Sites/save';
+  private postPutSitesById = 'http://localhost:3000/api/Sites/save';
   constructor(private http: HttpClient) { }
 
   // Get sites by category name
@@ -23,9 +23,14 @@ export class SiteService {
     return this.http.get<siteType[]>(url);
   }
 
-  // Post site
+  /* POST: send the site on the server */
   addSite(site: siteType): Observable<siteType> {
-    return this.http.post<siteType>(this.postSitesById, site, httpOptions).do(console);
+    return this.http.post<siteType>(this.postPutSitesById, site, httpOptions);
+  }
+
+  /** PUT: update the site on the server */
+  updateSite (site: siteType): Observable<any> {
+    return this.http.put(this.postPutSitesById, site, httpOptions);
   }
 
 }

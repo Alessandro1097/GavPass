@@ -23,9 +23,7 @@ export class CardService {
 
   // Get all the information of the card
   getCards(): Observable<cardType[]> {
-    return this.http.get<cardType[]>(this.categoriesList).do(console).pipe(
-      catchError(this.handleError('getHeroes', []))
-    );
+    return this.http.get<cardType[]>(this.categoriesList).do(console);
   }
 
   // Get all list of the categories name
@@ -42,22 +40,5 @@ export class CardService {
   // Update by id
   updateCard(card: cardType): Observable<any> {
     return this.http.put(this.categorySave, card, httpOptions);
-  }
-
-  /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }

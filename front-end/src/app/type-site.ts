@@ -1,3 +1,4 @@
+// tslint:disable-next-line:class-name
 export class siteType {
   _id?: number;
   user?: string;

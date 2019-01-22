@@ -34,6 +34,7 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Sites/save', function (req, res, next) {
+        console.log('REQ:', req, 'RES:', res);
         if (req.body.id) {
             // Update
             service.update(req.body.id, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)

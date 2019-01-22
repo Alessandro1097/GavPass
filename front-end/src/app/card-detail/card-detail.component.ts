@@ -65,14 +65,16 @@ export class CardDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModifySite was closed');
+      this.getSites();
     });
   }
 
-  openModalAttribute(currentName, siteAttributes): void {
+  openModalAttribute(currentName, currentId, siteAttributes): void {
     const dialogRef = this.dialog.open(ModifySiteInsideComponent, {
       width: '60%',
       data: {
         currentCategory: currentName,
+        currentCategoryId: currentId,
         listCategories: this.cardsName,
         attributes: siteAttributes
       }
@@ -82,7 +84,6 @@ export class CardDetailComponent implements OnInit {
       console.log('The dialog openModalAttribute was closed');
     });
   }
-
 }
 
 @Component({
@@ -96,26 +97,45 @@ export class ModifySiteInsideComponent {
   category = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+  note = new FormControl('', []);
   hide = true;
+  site: siteType;
 
   constructor(
     public dialogRef: MatDialogRef<ModifySiteInsideComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private siteService: SiteService) { }
 
   categoryShow = false;
 
-  setCategory(): void {
+  setCategory() {
     this.categoryShow = true;
   }
 
-  closeDialog(): void {
+  closeDialog() {
     this.dialogRef.close();
   }
 
+  // create put here
+  onSubmit(): void {
+    const user = 'fissoDaFrontEnd@tuttomail.com';
+    const url = this.url.value.trim();
+    const name = this.name.value.trim();
+    let category = this.category.value.trim();
+    const username = this.username.value.trim();
+    const pwd = this.password.value.trim();
+    const note = this.note.value.trim();
+    const data = this.data.currentCategoryId;
+    if (category === '') {
+      category = data;
+      this.closeDialog();
+    } else {
+      this.closeDialog();
+    }
+  }
+
   getErrorMessage() {
-    return this.url.hasError('required') ? 'You must enter a value' :
-      this.url.hasError('email') ? 'Not a valid email' :
-        '';
+    return this.url.hasError('required') ? 'Inserire email' :
+      this.url.hasError('email') ? 'Email non valida' : '';
   }
 
 }
@@ -149,7 +169,6 @@ export class AddSiteInsideComponent {
     this.dialogRef.close();
   }
 
-  // create post of the site inside the card detail
   onSubmit() {
     const user = 'fissoDaFrontEnd@tuttomail.com';
     const url = this.url.value.trim();
@@ -162,17 +181,17 @@ export class AddSiteInsideComponent {
     if (category === '') {
       category = data;
       this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
-      .subscribe(site => site);
+        .subscribe(site => site);
     } else {
+      // TODO: redirect on the right category
       this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
-      .subscribe(site => site);
+        .subscribe(site => site);
     }
   }
 
   getErrorMessage() {
-    return this.url.hasError('required') ? 'You must enter a value' :
-      this.url.hasError('email') ? 'Not a valid email' :
-        '';
+    return this.url.hasError('required') ? 'Inserire email' :
+      this.url.hasError('email') ? 'Email non valida' : '';
   }
 
 }

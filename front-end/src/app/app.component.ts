@@ -2,8 +2,10 @@ import {ChangeDetectorRef, Component, OnDestroy, Inject} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 
 export interface DialogData {
-  _id: number,
-  name: string
+  _id: number;
+  name: string;
+  currentCategoryId: number;
+  currentCategory: string;
 }
 
 @Component({
@@ -16,7 +18,7 @@ export class AppComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
