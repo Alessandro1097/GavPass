@@ -89,9 +89,9 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Users/save', function (req, res, next) {
-        if (req.body.id) {
+        if (req.body._id) {
             // Update
-            service.update(req.body.id, req.body.email, req.body.phone)
+            service.update(req.body._id, req.body.email, req.body.phone)
                 .then(res.json({ message: '1 document updated' }))
                 .catch(err => next(err));
         } else {
@@ -109,7 +109,7 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/Users/delete', function (req, res, next) {
-        service.deleteById(req.body.id)
+        service.deleteById(req.body._id)
             .then(res.send('1 document deleted'))
             .catch(err => next(err));
     });
