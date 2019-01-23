@@ -6,6 +6,7 @@ export interface DialogData {
   name: string;
   currentCategoryId: number;
   currentCategory: string;
+  attributes: { _id: number};
 }
 
 @Component({

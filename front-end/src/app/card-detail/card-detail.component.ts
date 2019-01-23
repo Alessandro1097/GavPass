@@ -79,9 +79,9 @@ export class CardDetailComponent implements OnInit {
         attributes: siteAttributes
       }
     });
-    console.log(this);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
+      this.getSites();
     });
   }
 }
@@ -125,8 +125,12 @@ export class ModifySiteInsideComponent {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     const data = this.data.currentCategoryId;
+    const _id = this.data.attributes._id;
+    console.log(_id);
     if (category === '') {
       category = data;
+      this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
+        .subscribe(site => site);
       this.closeDialog();
     } else {
       this.closeDialog();
