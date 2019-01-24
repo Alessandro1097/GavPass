@@ -34,19 +34,13 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Sites/save', function (req, res, next) {
-        // TODO: PER ANDRE, CAMBIA COME PREFERISCI
-        console.log('RES:', req.body._id);
         if (req.body._id) {
             // Update
-            req.body.id = req.body._id;
-            console.log('REQ update', req.body.id);
-            console.log('OK');
-            service.update(req.body.id, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
+            service.update(req.body._id, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
                 .then(res.json({ message: '1 document updated' }))
                 .catch(err => next(err));
         } else {
             // Insert
-            console.log('KO');
             service.insert(req.body.user, req.body.url, req.body.name, req.body.category, req.body.username, req.body.pwd, req.body.note)
                 .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
@@ -55,7 +49,7 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/Sites/delete', function (req, res, next) {
-        service.deleteById(req.body.id)
+        service.deleteById(req.body._id)
             .then(res.send('1 document deleted'))
             .catch(err => next(err));
     });

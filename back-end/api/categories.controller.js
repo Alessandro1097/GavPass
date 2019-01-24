@@ -33,9 +33,9 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Categories/save', function (req, res, next) {
-        if(req.body.id) {
+        if(req.body._id) {
             // Update
-            service.update(req.body.id, req.body.name)
+            service.update(req.body._id, req.body.name)
                 .then(res.send('1 document updated'))
                 .catch(err => next(err));
         } else {
@@ -48,7 +48,7 @@ module.exports = function (app) {
     
     // Delete
     app.delete('/api/Categories/delete', function (req, res, next) {
-        service.deleteById(req.body.id)
+        service.deleteById(req.body._id)
             .then(res.send('1 document deleted'))
             .catch(err => next(err));
     });
