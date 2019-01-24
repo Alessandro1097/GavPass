@@ -1,12 +1,12 @@
-import {ChangeDetectorRef, Component, OnDestroy, Inject} from '@angular/core';
-import {MediaMatcher} from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy, Inject } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 export interface DialogData {
   _id: number;
   name: string;
   currentCategoryId: number;
   currentCategory: string;
-  attributes: { _id: number};
+  attributes: { _id: number, url: string, name: string, username: string, pwd: string, note: string };
 }
 
 @Component({

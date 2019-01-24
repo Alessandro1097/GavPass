@@ -106,15 +106,33 @@ a {
   width: 100%;
   margin-bottom: 50px;
 }
-.button-section {
-  display: flex;
-  justify-content: flex-end;
-}
 .button-space {
   margin-right: 20px !important;
 }
-
 .params-required {
   color: #f44336;
   font-size: 14px;
+}
+
+.save-button {
+  position: absolute !important;
+  top: 85% !important; 
+  left: 95% !important;
+  transform: translate(-85%) !important;
+}
+
+.undo-button {
+  position: absolute !important;
+  top: 85% !important;
+  left: 12% !important; 
+  transform: translate(-85%) !important;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.card-section {
+  background-color: #fafafa;
+  padding: 30px 130px 30px 130px;
 }

@@ -81,6 +81,7 @@ export class CardDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
+      // FIXME: send the post only if the salva is pressed
       this.getSites();
     });
   }
@@ -115,26 +116,28 @@ export class ModifySiteInsideComponent {
     this.dialogRef.close();
   }
 
-  // create put here
   onSubmit(): void {
     const user = 'fissoDaFrontEnd@tuttomail.com';
-    const url = this.url.value.trim();
-    const name = this.name.value.trim();
+    const url = this.url.value.trim() === '' ? this.data.attributes.url : this.url.value.trim();
+    const name = this.name.value.trim() === '' ? this.data.attributes.name : this.name.value.trim();
     let category = this.category.value.trim();
-    const username = this.username.value.trim();
-    const pwd = this.password.value.trim();
-    const note = this.note.value.trim();
+    const username = this.username.value.trim() === '' ? this.data.attributes.username : this.username.value.trim();
+    const pwd = this.password.value.trim() === '' ? this.data.attributes.pwd : this.password.value.trim();
+    const note = this.note.value.trim() === '' ? this.data.attributes.note : this.note.value.trim();
     const data = this.data.currentCategoryId;
     const _id = this.data.attributes._id;
-    console.log(_id);
+    console.log('URL:', url, 'NAME:', name, 'CATEGORY:', category, 'USERNAME:', username, 'PWD:', pwd, 'DATA:', data, 'ID:', _id);
     if (category === '') {
       category = data;
       this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
       this.closeDialog();
     } else {
+      this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
+        .subscribe(site => site);
       this.closeDialog();
     }
+
   }
 
   getErrorMessage() {
@@ -165,11 +168,11 @@ export class AddSiteInsideComponent {
 
   categoryShow = false;
 
-  setCategory(): void {
+  setCategory() {
     this.categoryShow = true;
   }
 
-  closeDialog(): void {
+  closeDialog() {
     this.dialogRef.close();
   }
 

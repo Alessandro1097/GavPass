@@ -11,6 +11,7 @@
     <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites" (click)="openModalAttribute(card.name, card._id, siteAttributes)">
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>{{siteAttributes.name}}</h4>
+      <mat-icon>delete</mat-icon>
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
