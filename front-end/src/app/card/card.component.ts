@@ -97,7 +97,5 @@ export class DialogAddSiteDialog implements OnInit {
       this.url.hasError('email') ? 'Not a valid email' : '';
   }
 
-  // get dataInfo() { return JSON.stringify(this.data.name); }
-  // get datae() { return JSON.stringify(this.cards); }
 
 }
