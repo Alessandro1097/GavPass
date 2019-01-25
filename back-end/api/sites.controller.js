@@ -50,7 +50,8 @@ module.exports = function (app) {
     // Delete
     app.delete('/api/Sites/delete/:siteId', function (req, res, next) {
         service.deleteById(req.params.siteId)
-            .then(res.send('1 document deleted'))
+            .then(result => res.json(result))
             .catch(err => next(err));
+            console.log(req.params.siteId);
     });
 };
