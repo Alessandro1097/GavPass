@@ -15,9 +15,10 @@ export class SiteService {
 
   private sitesByCategory = 'http://localhost:3000/api/Sites/getByCategory';
   private postPutSitesById = 'http://localhost:3000/api/Sites/save';
+  private deleteSiteById = 'http://localhost:3000/api/Sites/delete';
   constructor(private http: HttpClient) { }
 
-  // Get sites by category name
+  /** GET: get the sites from the server */
   getSites(categoryName: string): Observable<siteType[]> {
     const url = `${this.sitesByCategory}/${categoryName}`;
     return this.http.get<siteType[]>(url);
@@ -29,8 +30,15 @@ export class SiteService {
   }
 
   /** PUT: update the site on the server */
-  updateSite (site: siteType): Observable<any> {
-    return this.http.put(this.postPutSitesById, site, httpOptions);
+  updateSite (site: siteType): Observable<siteType> {
+    return this.http.put<siteType>(this.postPutSitesById, site, httpOptions);
+  }
+
+  /** DELETE: delete the site on the server */
+  deleteSite (site: siteType): Observable<any> {
+    const id = site._id;
+    const url = `${this.deleteSiteById}/${id}`;
+    return this.http.delete(url, httpOptions);
   }
 
 }

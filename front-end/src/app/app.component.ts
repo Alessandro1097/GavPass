@@ -4,6 +4,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export interface DialogData {
   _id: number;
   name: string;
+  currentSiteId: number;
   currentCategoryId: number;
   currentCategory: string;
   attributes: { _id: number, url: string, name: string, username: string, pwd: string, note: string };

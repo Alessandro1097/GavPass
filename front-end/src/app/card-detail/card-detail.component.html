@@ -8,10 +8,11 @@
   <mat-list>
     <h3 mat-subheader>Sites</h3>
     <mat-divider></mat-divider>
-    <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites" (click)="openModalAttribute(card.name, card._id, siteAttributes)">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line>{{siteAttributes.name}}</h4>
-      <mat-icon>delete</mat-icon>
+    <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites">
+      <!-- FIXME: there must be just one function that trigger the modal -->
+      <mat-icon mat-list-icon (click)="openModalAttribute(card.name, card._id, siteAttributes)">folder</mat-icon>
+      <h4 mat-line (click)="openModalAttribute(card.name, card._id, siteAttributes)">{{siteAttributes.name}}</h4>
+      <button mat-icon-button (click)="openModalDelete(siteAttributes._id)"><mat-icon>delete</mat-icon></button>
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>

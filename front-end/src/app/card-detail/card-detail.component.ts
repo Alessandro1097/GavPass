@@ -54,6 +54,19 @@ export class CardDetailComponent implements OnInit {
     this.location.back();
   }
 
+  openModalDelete(currentSiteId): void {
+    const dialogRef = this.dialog.open(DeleteSiteComponent, {
+      width: '60%',
+      data: {
+        currentSiteId: currentSiteId
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog DeleteSiteComponent was closed');
+      this.getSites();
+    });
+  }
+
   openModifySite(currentName, currentId): void {
     const dialogRef = this.dialog.open(AddSiteInsideComponent, {
       width: '60%',
@@ -81,7 +94,6 @@ export class CardDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog openModalAttribute was closed');
-      // FIXME: send the post only if the salva is pressed
       this.getSites();
     });
   }
@@ -126,16 +138,14 @@ export class ModifySiteInsideComponent {
     const note = this.note.value.trim() === '' ? this.data.attributes.note : this.note.value.trim();
     const data = this.data.currentCategoryId;
     const _id = this.data.attributes._id;
-    console.log('URL:', url, 'NAME:', name, 'CATEGORY:', category, 'USERNAME:', username, 'PWD:', pwd, 'DATA:', data, 'ID:', _id);
+
     if (category === '') {
       category = data;
       this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
-      this.closeDialog();
     } else {
       this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
-      this.closeDialog();
     }
 
   }
@@ -185,6 +195,7 @@ export class AddSiteInsideComponent {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     const data = this.data.currentCategoryId;
+
     if (category === '') {
       category = data;
       this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
@@ -199,6 +210,30 @@ export class AddSiteInsideComponent {
   getErrorMessage() {
     return this.url.hasError('required') ? 'Inserire email' :
       this.url.hasError('email') ? 'Email non valida' : '';
+  }
+
+}
+
+@Component({
+  selector: './app-dialog-delete-site',
+  templateUrl: './delete-site.component.html',
+})
+
+export class DeleteSiteComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteSiteComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private siteService: SiteService) { }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  deleteSite(): void {
+    const _id = this.data.currentSiteId;
+    console.log(_id);
+    this.siteService.deleteSite({ _id } as siteType).subscribe(site => site);
+    this.closeDialog();
   }
 
 }

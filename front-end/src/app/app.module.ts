@@ -9,7 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { CardComponent, DialogAddSiteDialog } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
-import {CardDetailComponent, ModifySiteInsideComponent, AddSiteInsideComponent} from './card-detail/card-detail.component';
+// tslint:disable-next-line:max-line-length
+import {CardDetailComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent} from './card-detail/card-detail.component';
 import { NoteComponent } from './note/note.component';
 import {MatDialogModule} from '@angular/material';
 
@@ -21,7 +22,8 @@ import {MatDialogModule} from '@angular/material';
     DialogAddSiteDialog,
     NoteComponent,
     ModifySiteInsideComponent,
-    AddSiteInsideComponent
+    AddSiteInsideComponent,
+    DeleteSiteComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import {MatDialogModule} from '@angular/material';
     AppRoutingModule,
     MatDialogModule
   ],
-  entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, ModifySiteInsideComponent, AddSiteInsideComponent],
+  // tslint:disable-next-line:max-line-length
+  entryComponents: [CardComponent, CardDetailComponent, DialogAddSiteDialog, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

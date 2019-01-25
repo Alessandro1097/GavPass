@@ -4,7 +4,6 @@
     <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
   </button>
 </div>
-<!--FIXME: fix problem with data already there-->
 <div class="padding-modal position-relative">
   <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
     <mat-form-field class="form-url">
@@ -46,7 +45,7 @@
     <mat-form-field class="note-section">
       <textarea matInput placeholder="Note" #inputNote [formControl]="note" [value]="data.attributes.note"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="save-button">Salva</button>
+    <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
   </form>
   <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
 
