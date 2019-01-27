@@ -1,6 +1,6 @@
-## GavPass
+# GavPass
 
-# Description
+## Description
 
 GavPass is a software that allows you to store all your personal data (access credentials and personal notes) safely.
 
@@ -10,7 +10,7 @@ You can do the same inside a category.
 
 You can also delete and update your site.
 
-# Technical description 
+## Technical description
 
 We decided to use NodeJs as backend, so it handles the API, and as a frontend we decided to use Angular 7.
 
