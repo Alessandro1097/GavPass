@@ -47,9 +47,9 @@ module.exports = function (app) {
     });
     
     // Delete
-    app.delete('/api/Categories/delete', function (req, res, next) {
-        service.deleteById(req.body._id)
-            .then(res.send('1 document deleted'))
+    app.delete('/api/Categories/delete/:id', function (req, res, next) {
+        service.deleteById(req.params.id)
+            .then(res.json({ message: '1 document deleted' }))
             .catch(err => next(err));
     });
 };
