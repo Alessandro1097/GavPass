@@ -14,9 +14,17 @@ You can also delete and update your site.
 
 We decided to use NodeJs as backend, so it handles the API, and as a frontend we decided to use Angular 7.
 
-To start using the application you have to download node: https://nodejs.org/it/
-Once you have done installing node you have to run npm install.
-To start the frontend go to the folder front-end and run: ng serve -o 
-To start the backend go to the folder backend and run: node index.js
+To start using the application you have to download node: <https://nodejs.org/it/>
+To start the frontend go to the folder front-end and run: <b>npm install</b>, and after that <b>ng serve -o</b>.
+To start the backend go to the folder backend and run: <b>npm install</b>, and after that <b>node index.js</b>.
 
 Once you have done that you'll be able to use GavPass.
+
+# Per Alessandro
+TODO: 
+- aggiungi categoria 
+- aggiungi modale quando viene inserito un sito e redirigi nella categoria corretta
+- cerca che mostra sia siti che categorie 
+
+FIXME: 
+- validazione del form modifica sito da correggere
