@@ -56,7 +56,7 @@ export class CardDetailComponent implements OnInit {
 
   openModalDelete(currentSiteId): void {
     const dialogRef = this.dialog.open(DeleteSiteComponent, {
-      width: '60%',
+      width: '40%',
       data: {
         currentSiteId: currentSiteId
       }
@@ -231,7 +231,6 @@ export class DeleteSiteComponent {
 
   deleteSite(): void {
     const _id = this.data.currentSiteId;
-    console.log(_id);
     this.siteService.deleteSite({ _id } as siteType).subscribe(site => site);
     this.closeDialog();
   }

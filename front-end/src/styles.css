@@ -70,12 +70,6 @@ a {
   display: flex;
   position: relative;
 }
-.top-bar-delete {
-  background-color: #f44336;
-  padding: 20px 0 20px 0;
-  display: flex;
-  position: relative;
-}
 .title-modal {
   color: white;
   margin: auto;
@@ -87,14 +81,6 @@ a {
   border: none;
   cursor: pointer;
 }
-
-.close-modal-button-delete {
-  position: absolute;
-  right: 24px;
-  background-color: #f44336;
-  border: none;
-  cursor: pointer;
-} 
 
 .padding-modal {
   padding: 24px 35px;
