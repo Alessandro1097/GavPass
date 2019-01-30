@@ -48,10 +48,9 @@ module.exports = function (app) {
     });
 
     // Delete
-    app.delete('/api/Sites/delete/:siteId', function (req, res, next) {
-        service.deleteById(req.params.siteId)
-            .then(result => res.json(result))
+    app.delete('/api/Sites/delete/:id', function (req, res, next) {
+        service.deleteById(req.params.id)
+            .then(res.json({ message: '1 document deleted' }))
             .catch(err => next(err));
-            console.log(req.params.siteId);
     });
 };

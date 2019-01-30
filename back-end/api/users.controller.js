@@ -108,9 +108,9 @@ module.exports = function (app) {
     });
 
     // Delete
-    app.delete('/api/Users/delete', function (req, res, next) {
-        service.deleteById(req.body._id)
-            .then(res.send('1 document deleted'))
+    app.delete('/api/Users/delete/:id', function (req, res, next) {
+        service.deleteById(req.params.id)
+            .then(res.json({ message: '1 document deleted' }))
             .catch(err => next(err));
     });
 };
