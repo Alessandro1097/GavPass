@@ -34,7 +34,7 @@ export class CardComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddSiteDialog, {
+    const dialogRef = this.dialog.open(AddSiteComponent, {
       width: '60%',
       data: {
         name: this.cardsName
@@ -45,11 +45,11 @@ export class CardComponent implements OnInit {
 }
 
 @Component({
-  selector: './dialog-add-site-dialog',
-  templateUrl: './dialog-add-site.html',
+  selector: './app-add-site',
+  templateUrl: './add-site.component.html',
 })
 
-export class DialogAddSiteDialog implements OnInit {
+export class AddSiteComponent implements OnInit {
   @Input() card: cardType;
   sites: siteType[];
   cards: cardType[];
@@ -72,7 +72,7 @@ export class DialogAddSiteDialog implements OnInit {
   }
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddSiteDialog>,
+    public dialogRef: MatDialogRef<AddSiteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private cardService: CardService,
     private siteService: SiteService) { }
 
@@ -96,6 +96,4 @@ export class DialogAddSiteDialog implements OnInit {
     return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Not a valid email' : '';
   }
-
-
 }
