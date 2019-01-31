@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'cards', component: CardComponent },
   { path: 'notes', component: NoteComponent },
   { path: 'detail/:name', component: CardDetailComponent },
+  // TODO: add this => { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

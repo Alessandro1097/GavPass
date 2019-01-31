@@ -21,10 +21,10 @@ To start the backend go to the folder backend and run: <b>npm install</b>, and a
 Once you have done that you'll be able to use GavPass.
 
 # Per Alessandro
-TODO: 
-- aggiungi categoria 
-- aggiungi modale quando viene inserito un sito e redirigi nella categoria corretta
-- cerca che mostra sia siti che categorie 
+TODO : 
+- aggiungi categoria
+- modifica modale AddSiteSucessfullyComponent e aggiungi il processo per le altre modali
+- cerca che mostra sia siti che categorie
 
 FIXME: 
 - validazione del form modifica sito da correggere

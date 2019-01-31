@@ -56,13 +56,12 @@ export class CardDetailComponent implements OnInit {
 
   openModalDelete(currentSiteId): void {
     const dialogRef = this.dialog.open(DeleteSiteComponent, {
-      width: '40%',
+      width: '60%',
       data: {
         currentSiteId: currentSiteId
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog DeleteSiteComponent was closed');
       this.getSites();
     });
   }
@@ -77,7 +76,6 @@ export class CardDetailComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog openModifySite was closed');
       this.getSites();
     });
   }
@@ -93,7 +91,6 @@ export class CardDetailComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog openModalAttribute was closed');
       this.getSites();
     });
   }
@@ -140,10 +137,12 @@ export class ModifySiteInsideComponent {
     const _id = this.data.attributes._id;
 
     if (category === '') {
+      // TODO: redirect on the right category
       category = data;
       this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
     } else {
+      // TODO: redirect on the right category
       this.siteService.addSite({ _id, user,  url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
     }
@@ -197,6 +196,7 @@ export class AddSiteInsideComponent {
     const data = this.data.currentCategoryId;
 
     if (category === '') {
+      // TODO: redirect on the right category
       category = data;
       this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType)
         .subscribe(site => site);
