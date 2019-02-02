@@ -22,6 +22,7 @@ export class CardDetailComponent implements OnInit {
   cards: cardType[];
   cardsName: cardType[];
   sites: siteType[];
+  rightCategory: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,6 @@ export class CardDetailComponent implements OnInit {
 
   getCard(): void {
     const name = this.route.snapshot.paramMap.get('name');
-    console.log('Name current category => getCards', name);
     this.cardService.getCard(name)
       .subscribe(card => this.card = card);
   }
@@ -50,7 +50,7 @@ export class CardDetailComponent implements OnInit {
 
   getSites(): void {
     const name = this.route.snapshot.paramMap.get('name');
-    console.log('Name current category => getSites', name);
+    this.rightCategory = name;
     this.siteService.getSites(name).subscribe(sites => this.sites = sites);
   }
 
