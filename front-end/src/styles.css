@@ -137,3 +137,7 @@ a {
   background-color: #fafafa;
   padding: 30px 130px 30px 130px;
 }
+
+.blue-snackbar {
+  background: #3f51b5;
+}
