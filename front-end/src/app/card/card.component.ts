@@ -1,4 +1,3 @@
-import { AddSiteInsideComponent } from './../card-detail/card-detail.component';
 import { Router } from '@angular/router';
 import { SiteService } from './../site.service';
 import { CardService } from './../card.service';
@@ -8,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 import { siteType } from '../type-site';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-card',
@@ -83,18 +83,18 @@ export class AddSiteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private cardService: CardService,
     private siteService: SiteService,
-    public dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  openDialogSucess(): void {
-    const dialogRef = this.dialog.open(AddSiteSucessfullyComponent, {
-      width: '60%',
+  openSnackSuccess(): void {
+    this.snackBar.open('Site added', 'Okay!', {
+      duration: 3000,
+      panelClass: ['blue-snackbar']
     });
-    dialogRef.afterClosed().subscribe(result => { });
   }
 
   onSubmit() {
@@ -114,7 +114,7 @@ export class AddSiteComponent implements OnInit {
     }
     const urlToGo = `/detail/${selectedCategory}`;
     this.router.navigate([urlToGo]);
-    this.openDialogSucess();
+    this.openSnackSuccess();
   }
 
   getErrorMessage() {
@@ -122,20 +122,3 @@ export class AddSiteComponent implements OnInit {
       this.url.hasError('email') ? 'Not a valid email' : '';
   }
 }
-
-@Component({
-  selector: './app-added-site-sucessfully',
-  templateUrl: './added-site-sucessfully.component.html',
-})
-
-export class AddSiteSucessfullyComponent implements OnInit {
-
-  ngOnInit() {}
-
-  constructor(
-    public dialogRef: MatDialogRef<AddSiteSucessfullyComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
-}
-
-
