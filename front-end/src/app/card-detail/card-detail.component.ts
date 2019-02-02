@@ -191,7 +191,7 @@ export class ModifySiteInsideComponent implements OnInit {
   selector: './app-dialog-add-site-inside',
   templateUrl: './add-site-inside.component.html',
 })
-export class AddSiteInsideComponent implements OnInit{
+export class AddSiteInsideComponent implements OnInit {
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -287,15 +287,27 @@ export class DeleteSiteComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteSiteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private siteService: SiteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siteService: SiteService,
+    private snackBar: MatSnackBar
+    ) { }
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  openSnackSuccess(): void {
+    const messageModifyCategory = 'Site delete succesfully!';
+    this.snackBar.open(messageModifyCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['red-snackbar']
+    });
   }
 
   deleteSite(): void {
     const _id = this.data.currentSiteId;
     this.siteService.deleteSite({ _id } as siteType).subscribe(site => site);
     this.closeDialog();
+    this.openSnackSuccess();
   }
 }

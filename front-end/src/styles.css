@@ -70,14 +70,31 @@ a {
   display: flex;
   position: relative;
 }
+
+.top-bar-delete {
+  background-color: #ba3f3f;
+  padding: 20px 0 20px 0;
+  display: flex;
+  position: relative;
+}
+
 .title-modal {
   color: white;
   margin: auto;
 }
+
 .close-modal-button {
   position: absolute;
   right: 24px;
   background-color: #3f51b5;
+  border: none;
+  cursor: pointer;
+}
+
+.close-modal-button-delete {
+  position: absolute;
+  right: 24px;
+  background-color: #ba3f3f;
   border: none;
   cursor: pointer;
 }
@@ -111,7 +128,7 @@ a {
   margin-right: 20px !important;
 }
 .params-required {
-  color: #f44336;
+  color: #ba3f3f;
   font-size: 14px;
 }
 
@@ -140,4 +157,10 @@ a {
 
 .blue-snackbar {
   background: #3f51b5;
+  color: white;
+}
+
+.red-snackbar {
+  background: #ba3f3f;
+  color: white;
 }
