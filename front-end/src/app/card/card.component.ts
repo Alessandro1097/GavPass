@@ -22,9 +22,7 @@ export class CardComponent implements OnInit {
     private router: Router
   ) { }
 
-  // list of all the card and id
   cards: cardType[];
-  // list of all the categories
   cardsName: cardType[];
 
   ngOnInit() {
@@ -90,8 +88,9 @@ export class AddSiteComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  openSnackSuccess(): void {
-    this.snackBar.open('Site added', 'Okay!', {
+  openSnackSuccess(selectedCategory): void {
+    const messageAddedCategory = 'Site added to: ' + selectedCategory;
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
       duration: 3000,
       panelClass: ['blue-snackbar']
     });
@@ -105,7 +104,7 @@ export class AddSiteComponent implements OnInit {
     const username = this.username.value.trim();
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
-    let selectedCategory = '';
+    let selectedCategory;
     this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
     for (let index = 0; index < this.cards.length; index++) {
       if (this.cards[index]._id === category) {
@@ -114,7 +113,7 @@ export class AddSiteComponent implements OnInit {
     }
     const urlToGo = `/detail/${selectedCategory}`;
     this.router.navigate([urlToGo]);
-    this.openSnackSuccess();
+    this.openSnackSuccess(selectedCategory);
   }
 
   getErrorMessage() {

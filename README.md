@@ -28,4 +28,3 @@ TODO :
 
 FIXME: 
 - validazione del form modifica sito da correggere
-- corregere inserimento nome categoria e di conseguenza tutte le modali che prendono il nome della categoria corrente da <b>card.name</b>

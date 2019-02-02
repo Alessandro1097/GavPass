@@ -9,8 +9,8 @@
         <p>Vuoi davvero eliminare questo sito?</p>
     </mat-card-title>
 
-    <div style="display: flex; justify-content:space-between;">
-        <button mat-raised-button (click)="closeDialog()">Annulla</button>
+    <div style="display: flex; justify-content:flex-end;">
+        <button mat-raised-button (click)="closeDialog()" style="margin-right:20px">Annulla</button>
         <button mat-raised-button color="warn" (click)="deleteSite()">Elimina</button>
     </div>
 </div>

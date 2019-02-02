@@ -66,7 +66,7 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  openModifySite(currentName, currentId): void {
+  addSiteInside(currentName, currentId): void {
     const dialogRef = this.dialog.open(AddSiteInsideComponent, {
       width: '60%',
       data: {
@@ -80,7 +80,7 @@ export class CardDetailComponent implements OnInit {
     });
   }
 
-  openModalAttribute(currentName, currentId, siteAttributes): void {
+  modifySiteInside(currentName, currentId, siteAttributes): void {
     const dialogRef = this.dialog.open(ModifySiteInsideComponent, {
       width: '60%',
       data: {
@@ -120,7 +120,7 @@ export class ModifySiteInsideComponent implements OnInit {
     private siteService: SiteService,
     private snackBar: MatSnackBar,
     private cardService: CardService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getCategoriesName();
@@ -138,11 +138,20 @@ export class ModifySiteInsideComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  openSnackSuccess(): void {
-    this.snackBar.open('Site modified', 'Okay!', {
-      duration: 3000,
-      panelClass: ['blue-snackbar']
-    });
+  openSnackSuccess(selectedCategory?): void {
+    if (selectedCategory) {
+      const messageModifyCategory = 'Site moved to: ' + selectedCategory;
+      this.snackBar.open(messageModifyCategory, 'Okay!', {
+        duration: 3000,
+        panelClass: ['blue-snackbar']
+      });
+    } else {
+      const messageModifyCategory = 'Site modified succesfully!';
+      this.snackBar.open(messageModifyCategory, 'Okay!', {
+        duration: 3000,
+        panelClass: ['blue-snackbar']
+      });
+    }
   }
 
   onSubmit(): void {
@@ -155,7 +164,7 @@ export class ModifySiteInsideComponent implements OnInit {
     const note = this.note.value.trim() === '' ? this.data.attributes.note : this.note.value.trim();
     const data = this.data.currentCategoryId;
     const _id = this.data.attributes._id;
-    let selectedCategory = '';
+    let selectedCategory;
     category === '' ? category = data : category = category;
     this.siteService.addSite({ _id, user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
     for (let index = 0; index < this.cardsName.length; index++) {
@@ -163,24 +172,26 @@ export class ModifySiteInsideComponent implements OnInit {
         selectedCategory = this.cardsName[index].name;
       }
     }
-    // FIME: name of the category
-    const urlToGo = `/detail/${selectedCategory}`;
-    this.router.navigate([urlToGo]);
-    this.openSnackSuccess();
+    if (this.data.currentCategory === selectedCategory) {
+      this.openSnackSuccess();
+    } else {
+      const urlToGo = `/detail/${selectedCategory}`;
+      this.router.navigate([urlToGo]);
+      this.openSnackSuccess(selectedCategory);
+    }
   }
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'Inserire email' :
       this.url.hasError('email') ? 'Email non valida' : '';
   }
-
 }
 
 @Component({
   selector: './app-dialog-add-site-inside',
   templateUrl: './add-site-inside.component.html',
 })
-export class AddSiteInsideComponent {
+export class AddSiteInsideComponent implements OnInit{
 
   url = new FormControl('', [Validators.required]);
   name = new FormControl('', [Validators.required]);
@@ -190,19 +201,48 @@ export class AddSiteInsideComponent {
   password = new FormControl('', [Validators.required]);
   note = new FormControl('', []);
   hide = true;
+  categoryShow = false;
+  cardsName: cardType[];
 
   constructor(
     public dialogRef: MatDialogRef<AddSiteInsideComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private siteService: SiteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siteService: SiteService,
+    private cardService: CardService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
-  categoryShow = false;
+  ngOnInit() {
+    this.getCategoriesName();
+  }
 
   setCategory() {
     this.categoryShow = true;
   }
 
+  getCategoriesName(): void {
+    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
+  }
+
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  openSnackSuccess(selectedCategory?): void {
+    if (selectedCategory) {
+      const messageModifyCategory = 'Site added to: ' + selectedCategory;
+      this.snackBar.open(messageModifyCategory, 'Okay!', {
+        duration: 3000,
+        panelClass: ['blue-snackbar']
+      });
+    } else {
+      const messageModifyCategory = 'Site added succesfully!';
+      this.snackBar.open(messageModifyCategory, 'Okay!', {
+        duration: 3000,
+        panelClass: ['blue-snackbar']
+      });
+    }
   }
 
   onSubmit() {
@@ -214,14 +254,21 @@ export class AddSiteInsideComponent {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     const data = this.data.currentCategoryId;
-
-    if (category === '') {
-      // TODO: redirect on the right category
-      category = data;
-      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+    let selectedCategory;
+    category === '' ? category = data : category = category;
+    this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+    console.log(this);
+    for (let index = 0; index < this.cardsName.length; index++) {
+      if (this.cardsName[index]._id === category) {
+        selectedCategory = this.cardsName[index].name;
+      }
+    }
+    if (this.data.currentCategory === selectedCategory) {
+      this.openSnackSuccess();
     } else {
-      // TODO: redirect on the right category
-      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+      const urlToGo = `/detail/${selectedCategory}`;
+      this.router.navigate([urlToGo]);
+      this.openSnackSuccess(selectedCategory);
     }
   }
 
