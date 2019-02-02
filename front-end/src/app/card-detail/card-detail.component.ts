@@ -54,10 +54,6 @@ export class CardDetailComponent implements OnInit {
     this.siteService.getSites(name).subscribe(sites => this.sites = sites);
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
   openModalDelete(currentSiteId): void {
     const dialogRef = this.dialog.open(DeleteSiteComponent, {
       width: '60%',
