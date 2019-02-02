@@ -16,19 +16,22 @@ const jwt = require('jsonwebtoken');
 module.exports = function (app) {
 
     // UNDONE - Post online
-    app.get('/me', function(req, res) {
+    // TODO - Make this function in the service
+    app.get('/me', function (req, res) {
         var token = req.headers['x-access-token'];
         if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-        
-        jwt.verify(token, config.secret, function(err, decoded) {
-          if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-          
-          res.status(200).send(decoded);
-        });
-      });
 
-      // FIXME - Authenticate with JWT (public route)
-    app.post('/api/Users/authenticate', function (req, res, next) {
+        jwt.verify(token, config.secret, function (err, decoded) {
+            if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+            res.status(200).send(decoded);
+        });
+    });
+
+
+    // FIXME - Authenticate with JWT (public route)
+    // Login
+    app.post('/api/Users/login', function (req, res, next) {
 
         service.getByEmail(req.body.email)
             .then(result => login(result, res))
@@ -44,22 +47,22 @@ module.exports = function (app) {
 
             if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
 
-            // var token = jwt.sign({ id: user._id }, config.secret, {
-            //     expiresIn: 86400 // expires in 24 hours
-            // });
-            // res.status(200).send({ auth: true, token: token });
+            var token = jwt.sign({ id: user._id }, config.secret, {
+                expiresIn: 86400 // expires in 24 hours
+            });
+            res.status(200).send({ auth: true, token: token });
 
-            res.status(200).send({ auth: true });
-
-
-
-
-        //     if (!user) return res.status(404).send('No user found.');
-
-        //     service.authenticate(req.body.email, req.body.pwd)
-        //         .then(result => res.json(result))
-        //         .catch(err => next(err));
+            //     service.authenticate(req.body.email, req.body.pwd)
+            //         .then(result => res.json(result))
+            //         .catch(err => next(err));
         }
+    });
+
+    // Logout
+    app.post('/api/Users/logout', function (req, res, next) {
+
+        // It doesn't really logout. The token must expire on its own.
+        res.status(200).send({ auth: false, token: null });
     });
 
     // Select (admin only)
@@ -100,10 +103,10 @@ module.exports = function (app) {
                 .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
 
-                // UNDONE - Test token
-                var token = jwt.sign({ email: req.body.email }, config.secret, {
-                    expiresIn: 86400 // expires in 24 hours
-                });
+            // UNDONE - Test token
+            var token = jwt.sign({ email: req.body.email }, config.secret, {
+                expiresIn: 86400 // expires in 24 hours
+            });
         }
     });
 
