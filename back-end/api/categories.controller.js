@@ -12,9 +12,39 @@ module.exports = function (app) {
 
     // Get Name & Id
     app.get('/api/Categories/name', function (req, res, next) {
+        // UNDONE - Request of the auth.service
+        const auth = require('./auth.service');
+        
+        var token = req.get('Authorization');
+
+        auth.authenticate(token)
+            .then(result => sendResult(result, res))
+            .catch(err => next(err));
+
+        function sendResult(result, res) {
+
+            console.log(result);
+            res.status(result.status).send(result.status)
+
+            /* const c = await doubleAfter2Seconds(30);
+
+        }
+
+/*         if (authRes.xxx == 500) {
+            switch(authRes) {
+                case -1:
+                    return res.status(401).send({ auth: false, message: 'No token provided.' });
+                case 2:
+                    return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+            } */
+        
+
         service.getNameId()
             .then(result => res.json(result))
             .catch(err => next(err));
+
+            // res.status(200).send(decoded);
+        }
     });
 
     // Get by ID

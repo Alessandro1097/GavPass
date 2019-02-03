@@ -9,7 +9,6 @@ const authorize = require('../_helpers/authorize')
 
 // UNDONE - Modules online
 var bcrypt = require('bcryptjs');
-var users = require('../models/User');
 const config = require('../topSecret/secret.json');
 const jwt = require('jsonwebtoken');
 
@@ -50,7 +49,10 @@ module.exports = function (app) {
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
             });
-            res.status(200).send({ auth: true, token: token });
+            res.status(200).send({
+                auth: true,
+                message: "That's the token bro",
+                token: token });
 
             //     service.authenticate(req.body.email, req.body.pwd)
             //         .then(result => res.json(result))
@@ -102,11 +104,6 @@ module.exports = function (app) {
             service.insert(req.body.email, req.body.pwd, req.body.phone, req.body.role)
                 .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
-
-            // UNDONE - Test token
-            var token = jwt.sign({ email: req.body.email }, config.secret, {
-                expiresIn: 86400 // expires in 24 hours
-            });
         }
     });
 
