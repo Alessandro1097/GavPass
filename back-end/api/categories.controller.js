@@ -17,34 +17,25 @@ module.exports = function (app) {
         
         var token = req.get('Authorization');
 
-        auth.authenticate(token)
+        var prova = auth.authenticate(token)
             .then(result => sendResult(result, res))
             .catch(err => next(err));
 
         function sendResult(result, res) {
 
             console.log(result);
-            res.status(result.status).send(result.status)
 
-            /* const c = await doubleAfter2Seconds(30);
-
+            res.status(result.status).send(result.result);
         }
 
-/*         if (authRes.xxx == 500) {
-            switch(authRes) {
-                case -1:
-                    return res.status(401).send({ auth: false, message: 'No token provided.' });
-                case 2:
-                    return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-            } */
-        
+        // TODO - Non chiamare getNameId se risultato != 500
+        return;
 
         service.getNameId()
             .then(result => res.json(result))
             .catch(err => next(err));
 
             // res.status(200).send(decoded);
-        }
     });
 
     // Get by ID
