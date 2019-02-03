@@ -36,12 +36,12 @@ module.exports = function (app) {
         if(req.body._id) {
             // Update
             service.update(req.body._id, req.body.name)
-                .then(res.send('1 document updated'))
+                .then(res.json({ message: '1 document updated' }))
                 .catch(err => next(err));
         } else {
             // Insert
             service.insert(req.body.name, "master")
-                .then(res.send('1 document inserted'))
+                .then(res.json({ message: '1 document updated' }))
                 .catch(err => next(err));
         }
     });

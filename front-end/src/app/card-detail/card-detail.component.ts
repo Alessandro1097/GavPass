@@ -143,13 +143,13 @@ export class ModifySiteInsideComponent implements OnInit {
       const messageModifyCategory = 'Site moved to: ' + selectedCategory;
       this.snackBar.open(messageModifyCategory, 'Okay!', {
         duration: 3000,
-        panelClass: ['blue-snackbar']
+        panelClass: ['green-snackbar']
       });
     } else {
       const messageModifyCategory = 'Site modified succesfully!';
       this.snackBar.open(messageModifyCategory, 'Okay!', {
         duration: 3000,
-        panelClass: ['blue-snackbar']
+        panelClass: ['green-snackbar']
       });
     }
   }
@@ -234,13 +234,13 @@ export class AddSiteInsideComponent implements OnInit {
       const messageModifyCategory = 'Site added to: ' + selectedCategory;
       this.snackBar.open(messageModifyCategory, 'Okay!', {
         duration: 3000,
-        panelClass: ['blue-snackbar']
+        panelClass: ['green-snackbar']
       });
     } else {
       const messageModifyCategory = 'Site added succesfully!';
       this.snackBar.open(messageModifyCategory, 'Okay!', {
         duration: 3000,
-        panelClass: ['blue-snackbar']
+        panelClass: ['green-snackbar']
       });
     }
   }
@@ -290,14 +290,14 @@ export class DeleteSiteComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private siteService: SiteService,
     private snackBar: MatSnackBar
-    ) { }
+  ) { }
 
   closeDialog() {
     this.dialogRef.close();
   }
 
   openSnackSuccess(): void {
-    const messageModifyCategory = 'Site delete succesfully!';
+    const messageModifyCategory = 'Site deleted succesfully!';
     this.snackBar.open(messageModifyCategory, 'Okay!', {
       duration: 3000,
       panelClass: ['red-snackbar']
