@@ -1,12 +1,12 @@
-import { Router } from '@angular/router';
-import { SiteService } from './../site.service';
-import { CardService } from './../card.service';
-import { Component, Inject, OnInit, Input } from '@angular/core';
-import { cardType } from '../type-card-container';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
-import { DialogData } from '../app.component';
-import { FormControl, Validators } from '@angular/forms';
-import { siteType } from '../type-site';
+import {Router} from '@angular/router';
+import {SiteService} from './../site.service';
+import {CardService} from './../card.service';
+import {Component, Inject, OnInit, Input} from '@angular/core';
+import {cardType} from '../type-card-container';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {DialogData} from '../app.component';
+import {FormControl, Validators} from '@angular/forms';
+import {siteType} from '../type-site';
 import {MatSnackBar} from '@angular/material';
 
 @Component({
@@ -20,7 +20,8 @@ export class CardComponent implements OnInit {
     private cardService: CardService,
     public dialog: MatDialog,
     private router: Router
-  ) { }
+  ) {
+  }
 
   cards: cardType[];
   cardsName: cardType[];
@@ -43,7 +44,9 @@ export class CardComponent implements OnInit {
       width: '60%',
       height: '38%'
     });
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getCards();
+    });
   }
 
   addSite(): void {
@@ -53,7 +56,20 @@ export class CardComponent implements OnInit {
         name: this.cardsName
       }
     });
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  deleteSite(currentCategoryId): void {
+    const dialogRef = this.dialog.open(DeleteCategoryComponent, {
+      width: '60%',
+      data: {
+        currentCategoryId: currentCategoryId
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getCards();
+    });
   }
 }
 
@@ -91,7 +107,8 @@ export class AddSiteComponent implements OnInit {
     private siteService: SiteService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -101,7 +118,7 @@ export class AddSiteComponent implements OnInit {
     const messageAddedCategory = 'Site added to: ' + selectedCategory;
     this.snackBar.open(messageAddedCategory, 'Okay!', {
       duration: 3000,
-      panelClass: ['blue-snackbar']
+      panelClass: ['green-snackbar']
     });
   }
 
@@ -114,7 +131,7 @@ export class AddSiteComponent implements OnInit {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     let selectedCategory;
-    this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+    this.siteService.addSite({user, url, name, category, username, pwd, note} as siteType).subscribe(site => site);
     for (let index = 0; index < this.cards.length; index++) {
       if (this.cards[index]._id === category) {
         selectedCategory = this.cards[index].name;
@@ -145,9 +162,20 @@ export class AddCategoryComponent implements OnInit {
     public dialogRef: MatDialogRef<AddCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private cardService: CardService,
-  ) {}
+    private snackBar: MatSnackBar
+  ) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Category added succesfully';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['green-snackbar']
+    });
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -155,6 +183,43 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit() {
     const name = this.newCategory.value.trim();
-    this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
+    this.cardService.addCategory({name,} as cardType).subscribe(categoryToAdd => categoryToAdd);
+    this.openSnackSuccess();
+  }
+}
+
+@Component({
+  selector: './app-dialog-delete-category',
+  templateUrl: './delete-category.component.html',
+})
+
+export class DeleteCategoryComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteCategoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private siteService: SiteService,
+    private cardService: CardService,
+    private snackBar: MatSnackBar
+  ) {
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  openSnackSuccess(): void {
+    const messageModifyCategory = 'Category deleted succesfully!';
+    this.snackBar.open(messageModifyCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['red-snackbar']
+    });
+  }
+
+  deleteCategory() {
+    const _id = this.data.currentCategoryId;
+    this.cardService.deleteCategory({ _id } as cardType).subscribe(category => category);
+    this.closeDialog();
+    this.openSnackSuccess();
   }
 }
