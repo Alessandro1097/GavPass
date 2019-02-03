@@ -1,0 +1,17 @@
+<div class="top-bar">
+    <h3 class="title-modal">Aggiungi una categoria</h3>
+    <button class="close-modal-button" (click)="closeDialog()">
+        <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
+    </button>
+</div>
+<div class="padding-modal position-relative">
+    <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+        <mat-card-title style="margin: auto">
+            <mat-form-field class="form-url">
+                <input matInput placeholder="Nome categoria">
+            </mat-form-field>
+        </mat-card-title>
+        <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
+    </form>
+    <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
+</div>

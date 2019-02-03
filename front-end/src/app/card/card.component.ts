@@ -38,7 +38,15 @@ export class CardComponent implements OnInit {
     this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
   }
 
-  openDialog(): void {
+  addCategory(): void {
+    const dialogRef = this.dialog.open(AddCategryComponent, {
+      width: '60%',
+      height: '38%'
+    });
+    dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  addSite(): void {
     const dialogRef = this.dialog.open(AddSiteComponent, {
       width: '60%',
       data: {
@@ -82,7 +90,8 @@ export class AddSiteComponent implements OnInit {
     private cardService: CardService,
     private siteService: SiteService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar
+  ) { }
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -119,5 +128,33 @@ export class AddSiteComponent implements OnInit {
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Not a valid email' : '';
+  }
+}
+
+@Component({
+  selector: './app-add-category',
+  templateUrl: './add-category.component.html',
+})
+
+export class AddCategryComponent implements OnInit {
+
+  categories: siteType[];
+
+  constructor(
+    public dialogRef: MatDialogRef<AddCategryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private cardService: CardService,
+  ) {}
+
+  ngOnInit() {}
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit() {
+    const name = 'lol';
+
+    this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
   }
 }

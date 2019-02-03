@@ -37,6 +37,11 @@ export class CardService {
     return this.http.get<cardType>(url);
   }
 
+  /* POST: send the new category on the server */
+  addCategory(card: cardType): Observable<cardType> {
+    return this.http.post<cardType>(this.categorySave, card, httpOptions);
+  }
+
   // Update by id
   updateCard(card: cardType): Observable<any> {
     return this.http.put(this.categorySave, card, httpOptions);

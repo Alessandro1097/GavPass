@@ -23,7 +23,6 @@ Once you have done that you'll be able to use GavPass.
 # Per Alessandro
 TODO : 
 - aggiungi categoria
-- modifica modale AddSiteSucessfullyComponent e aggiungi il processo per le altre modali / aggiungi snakbar al posto del dialog
 - cerca che mostra sia siti che categorie
 
 FIXME: 
