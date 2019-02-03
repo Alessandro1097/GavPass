@@ -22,9 +22,7 @@ export class CardComponent implements OnInit {
     private router: Router
   ) { }
 
-  // list of all the card and id
   cards: cardType[];
-  // list of all the categories
   cardsName: cardType[];
 
   ngOnInit() {
@@ -40,7 +38,15 @@ export class CardComponent implements OnInit {
     this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
   }
 
-  openDialog(): void {
+  addCategory(): void {
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
+      width: '60%',
+      height: '38%'
+    });
+    dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  addSite(): void {
     const dialogRef = this.dialog.open(AddSiteComponent, {
       width: '60%',
       data: {
@@ -84,14 +90,16 @@ export class AddSiteComponent implements OnInit {
     private cardService: CardService,
     private siteService: SiteService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar
+  ) { }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  openSnackSuccess(): void {
-    this.snackBar.open('Site added', 'Okay!', {
+  openSnackSuccess(selectedCategory): void {
+    const messageAddedCategory = 'Site added to: ' + selectedCategory;
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
       duration: 3000,
       panelClass: ['blue-snackbar']
     });
@@ -105,7 +113,7 @@ export class AddSiteComponent implements OnInit {
     const username = this.username.value.trim();
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
-    let selectedCategory = '';
+    let selectedCategory;
     this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
     for (let index = 0; index < this.cards.length; index++) {
       if (this.cards[index]._id === category) {
@@ -114,11 +122,39 @@ export class AddSiteComponent implements OnInit {
     }
     const urlToGo = `/detail/${selectedCategory}`;
     this.router.navigate([urlToGo]);
-    this.openSnackSuccess();
+    this.openSnackSuccess(selectedCategory);
   }
 
   getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Not a valid email' : '';
+  }
+}
+
+@Component({
+  selector: './app-add-category',
+  templateUrl: './add-category.component.html',
+})
+
+export class AddCategoryComponent implements OnInit {
+
+  categories: siteType[];
+  newCategory = new FormControl('', [Validators.required]);
+
+  constructor(
+    public dialogRef: MatDialogRef<AddCategoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private cardService: CardService,
+  ) {}
+
+  ngOnInit() {}
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit() {
+    const name = this.newCategory.value.trim();
+    this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
   }
 }
