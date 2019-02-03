@@ -146,6 +146,11 @@ a {
   transform: translate(-85%) !important;
 }
 
+.center-category {
+  position: absolute !important;
+  top: 30% !important;
+}
+
 .position-relative {
   position: relative;
 }

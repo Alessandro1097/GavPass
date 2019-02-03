@@ -18,6 +18,7 @@ export class CardService {
   private categoryData = 'http://localhost:3000/api/Categories/getByName';
   private categoriesName = 'http://localhost:3000/api/Categories/name';
   private categorySave = 'http://localhost:3000/api/Categories/save';
+  private categoryDeleteById = 'http://localhost:3000/api/Categories/delete';
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +38,18 @@ export class CardService {
   getCard(name: string): Observable<cardType> {
     const url = `${this.categoryData}/${name}`;
     return this.http.get<cardType>(url);
+  }
+
+  /* POST: send the new category on the server */
+  addCategory(card: cardType): Observable<cardType> {
+    return this.http.post<cardType>(this.categorySave, card, httpOptions);
+  }
+
+  /* DELETE: send the new category on the server */
+  deleteCategory(card: cardType): Observable<any> {
+    const id = card._id;
+    const url = `${this.categoryDeleteById}/${id}`;
+    return this.http.delete(url, httpOptions);
   }
 
   // Update by id
