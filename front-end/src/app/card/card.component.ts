@@ -139,6 +139,7 @@ export class AddSiteComponent implements OnInit {
 export class AddCategryComponent implements OnInit {
 
   categories: siteType[];
+  newCategory = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<AddCategryComponent>,
@@ -153,8 +154,7 @@ export class AddCategryComponent implements OnInit {
   }
 
   onSubmit() {
-    const name = 'lol';
-
+    const name = this.newCategory.value.trim();
     this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
   }
 }
