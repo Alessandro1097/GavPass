@@ -7,7 +7,7 @@ import { DemoMaterialModule } from '../material-module';
 import { MatNativeDateModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CardComponent, AddSiteComponent, AddCategryComponent } from './card/card.component';
+import { CardComponent, AddSiteComponent, AddCategoryComponent } from './card/card.component';
 import { AppRoutingModule } from './app-routing.module';
 // tslint:disable-next-line:max-line-length
 import { CardDetailComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent } from './card-detail/card-detail.component';
@@ -24,7 +24,7 @@ import { MatDialogModule } from '@angular/material';
     ModifySiteInsideComponent,
     AddSiteInsideComponent,
     DeleteSiteComponent,
-    AddCategryComponent
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,7 @@ import { MatDialogModule } from '@angular/material';
     MatDialogModule
   ],
   // tslint:disable-next-line:max-line-length
-  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategryComponent],
+  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategoryComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

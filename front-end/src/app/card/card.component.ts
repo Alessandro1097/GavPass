@@ -39,7 +39,7 @@ export class CardComponent implements OnInit {
   }
 
   addCategory(): void {
-    const dialogRef = this.dialog.open(AddCategryComponent, {
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
       width: '60%',
       height: '38%'
     });
@@ -136,13 +136,13 @@ export class AddSiteComponent implements OnInit {
   templateUrl: './add-category.component.html',
 })
 
-export class AddCategryComponent implements OnInit {
+export class AddCategoryComponent implements OnInit {
 
   categories: siteType[];
   newCategory = new FormControl('', [Validators.required]);
 
   constructor(
-    public dialogRef: MatDialogRef<AddCategryComponent>,
+    public dialogRef: MatDialogRef<AddCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private cardService: CardService,
   ) {}

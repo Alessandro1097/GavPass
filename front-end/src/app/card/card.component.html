@@ -1,13 +1,18 @@
 <h2 class="category-space card-section">My category</h2>
 <div class="card-container">
   <div *ngFor="let card of cards">
-    <a routerLink="/detail/{{card.name}}">
-      <mat-card class="example-card">
-        <mat-card-content>
-          <span class="title-card">{{card.name}}</span>
-        </mat-card-content>
-      </mat-card>
-    </a>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div style="display: flex; width: 100%; justify-content: flex-end">
+          <button mat-icon-button>
+            <mat-icon style="color: white">close</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+      <div routerLink="/detail/{{card.name}}" style="width: 300px; height: 120px; position: relative !important; cursor: pointer">
+        <div class="title-card center-category">{{card.name}}</div>
+      </div>
+    </mat-card>
   </div>
 </div>
 
