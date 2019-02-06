@@ -1,5 +1,6 @@
 // Request of the service
 const service = require('./category.service');
+const authService = require('./auth.service');
 
 module.exports = function (app) {
 
@@ -12,30 +13,11 @@ module.exports = function (app) {
 
     // Get Name & Id
     app.get('/api/Categories/name', function (req, res, next) {
-        // UNDONE - Request of the auth.service
-        const auth = require('./auth.service');
-        
-        var token = req.get('Authorization');
-
-        var prova = auth.authenticate(token)
-            .then(result => sendResult(result, res))
-            .catch(err => next(err));
-
-        function sendResult(result, res) {
-
-            console.log(result);
-
-            res.status(result.status).send(result.result);
-        }
-
-        // TODO - Non chiamare getNameId se risultato != 500
-        return;
-
-        service.getNameId()
-            .then(result => res.json(result))
-            .catch(err => next(err));
-
-            // res.status(200).send(decoded);
+        authService.checkToken(req, res, function (req, res) {
+            service.getNameId()
+                .then(result => res.json(result))
+                .catch(err => next(err));
+        });
     });
 
     // Get by ID
@@ -54,7 +36,7 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Categories/save', function (req, res, next) {
-        if(req.body._id) {
+        if (req.body._id) {
             // Update
             service.update(req.body._id, req.body.name)
                 .then(res.json({ message: '1 document updated' }))
@@ -62,11 +44,11 @@ module.exports = function (app) {
         } else {
             // Insert
             service.insert(req.body.name, "master")
-                .then(res.json({ message: '1 document updated' }))
+                .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
         }
     });
-    
+
     // Delete
     app.delete('/api/Categories/delete/:id', function (req, res, next) {
         service.deleteById(req.params.id)

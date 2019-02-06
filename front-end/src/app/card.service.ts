@@ -30,7 +30,7 @@ export class CardService {
   // Get all list of the categories name
   getCategoriesName(): Observable<cardType[]> {
     // FIXME - It's the right one, trust me bro ;)
-    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': "NON CORRETTO eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNTRmN2U2MTI3M2UwMThjOGY0YzNjNSIsImlhdCI6MTU0OTA3MzMyNywiZXhwIjoxNTQ5MTU5NzI3fQ.gQ0bYHkOHaax3sOH2omsw9GM1jNOiTGVoJBYu5ZFKVs"} }).do(console);
+    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNTRmN2U2MTI3M2UwMThjOGY0YzNjNSIsImlhdCI6MTU0OTIzNzI2NiwiZXhwIjoxNTQ5MzIzNjY2fQ.NBRHP986Sv_H-BTFpn3xhl2mN_vsycLdRiCFXBq4VHE"} }).do(console);
     //return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
 

@@ -14,20 +14,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function (app) {
 
-    // UNDONE - Post online
-    // TODO - Make this function in the service
-    app.get('/me', function (req, res) {
-        var token = req.headers['x-access-token'];
-        if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-
-        jwt.verify(token, config.secret, function (err, decoded) {
-            if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-
-            res.status(200).send(decoded);
-        });
-    });
-
-
     // FIXME - Authenticate with JWT (public route)
     // Login
     app.post('/api/Users/login', function (req, res, next) {
@@ -49,6 +35,7 @@ module.exports = function (app) {
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
             });
+            
             res.status(200).send({
                 auth: true,
                 message: "That's the token bro",
