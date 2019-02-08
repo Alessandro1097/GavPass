@@ -183,7 +183,7 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit() {
     const name = this.newCategory.value.trim();
-    this.cardService.addCategory({name,} as cardType).subscribe(categoryToAdd => categoryToAdd);
+    this.cardService.addCategory({name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
     this.openSnackSuccess();
   }
 }
