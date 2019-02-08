@@ -1,15 +1,8 @@
 ﻿// Request of the model
 var users = require('../models/User');
-
-// Authentication
-const config = require('../topSecret/secret.json');
-const jwt = require('jsonwebtoken');
-
 var bcrypt = require('bcryptjs');
 
-
 module.exports = {
-    authenticate,
     getAll,
     getById,
     getByEmail,
@@ -17,33 +10,6 @@ module.exports = {
     update,
     deleteById
 };
-
-async function authenticate(user_email, user_pwd) {
-  
-    users.find({ email: user_email }, function (err, result) {
-        if (err) throw err;
-
-        if (!result) return { message: 'No user found.' };
-
-        console.log(result);
-
-        // FIXME - user_pwd non è visibile da qui
-        console.log(user_pwd);
-
-        var passwordIsValid = bcrypt.compareSync(user_pwd, result.pwd);
-
-            console.log(passwordIsValid);
-
-            if (!passwordIsValid) return { auth: false, token: null };
-
-            // const token = jwt.sign({ id: user._id }, config.secret, {
-            //     expiresIn: 86400 // expires in 24 hours
-            // });
-            // return { auth: true, token: token };
-
-            return { auth: true };
-    });
-}
 
 // Select
 async function getAll() {
