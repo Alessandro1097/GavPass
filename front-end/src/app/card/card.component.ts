@@ -1,6 +1,6 @@
 import {Router} from '@angular/router';
-import {SiteService} from './../site.service';
-import {CardService} from './../card.service';
+import {SiteService} from '../_services/site.service';
+import {CardService} from '../_services/card.service';
 import {Component, Inject, OnInit, Input} from '@angular/core';
 import {cardType} from '../type-card-container';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';

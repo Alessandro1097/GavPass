@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cardType } from './type-card-container';
+import { cardType } from '../type-card-container';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/do';
@@ -30,8 +30,9 @@ export class CardService {
   // Get all list of the categories name
   getCategoriesName(): Observable<cardType[]> {
     // FIXME - It's the right one, trust me bro ;)
-    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNTRmN2U2MTI3M2UwMThjOGY0YzNjNSIsImlhdCI6MTU0OTIzNzI2NiwiZXhwIjoxNTQ5MzIzNjY2fQ.NBRHP986Sv_H-BTFpn3xhl2mN_vsycLdRiCFXBq4VHE"} }).do(console);
-    //return this.http.get<cardType[]>(this.categoriesName).do(console);
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': 'OKAY'} }).do(console);
+    // return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
 
   // Get card by name

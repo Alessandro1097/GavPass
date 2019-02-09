@@ -3,8 +3,8 @@ import { cardType } from '../type-card-container';
 import { siteType } from '../type-site';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { CardService } from '../card.service';
-import { SiteService } from '../site.service';
+import { CardService } from '../_services/card.service';
+import { SiteService } from '../_services/site.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import 'rxjs-compat/add/operator/do';
 import { DialogData } from '../app.component';
@@ -257,7 +257,6 @@ export class AddSiteInsideComponent implements OnInit {
     let selectedCategory;
     category === '' ? category = data : category = category;
     this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
-    console.log(this);
     for (let index = 0; index < this.cardsName.length; index++) {
       if (this.cardsName[index]._id === category) {
         selectedCategory = this.cardsName[index].name;

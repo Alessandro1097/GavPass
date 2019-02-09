@@ -37,12 +37,9 @@ export class SingUpComponent implements OnInit {
     const email = this.email.value.trim();
     const pwd = this.pwd.value.trim();
     const phone = this.phone.value.trim();
-    const role = "user";
+    const role = 'user';
 
     this.userService.createUser({ email, pwd, phone, role} as User).subscribe(user => user);
-    console.log('Aggiunto!');
   }
-
-  // API to insert user: email, pwd, phone, role
 
 }

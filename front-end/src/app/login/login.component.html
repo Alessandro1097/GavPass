@@ -1,12 +1,12 @@
 <div style="max-width: 750px;margin: 100px auto;">
     <mat-card style="padding: 50px">
         <h2 style="text-align: center">Login</h2>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="onSubmit()">
 
             <div style="display: flex; justify-content: center;">
                 <mat-form-field appearance="outline" style="width: 500px">
-                    <mat-label>Username</mat-label>
-                    <input matInput formControlName="username"
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="email"
                         [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                 </mat-form-field>
             </div>
@@ -14,7 +14,7 @@
             <div style="display: flex; justify-content: center;">
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password"
+                    <input matInput [formControl]="pwd"
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" type="password">
                 </mat-form-field>
             </div>

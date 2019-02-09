@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { siteType } from './type-site';
+import { siteType } from '../type-site';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/do';
