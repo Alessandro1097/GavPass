@@ -6,10 +6,12 @@ import {NoteComponent} from './note/note.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { SingUpComponent } from './sing-up/sing-up.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'sing-up', component: SingUpComponent },
   { path: 'cards', component: CardComponent },
   { path: 'notes', component: NoteComponent },
   { path: 'detail/:name', component: CardDetailComponent },

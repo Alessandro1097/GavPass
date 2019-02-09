@@ -1,7 +1,6 @@
 <!-- Toolbar -->
 <div [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary">
-    <div style="display: flex;">
       <button mat-icon-button (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -11,7 +10,6 @@
       <input type="text" class="search-style" placeholder="Cerca" />
       <mat-icon class="cursor-pointer">person</mat-icon>
       <p class="cursor-pointer white-text">example@tuttomail.com</p>
-    </div>
   </mat-toolbar>
 
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

@@ -1,0 +1,33 @@
+<div style="max-width: 750px;margin: 100px auto;">
+    <mat-card style="padding: 50px">
+        <h2 style="text-align: center">Sing-up</h2>
+        <form (ngSubmit)="onSubmit()">
+
+            <div style="display: flex; justify-content: center;">
+                <mat-form-field appearance="outline" style="width: 500px">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="email">
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+                <mat-form-field appearance="outline" style="width: 500px">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [formControl]="pwd">
+                </mat-form-field>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <mat-form-field appearance="outline" style="width: 500px">
+                    <mat-label>Phone</mat-label>
+                    <input matInput (keypress)="numberOnly($event)" type="text" [formControl]="phone">
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <button mat-raised-button color="primary" [disabled]="loading">Sing up</button>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</div>
