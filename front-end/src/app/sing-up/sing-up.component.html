@@ -7,6 +7,7 @@
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Email</mat-label>
                     <input matInput [formControl]="email">
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -14,19 +15,18 @@
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Password</mat-label>
                     <input matInput type="password" [formControl]="pwd">
+                    <mat-error *ngIf="pwd.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div style="display: flex; justify-content: center;">
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Phone</mat-label>
                     <input matInput (keypress)="numberOnly($event)" type="text" [formControl]="phone">
+                    <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-
-            <div style="display: flex; justify-content: space-between;">
-                <div>
-                    <button mat-raised-button color="primary" [disabled]="loading">Sing up</button>
-                </div>
+            <div style="display: flex; justify-content: center;">
+                <button mat-raised-button color="primary" [disabled]="loading" style="width: 500px; height: 60px">Sing up</button>
             </div>
         </form>
     </mat-card>

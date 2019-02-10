@@ -11,7 +11,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  email = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
   pwd = new FormControl('', [Validators.required]);
   loading = false;
   submitted = false;
@@ -30,6 +30,12 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   onSubmit() {

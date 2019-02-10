@@ -7,15 +7,17 @@
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Email</mat-label>
                     <input matInput [formControl]="email"
-                        [ngClass]="{ 'is-invalid': submitted && email.errors }">
+                        [ngClass]="{ 'is-invalid': submitted && email.errors }" />
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-
+            
             <div style="display: flex; justify-content: center;">
                 <mat-form-field appearance="outline" style="width: 500px">
                     <mat-label>Password</mat-label>
                     <input matInput [formControl]="pwd"
-                        [ngClass]="{ 'is-invalid': submitted && pwd.errors }" type="password">
+                        [ngClass]="{ 'is-invalid': submitted && pwd.errors }" type="password" />
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 

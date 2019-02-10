@@ -11,7 +11,7 @@ import { User } from '../_models/user';
 })
 export class SingUpComponent implements OnInit {
   submitted = false;
-  email = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
   pwd = new FormControl('', [Validators.required]);
   phone = new FormControl('', [Validators.required]);
 
@@ -30,6 +30,12 @@ export class SingUpComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   onSubmit() {
