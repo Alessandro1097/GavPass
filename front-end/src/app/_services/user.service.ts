@@ -11,12 +11,8 @@ const httpOptions = {
 export class UserService {
 
     private createUserUrl = 'http://localhost:3000/api/Users/save';
-    
+
     constructor(private http: HttpClient) { }
-    
-    getAll() {
-        return this.http.get<User[]>(`http://localhost:3000/api/Users`);
-    }
 
     createUser(user: User): Observable<User> {
         return this.http.post<User>(this.createUserUrl, user, httpOptions);
