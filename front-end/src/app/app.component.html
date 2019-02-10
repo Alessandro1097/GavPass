@@ -1,16 +1,16 @@
 <!-- Toolbar -->
 <div [class.example-is-mobile]="mobileQuery.matches">
-  <div style="background-color:#3f51b5; display: flex; justify-content: space-between">
-    <button mat-icon-button (click)="snav.toggle()" *ngIf="1" style="margin-top: 10px; margin-left: 10px">
-      <mat-icon style="color: white;">menu</mat-icon>
+  <div class="top-bar">
+    <button mat-icon-button (click)="snav.toggle()" *ngIf="1" class="menu-placement">
+      <mat-icon class="white">menu</mat-icon>
     </button>
     <a routerLink="/">
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
     </a>
     <input type="text" class="search-style" placeholder="Cerca" *ngIf="1" />
-    <div style="display: flex; margin-top: 20px; margin-right: 10px">
-      <mat-icon class="cursor-pointer" style="color: white">person</mat-icon>
-      <p class="cursor-pointer white-text" style="margin-top: 0">example@tuttomail.com</p>
+    <div class="account">
+      <mat-icon class="cursor-pointer white">person</mat-icon>
+      <p class="cursor-pointer white-text m-0">example@tuttomail.com</p>
     </div>
   </div>
 

@@ -169,3 +169,43 @@ a {
   background: #ba3f3f;
   color: white;
 }
+
+.d-flex {
+  display: flex;
+}
+
+.content-flex-end {
+  justify-content: flex-end;
+}
+
+.delete-button {
+  background-color: #ba3f3f;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/** MARGIN **/
+
+.m-0 {
+  margin-top: 0;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.ma {
+  margin: auto;
+}
+
+/** COLORS **/
+
+.white {
+  color: white;
+}
