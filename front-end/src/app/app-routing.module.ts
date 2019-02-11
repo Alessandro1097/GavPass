@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'sing-up', component: SingUpComponent },
   { path: 'notes', component: NoteComponent },
   { path: 'detail/:name', component: CardDetailComponent },
-  // TODO: add this => { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
