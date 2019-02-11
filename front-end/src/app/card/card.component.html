@@ -6,11 +6,11 @@
       <mat-card-header>
         <div class="d-flex w-100 content-flex-end">
           <button mat-icon-button (click)="deleteSite(card._id)">
-            <mat-icon style="color: white">close</mat-icon>
+            <mat-icon class="white">close</mat-icon>
           </button>
         </div>
       </mat-card-header>
-      <div routerLink="/detail/{{card.name}}" style="width: 300px; height: 120px; position: relative !important; cursor: pointer">
+      <div routerLink="/detail/{{card.name}}" class="card-shape">
         <div class="title-card center-category">{{card.name}}</div>
       </div>
     </mat-card>

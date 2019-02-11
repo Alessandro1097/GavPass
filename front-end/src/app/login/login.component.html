@@ -1,10 +1,10 @@
-<div style="max-width: 750px;margin: 100px auto;">
-    <mat-card style="padding: 50px">
-        <h2 style="text-align: center">Login</h2>
+<div class="card-authentication">
+    <mat-card class="p-50">
+        <h2 class="text-center">Login</h2>
         <form (ngSubmit)="onSubmit()">
 
-            <div style="display: flex; justify-content: center;">
-                <mat-form-field appearance="outline" style="width: 500px">
+            <div class="d-flex content-center">
+                <mat-form-field appearance="outline" class="w-500">
                     <mat-label>Email</mat-label>
                     <input matInput [formControl]="email"
                         [ngClass]="{ 'is-invalid': submitted && email.errors }" />
@@ -12,8 +12,8 @@
                 </mat-form-field>
             </div>
             
-            <div style="display: flex; justify-content: center;">
-                <mat-form-field appearance="outline" style="width: 500px">
+            <div class="d-flex content-center">
+                <mat-form-field appearance="outline" class="w-500">
                     <mat-label>Password</mat-label>
                     <input matInput [formControl]="pwd"
                         [ngClass]="{ 'is-invalid': submitted && pwd.errors }" type="password" />
@@ -21,8 +21,8 @@
                 </mat-form-field>
             </div>
 
-            <div style="display: flex; justify-content: space-between;">
-                <p style="margin-top: 0">Non ti sei ancora iscritto? <a routerLink="/sing-up">Clicca qui.</a></p>
+            <div class="d-flex content-space-between">
+                <p class="mt-0">Non ti sei ancora iscritto? <a routerLink="/sing-up">Clicca qui.</a></p>
                 <div>
                     <button mat-raised-button color="primary" [disabled]="loading">Login</button>
                 </div>

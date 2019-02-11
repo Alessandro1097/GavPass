@@ -1,32 +1,32 @@
-<div style="max-width: 750px;margin: 100px auto;">
-    <mat-card style="padding: 50px">
-        <h2 style="text-align: center">Sing-up</h2>
+<div class="card-authentication">
+    <mat-card class="p-50">
+        <h2 class="text-center">Sing-up</h2>
         <form (ngSubmit)="onSubmit()">
 
-            <div style="display: flex; justify-content: center;">
-                <mat-form-field appearance="outline" style="width: 500px">
+            <div class="d-flex content-center">
+                <mat-form-field appearance="outline" class="w-500">
                     <mat-label>Email</mat-label>
                     <input matInput [formControl]="email">
                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
-            <div style="display: flex; justify-content: center;">
-                <mat-form-field appearance="outline" style="width: 500px">
+            <div class="d-flex content-center">
+                <mat-form-field appearance="outline" class="w-500">
                     <mat-label>Password</mat-label>
                     <input matInput type="password" [formControl]="pwd">
                     <mat-error *ngIf="pwd.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-            <div style="display: flex; justify-content: center;">
-                <mat-form-field appearance="outline" style="width: 500px">
+            <div class="d-flex content-center">
+                <mat-form-field appearance="outline" class="w-500">
                     <mat-label>Phone</mat-label>
                     <input matInput (keypress)="numberOnly($event)" type="text" [formControl]="phone">
                     <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-            <div style="display: flex; justify-content: center;">
-                <button mat-raised-button color="primary" [disabled]="loading" style="width: 500px; height: 60px">Sing up</button>
+            <div class="d-flex content-center">
+                <button mat-raised-button color="primary" [disabled]="loading" class="sign-up-button">Sing up</button>
             </div>
         </form>
     </mat-card>

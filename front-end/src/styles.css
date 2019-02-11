@@ -178,6 +178,14 @@ a {
   justify-content: flex-end;
 }
 
+.content-center {
+  justify-content: center;
+}
+
+.content-space-between {
+  justify-content: space-between;
+}
+
 .delete-button {
   background-color: #ba3f3f;
 }
@@ -186,22 +194,39 @@ a {
   width: 100%;
 }
 
+.w-500 {
+  width: 500px;
+}
+
+.card-authentication {
+  max-width: 750px;
+  margin: 100px auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
 /** MARGIN **/
 
-.m-0 {
-  margin-top: 0;
+.mt-0 {
+  margin-top: 0 !important;
 }
 
 .mt-8 {
-  margin-top: 8px;
+  margin-top: 8px !important;
 }
 
 .mr-20 {
-  margin-right: 20px;
+  margin-right: 20px !important;
 }
 
 .ma {
-  margin: auto;
+  margin: auto !important;
+}
+
+.p-50 {
+  padding: 50px !important;
 }
 
 /** COLORS **/

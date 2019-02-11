@@ -28,6 +28,13 @@
   font-size: 18px;
 }
 
+.card-shape {
+  width: 300px;
+  height: 120px;
+  position: relative !important;
+  cursor: pointer;
+}
+
 /** CSS for FAB button **/
 
 .container {
