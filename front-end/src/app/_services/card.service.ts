@@ -24,21 +24,21 @@ export class CardService {
 
   // Get all the information of the card
   getCards(): Observable<cardType[]> {
-    return this.http.get<cardType[]>(this.categoriesList).do(console);
+    return this.http.get<cardType[]>(this.categoriesList, { headers: {'Authorization': 'OKAY'} });
   }
 
   // Get all list of the categories name
   getCategoriesName(): Observable<cardType[]> {
     // FIXME - It's the right one, trust me bro ;)
     // tslint:disable-next-line:max-line-length
-    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': 'OKAY'} }).do(console);
+    return this.http.get<cardType[]>(this.categoriesName, { headers: {'Authorization': 'OKAY'} });
     // return this.http.get<cardType[]>(this.categoriesName).do(console);
   }
 
   // Get card by name
   getCard(name: string): Observable<cardType> {
     const url = `${this.categoryData}/${name}`;
-    return this.http.get<cardType>(url);
+    return this.http.get<cardType>(url, { headers: {'Authorization': 'OKAY'} });
   }
 
   /* POST: send the new category on the server */

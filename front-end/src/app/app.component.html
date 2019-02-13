@@ -8,12 +8,12 @@
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
     </a>
     <input type="text" class="search-style" placeholder="Cerca" *ngIf="1" />
-    <div class="account">
-      <mat-icon class="cursor-pointer white">person</mat-icon>
-      <p class="cursor-pointer white-text mt-0">example@tuttomail.com</p>
-    </div>
+    <mat-select placeholder="alessandro.cavuoti@tuttomail.com" style="width: 300px; margin-top: 20px">
+      <mat-option [routerLink]="['/login']" style="text-align: center">
+        Logout
+      </mat-option>
+    </mat-select>
   </div>
-
 
   <mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"

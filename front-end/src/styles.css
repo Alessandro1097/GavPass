@@ -207,6 +207,20 @@ a {
   text-align: center;
 }
 
+.mat-select-placeholder {
+  color: white !important;
+}
+
+.mat-select-arrow {
+  color: white !important;
+}
+
+.cdk-overlay-pane {
+  top: 50px !important;
+  left: initial;
+  right: -20px !important;
+}
+
 /** MARGIN **/
 
 .mt-0 {
