@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CardDetailComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent } from './card-detail/card-detail.component';
 import { NoteComponent } from './note/note.component';
 import { MatDialogModule } from '@angular/material';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -31,7 +30,6 @@ import { SingUpComponent } from './sing-up/sing-up.component';
     DeleteSiteComponent,
     AddCategoryComponent,
     DeleteCategoryComponent,
-    HomeComponent,
     LoginComponent,
     SingUpComponent
   ],

@@ -27,10 +27,12 @@ export class AuthenticationService {
         const currentToken = localStorage.getItem('currentUser');
         if (currentToken) {
             const currentT = JSON.parse(currentToken);
+            localStorage.removeItem('currentUser');
             return this.http.post<any>(this.logoutUrl, currentT.token, { headers: this.getHeaders() });
         }
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        
     }
 
     getHeaders(): HttpHeaders {

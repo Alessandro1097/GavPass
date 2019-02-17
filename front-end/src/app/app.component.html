@@ -8,7 +8,7 @@
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
     </a>
     <input type="text" class="search-style" placeholder="Cerca" *ngIf="1" />
-    <mat-select placeholder="alessandro.cavuoti@tuttomail.com" style="width: 300px; margin-top: 20px">
+    <mat-select placeholder="{{username}}" style="width: 300px; margin-top: 20px">
       <mat-option [routerLink]="['/login']" style="text-align: center">
         Logout
       </mat-option>
