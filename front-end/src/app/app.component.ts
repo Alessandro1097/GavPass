@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, Inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 export interface DialogData {
@@ -26,10 +26,11 @@ export interface DialogData {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
+  private username;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -37,7 +38,16 @@ export class AppComponent implements OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+  ngOnInit() {
+    this.getUsername();
+  }
+
+  getUsername() {
+    const currentToken = localStorage.getItem('currentUser');
+    if(currentToken) {
+      const currentT = JSON.parse(currentToken).user;
+      this.username = currentT;
+      console.log(this.username);
+    }
   }
 }

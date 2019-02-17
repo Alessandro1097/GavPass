@@ -19,7 +19,6 @@ export class CardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     public dialog: MatDialog,
-    private router: Router
   ) {
   }
 
