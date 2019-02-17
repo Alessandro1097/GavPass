@@ -1,5 +1,7 @@
 // Request of the service
 const service = require('./user.service');
+const authService = require('./auth.service');
+const tokenService = require('./token.service');
 
 // Role model
 const Role = require('../models/Role');
@@ -7,51 +9,57 @@ const Role = require('../models/Role');
 // Authentication
 const authorize = require('../_helpers/authorize')
 
-// UNDONE - Modules online
-var bcrypt = require('bcryptjs');
-const config = require('../topSecret/secret.json');
-const jwt = require('jsonwebtoken');
-
 module.exports = function (app) {
 
-    // FIXME - Authenticate with JWT (public route)
     // Login
     app.post('/api/Users/login', function (req, res, next) {
 
         service.getByEmail(req.body.email)
-            .then(result => login(result, res))
+            .then(result => login(result, req, res))
             .catch(err => next(err));
 
-        function login(user, res) {
+        function login(user, req, res) {
 
-            if (!user) return res.status(404).send('No user found.');
+            authService.login(user, req, res)
+                .then(result => createToken(result))
+                .catch(err => next(err));
+        }
 
-            var passwordIsValid = bcrypt.compareSync(req.body.pwd, user.pwd);
+        function createToken(loginResult) {
 
-            console.log(passwordIsValid);
+            // If the authentication fails
+            if (!loginResult.auth) return;
 
-            if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+            var today = new Date();
+            var exp = new Date(today.getFullYear() + 1, today.getMonth(), today.getDay())
 
-            var token = jwt.sign({ id: user._id }, config.secret, {
-                expiresIn: 86400 // expires in 24 hours
-            });
-            
-            res.status(200).send({
-                auth: true,
-                message: "That's the token bro",
-                token: token });
-
-            //     service.authenticate(req.body.email, req.body.pwd)
-            //         .then(result => res.json(result))
-            //         .catch(err => next(err));
+            tokenService.insert(loginResult.token, loginResult.user, 1, today, exp)
+                .then(result => result)
+                .catch(err => next(err));
         }
     });
 
     // Logout
     app.post('/api/Users/logout', function (req, res, next) {
 
-        // It doesn't really logout. The token must expire on its own.
-        res.status(200).send({ auth: false, token: null });
+        authService.logout(res)
+            .then(result => tokenExpired(result, req.body.email))
+            .catch(err => next(err));
+
+        function tokenExpired(logoutResult, tokenId) {
+
+            // If the log-out fails
+            if (logoutResult.auth) return;
+
+            service.getById(req.params.id)
+            .then(result => res.json(result))
+            .catch(err => next(err));
+
+            // TODO - Aggiorna solo data scadenza (e prendi in ingresso il token, non l'id su DB)
+            tokenService.deleteById(tokenId)
+                .then(result => result)
+                .catch(err => next(err));
+        }
     });
 
     // Select (admin only)
