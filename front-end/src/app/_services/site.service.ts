@@ -4,10 +4,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/do';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,19 +22,24 @@ export class SiteService {
 
   /* POST: send the site on the server */
   addSite(site: siteType): Observable<siteType> {
-    return this.http.post<siteType>(this.postPutSitesById, site, httpOptions);
+    return this.http.post<siteType>(this.postPutSitesById, site, { headers: this.getHeaders() });
   }
 
   /** PUT: update the site on the server */
-  updateSite (site: siteType): Observable<siteType> {
-    return this.http.put<siteType>(this.postPutSitesById, site, httpOptions);
+  updateSite(site: siteType): Observable<siteType> {
+    return this.http.put<siteType>(this.postPutSitesById, site, { headers: this.getHeaders() });
   }
 
   /** DELETE: delete the site on the server */
-  deleteSite (site: siteType): Observable<any> {
+  deleteSite(site: siteType): Observable<any> {
     const id = site._id;
     const url = `${this.deleteSiteById}/${id}`;
-    return this.http.delete(url, httpOptions);
+    return this.http.delete(url, { headers: this.getHeaders() });
   }
 
+  getHeaders(): HttpHeaders {
+    const currentToken = localStorage.getItem('currentUser');
+    const currentT = JSON.parse(currentToken).token;
+    return new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': currentT });
+  }
 }

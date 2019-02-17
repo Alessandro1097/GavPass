@@ -3,10 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
@@ -16,7 +12,7 @@ export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
     login(email: string, pwd: string): Observable<any> {
-        return this.http.post<any>(this.loginUrl , { email, pwd })
+        return this.http.post<any>(this.loginUrl, { email, pwd })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -26,13 +22,23 @@ export class AuthenticationService {
                 return user;
             }));
     }
+
     logout(): Observable<any> {
         const currentToken = localStorage.getItem('currentUser');
         if (currentToken) {
             const currentT = JSON.parse(currentToken);
-            return this.http.post<any>(this.logoutUrl, currentT.token, httpOptions);
+            return this.http.post<any>(this.logoutUrl, currentT.token, { headers: this.getHeaders() });
         }
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+    }
+
+    getHeaders(): HttpHeaders {
+        const currentToken = localStorage.getItem('currentUser');
+        let currentT = '';
+        if (currentToken) {
+            currentT = JSON.parse(currentToken).token;
+        }
+        return new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': currentT });
     }
 }

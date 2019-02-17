@@ -13,12 +13,10 @@ module.exports = {
 };
 
 async function checkToken(req, res, apiFunction) {
-
-    // HACK - Sempre vero
-    apiFunction(req, res);
-    return;
-
+    
     var token = req.get('Authorization');
+    token = token.replace('Bearer ', '');
+
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
     jwt.verify(token, config.secret, function (err, decoded) {
