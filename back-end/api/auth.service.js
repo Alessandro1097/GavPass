@@ -3,9 +3,6 @@ const config = require('../topSecret/secret.json');
 const jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 
-// Request of the model
-var tokens = require('../models/Token');
-
 module.exports = {
     checkToken,
     login,
@@ -22,7 +19,6 @@ async function checkToken(req, res, apiFunction) {
     jwt.verify(token, config.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-        //res.status(200).send(decoded);
         apiFunction(req, res);
     });
 }
