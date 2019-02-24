@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/do';
 
 const currentToken = localStorage.getItem('currentUser');
-const currentT = JSON.parse(currentToken).token;
+let currentT = '';
+if(currentToken) currentT = JSON.parse(currentToken).token;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': currentT })

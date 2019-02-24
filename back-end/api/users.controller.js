@@ -6,9 +6,6 @@ const tokenService = require('./token.service');
 // Role model
 const Role = require('../models/Role');
 
-// Authentication
-const authorize = require('../_helpers/authorize')
-
 module.exports = function (app) {
 
     // Login
@@ -63,24 +60,15 @@ module.exports = function (app) {
     });
 
     // Select (admin only)
-    app.get('/api/Users', authorize(Role.Admin), function (req, res, next) {
+    app.get('/api/Users', function (req, res, next) {
         service.getAll()
             .then(result => res.json(result))
             .catch(err => next(err));
     });
 
-    // FIXME - Get by ID (all authenticated users)
-    app.get('/api/Users/getById/:id', authorize(), function (req, res, next) {
-
-        const currentUser = req.user;
-        const getId = parseInt(req.params.id);
-
-        console.log
-
-        // Only allow admins to access other user records
-        if (getId !== currentUser.sub && currentUser.role !== Role.Admin) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
+    // Get by ID
+    // FIXME - Send status
+    app.get('/api/Users/getById/:id', function (req, res, next) {
 
         userService.getById(req.params.id)
             .then(result => result ? res.json(result) : res.sendStatus(404))

@@ -6,7 +6,8 @@ import 'rxjs-compat/add/operator/do';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const currentToken = localStorage.getItem('currentUser');
-const currentT = JSON.parse(currentToken).token;
+let currentT = '';
+if(currentToken) currentT = JSON.parse(currentToken).token;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': currentT })
