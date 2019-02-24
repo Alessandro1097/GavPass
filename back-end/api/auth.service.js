@@ -19,6 +19,8 @@ async function checkToken(req, res, apiFunction) {
     jwt.verify(token, config.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
+        // FIXME - Prova user
+        //req.body.user = 
         apiFunction(req, res);
     });
 }

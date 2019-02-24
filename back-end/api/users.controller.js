@@ -3,9 +3,6 @@ const service = require('./user.service');
 const authService = require('./auth.service');
 const tokenService = require('./token.service');
 
-// Role model
-const Role = require('../models/Role');
-
 module.exports = function (app) {
 
     // Login
@@ -49,8 +46,8 @@ module.exports = function (app) {
             if (logoutResult.auth) return;
 
             service.getById(req.params.id)
-            .then(result => res.json(result))
-            .catch(err => next(err));
+                .then(result => res.json(result))
+                .catch(err => next(err));
 
             // TODO - Aggiorna solo data scadenza (e prendi in ingresso il token, non l'id su DB)
             tokenService.deleteById(tokenId)

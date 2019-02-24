@@ -3,12 +3,10 @@ var ObjectId = require('mongoose').Types.ObjectId;
 // Request of the model
 var tokens = require('../models/Token');
 
-// Request of the service
-const tokenService = require('./token.service');
-
 module.exports = {
     getAll,
     getById,
+    getUser,
     insert,
     update,
     deleteById
@@ -30,10 +28,22 @@ async function getById(id) {
     });
 };
 
+// Get User by Token
+async function getUser(req) {
+
+    var token = req.get('Authorization');
+    token = token.replace('Bearer ', '');
+
+    return tokens.findOne({ "token": token }, { _id: 0, user: 1 }, function (err, result, user) {
+        if (err) throw err;
+        return result;
+    });
+};
+
 // Insert
-async function insert(ggtoken, user, state, effectiveDate, expiryDate) {
+async function insert(gtoken, user, state, effectiveDate, expiryDate) {
     var newRec = tokens({
-    token: ggtoken,
+    token: gtoken,
     user: user,
     state: state, // 0-Non valido; 1-Valido; 2-Scaduto
     effectiveDate: new Date(effectiveDate),
