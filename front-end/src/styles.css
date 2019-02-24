@@ -215,12 +215,6 @@ a {
   color: white !important;
 }
 
-.cdk-overlay-pane {
-  top: 50px !important;
-  left: initial;
-  right: -20px !important;
-}
-
 /** MARGIN **/
 
 .mt-0 {
