@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,15 +7,11 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class NavBarComponent implements OnInit {
 
-  mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
   private username;
+  opened: boolean;
+  events: string[] = [];
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-  }
+  constructor() {}
 
   ngOnInit() {
     this.getUsername();
@@ -27,7 +22,6 @@ export class NavBarComponent implements OnInit {
     if (currentToken) {
       const currentT = JSON.parse(currentToken).user;
       this.username = currentT;
-      console.log(this.username);
     }
   }
 }
