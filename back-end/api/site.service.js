@@ -30,7 +30,7 @@ async function getById(id) {
 
 // Get sites by Category
 async function getByCategory(categoryId, user) {
-    
+
     return sites.find({ category: categoryId, user: user }, function (err, result) {
         if (err) throw err;
         return result;

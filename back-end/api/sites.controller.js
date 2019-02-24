@@ -52,6 +52,7 @@ module.exports = function (app) {
     // Save
     app.post('/api/Sites/save', function (req, res, next) {
 
+        // TODO - Si può incapsulare?
         authService.checkToken(req, res, function (req, res) {
 
             tokenService.getUser(req)
