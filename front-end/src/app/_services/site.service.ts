@@ -6,7 +6,9 @@ import 'rxjs-compat/add/operator/do';
 
 const currentToken = localStorage.getItem('currentUser');
 let currentT = '';
-if(currentToken) currentT = JSON.parse(currentToken).token;
+if (currentToken) {
+  currentT = JSON.parse(currentToken).token;
+}
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': currentT })
@@ -22,7 +24,7 @@ export class SiteService {
   private deleteSiteById = 'http://localhost:3000/api/Sites/delete';
   constructor(private http: HttpClient) { }
 
-  /** GET: get the sites from the server */
+  /* GET: get the sites from the server */
   getSites(categoryName: string): Observable<siteType[]> {
     const url = `${this.sitesByCategory}/${categoryName}`;
     return this.http.get<siteType[]>(url);
@@ -33,12 +35,12 @@ export class SiteService {
     return this.http.post<siteType>(this.postPutSitesById, site, httpOptions);
   }
 
-  /** PUT: update the site on the server */
+  /* PUT: update the site on the server */
   updateSite(site: siteType): Observable<siteType> {
     return this.http.put<siteType>(this.postPutSitesById, site, httpOptions);
   }
 
-  /** DELETE: delete the site on the server */
+  /* DELETE: delete the site on the server */
   deleteSite(site: siteType): Observable<any> {
     const id = site._id;
     const url = `${this.deleteSiteById}/${id}`;
