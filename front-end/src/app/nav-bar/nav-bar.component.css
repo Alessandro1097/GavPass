@@ -1,0 +1,24 @@
+.top-bar-login {
+    background-color:#3f51b5;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .menu-placement {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .white-text {
+    color: white;
+    font-size: 17px;
+    margin-left: 10px;
+  }
+  
+  .logo-placement {
+    margin-left: 10px;
+  }
+  
+  .side-width {
+    width: 300px;
+  }
