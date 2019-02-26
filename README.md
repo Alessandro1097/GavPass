@@ -22,7 +22,6 @@ Once you have done that you'll be able to use GavPass.
 # Per Alessandro
 TODO : 
 - cerca che mostra sia siti che categorie
-- login
 
 FIXME:
 - validazione del form modifica sito da correggere e controlli che bloccano il continua in caso di errore 

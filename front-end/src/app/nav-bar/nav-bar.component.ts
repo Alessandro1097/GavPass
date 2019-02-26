@@ -10,11 +10,13 @@ export class NavBarComponent implements OnInit {
   private username;
   opened: boolean;
   events: string[] = [];
+  logged: boolean;
 
   constructor() {}
 
   ngOnInit() {
     this.getUsername();
+    this.checkUserStatus();
   }
 
   getUsername() {
@@ -23,5 +25,10 @@ export class NavBarComponent implements OnInit {
       const currentT = JSON.parse(currentToken).user;
       this.username = currentT;
     }
+  }
+
+  checkUserStatus() {
+    const currentToken = localStorage.getItem('currentUser');
+    currentToken ? this.logged = true : this.logged = false;
   }
 }

@@ -9,7 +9,6 @@ import { SingUpComponent } from './sing-up/sing-up.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 const routes: Routes = [
-  { path: 'card', component: CardComponent},
   { path: 'login', component: LoginComponent },
   { path: 'sing-up', component: SingUpComponent },
   { path: 'notes', component: NoteComponent },

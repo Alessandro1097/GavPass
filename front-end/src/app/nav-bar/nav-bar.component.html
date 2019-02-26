@@ -1,13 +1,13 @@
 <!-- Toolbar -->
-<div>
+<div *ngIf="logged">
   <div class="top-bar-login example-toolbar">
-    <button mat-icon-button (click)="sidenav.toggle()" *ngIf="1" class="menu-placement">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-placement">
       <mat-icon class="white">menu</mat-icon>
     </button>
     <a routerLink="/">
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
     </a>
-    <input type="text" class="search-style" placeholder="Cerca" *ngIf="1" />
+    <input type="text" class="search-style" placeholder="Cerca" />
     <mat-select placeholder="{{username}}" style="width: 300px; margin-top: 20px">
       <mat-option [routerLink]="['/login']" style="text-align: center">
         Logout
@@ -17,12 +17,11 @@
 
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-    (closed)="events.push('close!')" style="z-index:1000000000">
+      (closed)="events.push('close!')" style="z-index:1000000000">
       <mat-nav-list>
         <a mat-list-item routerLink="/">Siti</a>
         <a mat-list-item routerLink="/notes">Note</a>
       </mat-nav-list>
     </mat-sidenav>
-    <router-outlet></router-outlet>
   </mat-sidenav-container>
 </div>
