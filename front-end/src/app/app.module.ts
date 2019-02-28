@@ -18,6 +18,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { SingUpComponent } from './sing-up/sing-up.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     DeleteCategoryComponent,
     LoginComponent,
     SingUpComponent,
-    NavBarComponent
+    NavBarComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

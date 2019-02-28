@@ -1,32 +1,37 @@
 <app-nav-bar></app-nav-bar>
-<h2 class="category-space card-section">My category</h2>
-<div class="card-container">
-  <div *ngFor="let card of cards">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div class="d-flex w-100 content-flex-end">
-          <button mat-icon-button (click)="deleteSite(card._id)">
-            <mat-icon class="white">close</mat-icon>
-          </button>
-        </div>
-      </mat-card-header>
-      <div routerLink="/detail/{{card.name}}" class="card-shape">
-        <div class="title-card center-category">{{card.name}}</div>
+<div style="display: flex">
+  <app-side-bar style="width: 400px;" *ngIf="sideNavService.hideSideNav"></app-side-bar>
+  <div>
+    <h2 class="category-space card-section">My category</h2>
+    <div class="card-container">
+      <div *ngFor="let card of cards">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div class="d-flex w-100 content-flex-end">
+              <button mat-icon-button (click)="deleteSite(card._id)">
+                <mat-icon class="white">close</mat-icon>
+              </button>
+            </div>
+          </mat-card-header>
+          <div routerLink="/detail/{{card.name}}" class="card-shape">
+            <div class="title-card center-category">{{card.name}}</div>
+          </div>
+        </mat-card>
       </div>
-    </mat-card>
+    </div>
+
+    <nav class="container">
+      <a target="_blank" tooltip="Aggiugi sito" class="buttons" (click)="addSite()">
+        <mat-icon class="center-icon-add">description</mat-icon>
+      </a>
+      <a tooltip="Aggiungi categoria" class="buttons" (click)="addCategory()">
+        <mat-icon class="center-icon-add">folder</mat-icon>
+      </a>
+      <a tooltip="Menu" class="buttons">
+        <span>
+          <span class="rotate"></span>
+        </span>
+      </a>
+    </nav>
   </div>
 </div>
-
-<nav class="container">
-  <a target="_blank" tooltip="Aggiugi sito" class="buttons" (click)="addSite()">
-    <mat-icon class="center-icon-add">description</mat-icon>
-  </a>
-  <a tooltip="Aggiungi categoria" class="buttons" (click)="addCategory()">
-    <mat-icon class="center-icon-add">folder</mat-icon>
-  </a>
-  <a tooltip="Menu" class="buttons">
-    <span>
-      <span class="rotate"></span>
-    </span>
-  </a>
-</nav>

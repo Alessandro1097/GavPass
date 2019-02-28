@@ -1,27 +1,30 @@
 <app-nav-bar></app-nav-bar>
-<div *ngIf="card" class="card-section">
-  <div class="d-flex">
-    <a routerLink="/">
-      <button mat-icon-button class="button-back cursor-pointer">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-    </a>
-    <h2 class="mt-8">Category: {{rightCategory}}</h2>
-  </div>
-  <mat-list>
-    <h3 mat-subheader>Sites</h3>
-    <mat-divider></mat-divider>
-    <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites">
-      <!-- FIXME: there must be just one function that trigger the modal -->
-      <mat-icon mat-list-icon (click)="modifySiteInside(rightCategory, card._id, siteAttributes)">folder</mat-icon>
-      <h4 mat-line (click)="modifySiteInside(rightCategory, card._id, siteAttributes)">{{siteAttributes.name}}</h4>
-      <button mat-icon-button (click)="openModalDelete(siteAttributes._id)">
-        <mat-icon>delete</mat-icon>
-      </button>
+<div style="display: flex">
+  <app-side-bar style="width: 200px;" *ngIf="sideNavService.hideSideNav"></app-side-bar>
+  <div class="card-section" style="width: 100%">
+    <div class="d-flex">
+      <a routerLink="/">
+        <button mat-icon-button class="button-back cursor-pointer">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </a>
+      <h2 class="mt-8">Category: {{rightCategory}}</h2>
+    </div>
+    <mat-list>
+      <h3 mat-subheader>Sites</h3>
       <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>
-  <button mat-fab class="float" (click)="addSiteInside(rightCategory, card._id)">
-    <mat-icon>add</mat-icon>
-  </button>
+      <mat-list-item class="attributes-card" *ngFor="let siteAttributes of sites">
+        <!-- FIXME: there must be just one function that trigger the modal -->
+        <mat-icon mat-list-icon (click)="modifySiteInside(rightCategory, card._id, siteAttributes)">folder</mat-icon>
+        <h4 mat-line (click)="modifySiteInside(rightCategory, card._id, siteAttributes)">{{siteAttributes.name}}</h4>
+        <button mat-icon-button (click)="openModalDelete(siteAttributes._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+    <button mat-fab class="float" (click)="addSiteInside(rightCategory, card._id)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
