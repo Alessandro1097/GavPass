@@ -46,6 +46,7 @@ export class SingUpComponent implements OnInit {
     const role = 'user';
 
     this.userService.createUser({ email, pwd, phone, role} as User).subscribe(user => user);
+    this.router.navigate([`/login`]);
   }
 
 }
