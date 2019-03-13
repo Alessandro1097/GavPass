@@ -19,6 +19,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { SingUpComponent } from './sing-up/sing-up.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { NotFound404Component } from './not-found404/not-found404.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     LoginComponent,
     SingUpComponent,
     NavBarComponent,
-    SideBarComponent
+    SideBarComponent,
+    NotFound404Component
   ],
   imports: [
     BrowserModule,

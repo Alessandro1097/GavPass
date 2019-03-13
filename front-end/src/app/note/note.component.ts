@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {cardType} from '../type-card-container';
+import {SidenavService} from '../_services/sidenav.service';
 
 @Component({
   selector: 'app-note',
@@ -8,7 +9,9 @@ import {cardType} from '../type-card-container';
 })
 export class NoteComponent implements OnInit {
   @Input() card: cardType;
-  constructor() { }
+  constructor(
+    public sideNavService: SidenavService,
+  ) { }
 
   ngOnInit() {
   }

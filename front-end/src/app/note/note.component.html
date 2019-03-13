@@ -1,13 +1,17 @@
-<div class="card-section">
-  <h2>My note</h2>
-  <mat-list>
-    <h3 mat-subheader>Notes</h3>
-    <mat-divider></mat-divider>
-    <mat-list-item class="attributes-card">
-      <mat-icon mat-list-icon>note</mat-icon>
-      <h4 mat-line>
-      </h4>
+<app-nav-bar></app-nav-bar>
+<div style="display: flex">
+  <app-side-bar style="width: 400px;" *ngIf="sideNavService.hideSideNav" class="sidebar-color"></app-side-bar>
+  <div class="card-section" style="width: 100%">
+    <h2>My note</h2>
+    <mat-list>
+      <h3 mat-subheader>Notes</h3>
       <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>
+      <mat-list-item class="attributes-card">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <h4 mat-line>
+        </h4>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>

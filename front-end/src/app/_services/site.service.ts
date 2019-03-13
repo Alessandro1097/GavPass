@@ -27,7 +27,7 @@ export class SiteService {
   /* GET: get the sites from the server */
   getSites(categoryName: string): Observable<siteType[]> {
     const url = `${this.sitesByCategory}/${categoryName}`;
-    return this.http.get<siteType[]>(url);
+    return this.http.get<siteType[]>(url, httpOptions);
   }
 
   /* POST: send the site on the server */

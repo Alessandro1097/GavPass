@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidenavService } from '../_services/sidenav.service';
+import {Component, OnInit} from '@angular/core';
+import {SidenavService} from '../_services/sidenav.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,9 +8,7 @@ import { SidenavService } from '../_services/sidenav.service';
 })
 export class NavBarComponent implements OnInit {
 
-  private username;
-  opened: boolean;
-  events: string[] = [];
+  public username;
   logged: boolean;
 
   constructor(
@@ -24,8 +22,7 @@ export class NavBarComponent implements OnInit {
   getUsername() {
     const currentToken = localStorage.getItem('currentUser');
     if (currentToken) {
-      const currentT = JSON.parse(currentToken).user;
-      this.username = currentT;
+      this.username = JSON.parse(currentToken).user;
       this.logged = true;
     } else {
       this.logged = false;

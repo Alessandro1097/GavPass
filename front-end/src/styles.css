@@ -157,7 +157,7 @@ a {
 
 .card-section {
   background-color: #fafafa;
-  padding: 30px 130px 30px 130px;
+  padding: 30px 20px 30px 20px;
 }
 
 .green-snackbar {
@@ -241,4 +241,8 @@ a {
 
 .white {
   color: white;
+}
+
+.sidebar-color {
+  background-color: #F5F5F5;
 }

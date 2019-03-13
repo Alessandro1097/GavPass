@@ -5,19 +5,19 @@
   </button>
 </div>
 <div class="padding-modal position-relative">
-  <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+  <form (ngSubmit)="onSubmit()">
     <mat-form-field class="form-url">
-      <input matInput #input placeholder="URL:" [value]="data.attributes.url" [formControl]="url" required>
+      <input matInput placeholder="URL:" [value]="data.attributes.url" [formControl]="url" required>
       <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <div class="user-container">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome:" [value]="data.attributes.name" [formControl]="name" required>
+        <input matInput placeholder="Nome:" [value]="data.attributes.name" [formControl]="name" required>
         <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()"
+        <input matInput placeholder="Scegli categoria:" [value]="data.currentCategory" (click)="setCategory()"
           *ngIf="!categoryShow" required>
         <mat-select class="category-style" *ngIf="categoryShow" placeholder="Scegli categoria:" [formControl]="category"
           required>
@@ -31,19 +31,19 @@
 
     <div class="site-section">
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Nome utente:" [value]="data.attributes.username" [formControl]="username"
+        <input matInput placeholder="Nome utente:" [value]="data.attributes.username" [formControl]="username"
           required>
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="name-width">
-        <input matInput #input placeholder="Password:" type="password" [value]="data.attributes.pwd" [formControl]="password"
+        <input matInput placeholder="Password:" type="password" [value]="data.attributes.pwd" [formControl]="password"
           [type]="hide ? 'password' : 'text'" required>
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field class="note-section">
-      <textarea matInput placeholder="Note" #inputNote [formControl]="note" [value]="data.attributes.note"></textarea>
+      <textarea matInput placeholder="Note" [formControl]="note" [value]="data.attributes.note"></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
   </form>
