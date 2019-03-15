@@ -9,6 +9,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {siteType} from '../type-site';
 import {MatSnackBar} from '@angular/material';
 import { SidenavService } from '../_services/sidenav.service';
+import { trigger, transition, state, animate, style, AnimationEvent } from '@angular/animations';
 
 @Component({
   selector: 'app-card',
@@ -57,7 +58,7 @@ export class CardComponent implements OnInit {
         name: this.cardsName
       }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
     });
   }
 
@@ -68,7 +69,7 @@ export class CardComponent implements OnInit {
         currentCategoryId: currentCategoryId
       }
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getCards();
     });
   }
@@ -124,7 +125,8 @@ export class AddSiteComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = 'fissoDaFrontEnd@tuttomail.com';
+    const currentToken = localStorage.getItem('currentUser');
+    const user = JSON.parse(currentToken).user;
     const url = this.url.value.trim();
     const name = this.name.value.trim();
     const category = this.category.value.trim();
@@ -138,8 +140,7 @@ export class AddSiteComponent implements OnInit {
         selectedCategory = this.cards[index].name;
       }
     }
-    const urlToGo = `/detail/${selectedCategory}`;
-    this.router.navigate([urlToGo]);
+    this.router.navigate([`/detail/${selectedCategory}`]);
     this.openSnackSuccess(selectedCategory);
   }
 

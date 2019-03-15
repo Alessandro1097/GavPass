@@ -157,7 +157,8 @@ export class ModifySiteInsideComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const user = 'fissoDaFrontEnd@tuttomail.com';
+    const currentToken = localStorage.getItem('currentUser');
+    const user = JSON.parse(currentToken).user;
     const url = this.url.value.trim() === '' ? this.data.attributes.url : this.url.value.trim();
     const name = this.name.value.trim() === '' ? this.data.attributes.name : this.name.value.trim();
     let category = this.category.value.trim();
@@ -248,7 +249,8 @@ export class AddSiteInsideComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = 'fissoDaFrontEnd@tuttomail.com';
+    const currentToken = localStorage.getItem('currentUser');
+    const user = JSON.parse(currentToken).user;
     const url = this.url.value.trim();
     const name = this.name.value.trim();
     let category = this.category.value.trim();
