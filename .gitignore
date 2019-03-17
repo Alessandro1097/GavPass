@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# back-end configuration
+/back-end/config
+
 # compiled output
 /dist
 /tmp

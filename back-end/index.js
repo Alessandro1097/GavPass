@@ -23,7 +23,7 @@ var dbConnection = require('./config/dbConnection');
 mongoose.connect(dbConnection.getDbConnectionString());
 
 // Run the API
-var apiController = require('./api/ApiController');
+var apiController = require('./api/apiController');
 apiController(app);
 
 // Run the app on the port
