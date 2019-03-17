@@ -1,6 +1,7 @@
 // Request of the service
 const service = require('./user.service');
 const authService = require('./auth.service');
+const categoryService = require('./category.service');
 const tokenService = require('./token.service');
 
 module.exports = function (app) {
@@ -82,8 +83,15 @@ module.exports = function (app) {
         } else {
             // Insert
             service.insert(req.body.email, req.body.pwd, req.body.phone, req.body.role)
+                .then(result => insertSuccessful(req.body.email, res))
+                .catch(err => next(err));
+        }
+
+        function insertSuccessful(user, res) {
+            categoryService.insertDefaultCategories(user)
                 .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
+            ;
         }
     });
 

@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 const secretConfig = require('../config/secret.json');
+const tokenService = require('./token.service');
 
 module.exports = {
     checkToken,
@@ -19,7 +20,9 @@ async function checkToken(req, res, apiFunction) {
     jwt.verify(token, secretConfig.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-        apiFunction(req, res);
+        tokenService.getUser(req)
+            .then(result => apiFunction(result.user, req, res))
+            .catch(err => next(err));
     });
 }
 

@@ -11,28 +11,32 @@ module.exports = {
     getNameId,
     insert,
     update,
+    insertDefaultCategories,
     deleteById
 };
 
 // Select
-async function getAll() {
-    return categories.find({}, function (err, result) {
+async function getAll(user) {
+    // TODO - Ordina per nome
+    return categories.find({ user: user }, function (err, result) {
         if (err) throw err;
         return result;
     });
 };
 
 // Get Name
-async function getName() {
-    return categories.find({}, { _id: 0, name: 1 }, function (err, result) {
+async function getName(user) {
+    // TODO - Ordina per nome
+    return categories.find({ user: user }, { _id: 0, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
     });
 };
 
 // Get Name & Id
-async function getNameId() {
-    return categories.find({}, { _id: 1, name: 1 }, function (err, result) {
+async function getNameId(user) {
+    // TODO - Ordina per nome
+    return categories.find({ user: user }, { _id: 1, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -47,8 +51,8 @@ async function getById(id) {
 };
 
 // Get by Name
-async function getByName(name) {
-    return categories.findOne({ name: name }, function (err, result) {
+async function getByName(name, user) {
+    return categories.findOne({ name: name, user: user }, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -74,6 +78,37 @@ async function update(id, name) {
     }, function (err, result) {
         if (err) throw err;
         return result;
+    });
+};
+
+// Insert default categories
+async function insertDefaultCategories(user) {
+
+    var defaultCategories = [
+        {
+            name: "Business",
+            user: user
+        },
+        {
+            name: "Education",
+            user: user
+        },
+        {
+            name: "Entertainment",
+            user: user
+        },
+        {
+            name: "Shopping",
+            user: user
+        },
+        {
+            name: "Social",
+            user: user
+        }
+    ];
+
+    categories.create(defaultCategories, function (err, results) {
+        if (err) throw err;
     });
 };
 
