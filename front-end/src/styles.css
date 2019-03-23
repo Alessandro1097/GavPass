@@ -221,6 +221,11 @@ a {
   margin-top: 0 !important;
 }
 
+.m-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .mt-8 {
   margin-top: 8px !important;
 }
@@ -243,6 +248,7 @@ a {
   color: white;
 }
 
-.sidebar-color {
-  background-color: #F5F5F5;
+.sidebar {
+  background-color: white;
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 }

@@ -1,4 +1,42 @@
-<mat-nav-list>
-  <a mat-list-item routerLink="/">Siti</a>
-  <a mat-list-item routerLink="/notes">Note</a>
-</mat-nav-list>
+<div class="container-personal-info">
+  <h3 class="name m-0">Alessandro Cavuoti</h3>
+  <h4 class="email m-0">alessandro.cavuoti@db.com</h4>
+</div>
+<div>
+  <button mat-button routerLink="/">
+    <div class="iconContainer">
+      <mat-icon class="iconS">category</mat-icon>
+      <div>
+        <span class="buttonDesc">Category</span>
+      </div>
+    </div>
+  </button>
+  <br>
+  <button mat-button routerLink="/notes">
+    <div class="iconContainer">
+      <mat-icon class="iconS">description</mat-icon>
+      <div>
+        <span class="buttonDesc">Note</span>
+      </div>
+    </div>
+  </button>
+  <mat-divider></mat-divider>
+  <mat-card-subtitle style="color: rgba(0,0,0,0.54); padding: 16px 0 0 16px">Management</mat-card-subtitle>
+  <button mat-button routerLink="#">
+    <div class="iconContainer">
+      <mat-icon class="iconS">delete</mat-icon>
+      <div>
+        <span class="buttonDesc">Trash</span>
+      </div>
+    </div>
+  </button>
+  <br>
+  <button mat-button routerLink="#">
+    <div class="iconContainer">
+      <mat-icon class="iconS">settings</mat-icon>
+      <div>
+        <span class="buttonDesc">Settings</span>
+      </div>
+    </div>
+  </button>
+</div>

@@ -14,7 +14,20 @@ import { trigger, transition, state, animate, style, AnimationEvent } from '@ang
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  animations: [
+    trigger('childAnimation', [
+      state('open', style({
+        width: '400px',
+      })),
+      state('closed', style({
+        display: 'none',
+      })),
+      transition('* => *', [
+        animate('1s')
+      ]),
+    ]),
+  ],
 })
 export class CardComponent implements OnInit {
 
