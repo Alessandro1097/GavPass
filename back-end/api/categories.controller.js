@@ -6,8 +6,8 @@ module.exports = function (app) {
 
     // Select
     app.get('/api/Categories', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
-            service.getAll()
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
+            service.getAll(verifiedUser)
                 .then(result => res.json(result))
                 .catch(err => next(err));
         });
@@ -15,8 +15,8 @@ module.exports = function (app) {
 
     // Get Name & Id
     app.get('/api/Categories/name', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
-            service.getNameId()
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
+            service.getNameId(verifiedUser)
                 .then(result => res.json(result))
                 .catch(err => next(err));
         });
@@ -24,7 +24,7 @@ module.exports = function (app) {
 
     // Get by ID
     app.get('/api/Categories/getById/:id', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
             service.getById(req.params.id)
                 .then(result => res.json(result))
                 .catch(err => next(err));
@@ -33,8 +33,8 @@ module.exports = function (app) {
 
     // Get by Name
     app.get('/api/Categories/getByName/:name', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
-            service.getByName(req.params.name)
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
+            service.getByName(req.params.name, verifiedUser)
                 .then(result => res.json(result))
                 .catch(err => next(err));
         });
@@ -42,7 +42,7 @@ module.exports = function (app) {
 
     // Save
     app.post('/api/Categories/save', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
             if (req.body._id) {
                 // Update
                 service.update(req.body._id, req.body.name)
@@ -50,7 +50,7 @@ module.exports = function (app) {
                     .catch(err => next(err));
             } else {
                 // Insert
-                service.insert(req.body.name, "master")
+                service.insert(req.body.name, verifiedUser)
                     .then(res.json({ message: '1 document inserted' }))
                     .catch(err => next(err));
             }
@@ -59,7 +59,8 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/Categories/delete/:id', function (req, res, next) {
-        authService.checkToken(req, res, function (req, res) {
+        // TODO - Cancella tutti i suoi siti
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
             service.deleteById(req.params.id)
                 .then(res.json({ message: '1 document deleted' }))
                 .catch(err => next(err));

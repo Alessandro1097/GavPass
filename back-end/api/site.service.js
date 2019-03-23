@@ -13,8 +13,9 @@ module.exports = {
 };
 
 // Select
-async function getAll() {
-    return sites.find({}, function (err, result) {
+async function getAll(user) {
+    // TODO - Ordina per nome
+    return sites.find({ user: user }, function (err, result) {
         if (err) throw err;
         return result;
     });
@@ -30,7 +31,6 @@ async function getById(id) {
 
 // Get sites by Category
 async function getByCategory(categoryId, user) {
-
     return sites.find({ category: categoryId, user: user }, function (err, result) {
         if (err) throw err;
         return result;

@@ -15,7 +15,7 @@ app.use(cors());
 app.options('*', cors());
 app.set('view engine', 'ejs');
 
-// Global error handler
+// FIXME - Global error handler
 app.use(errorHandler);
 
 // Connect to MongoDB using Mongoose
@@ -23,12 +23,12 @@ var dbConnection = require('./config/dbConnection');
 mongoose.connect(dbConnection.getDbConnectionString());
 
 // Run the API
-var apiController = require('./api/ApiController');
+var apiController = require('./api/apiController');
 apiController(app);
 
 // Run the app on the port
 var port = process.env.PORT || 3000;
 
-const server = app.listen(port, function () {
+app.listen(port, function () {
     console.log('Back-end server listening on port ' + port);
 });
