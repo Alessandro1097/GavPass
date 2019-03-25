@@ -26,6 +26,10 @@ mongoose.connect(dbConnection.getDbConnectionString());
 var apiController = require('./api/apiController');
 apiController(app);
 
+// Run the documentation API
+var documentationController = require('./documentation/documentationController');
+documentationController(app);
+
 // Run the app on the port
 var port = process.env.PORT || 3000;
 
