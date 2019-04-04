@@ -39,6 +39,9 @@ button {
 
 .iconS {
   margin: 5px 30px 0 0;
+}
+
+.icon-color {
   color: #737373;
 }
 
@@ -47,4 +50,25 @@ button {
   font-weight: 500;
   letter-spacing: .01em;
   line-height: 24px;
+}
+
+/** New sidebar **/
+
+.example-sidenav-content {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  background-color: whitesmoke;
+}
+.active{
+  background-color:rgba(9, 30, 66, 0.25);
+}
+
+
+md-icon{
+  color: white;
 }

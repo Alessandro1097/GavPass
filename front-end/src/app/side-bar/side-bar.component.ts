@@ -8,11 +8,12 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class SideBarComponent implements OnInit {
   options: FormGroup;
+  sidenavWidth = 70;
 
   constructor(fb: FormBuilder) {
     this.options = fb.group({
       bottom: 0,
-      fixed: false,
+      fixed: true,
       top: 0
     });
   }
@@ -20,4 +21,11 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  increase() {
+    this.sidenavWidth = 300;
+  }
+  decrease() {
+    this.sidenavWidth = 70;
+    console.log('decrease sidenav width');
+  }
 }

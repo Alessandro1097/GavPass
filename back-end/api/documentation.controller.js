@@ -12,13 +12,9 @@ module.exports = function (app) {
     var baseUrl = 'http://localhost:3000';
 
     var tables = '';
-    var APIs = '';
-    var newTable = '';
-    var newApi = '';
 
     newTable = table.replace('{Entity}', "Categories");
-    APIs = ''
-
+    APIs = '';
     newApi = api;
     newApi = newApi.replace('{Description}', "Get all");
     newApi = newApi.replace('{Url}', baseUrl + "/api/Categories");

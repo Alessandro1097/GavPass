@@ -1,42 +1,41 @@
-<div class="container-personal-info">
-  <h3 class="name m-0">Alessandro Cavuoti</h3>
-  <h4 class="email m-0">alessandro.cavuoti@db.com</h4>
-</div>
-<div>
-  <button mat-button routerLink="/">
-    <div class="iconContainer">
-      <mat-icon class="iconS">category</mat-icon>
-      <div>
-        <span class="buttonDesc">Category</span>
+<mat-sidenav mode="side" class="example-sidenav" [style.width.px]=sidenavWidth opened="true" (mouseenter)="increase()"
+             (mouseleave)="decrease()" style="height: 100%; position: fixed; z-index: 1;">
+  <div>
+    <button mat-button routerLink="/">
+      <div class="iconContainer">
+        <mat-icon class="icon-color" [ngClass]="{iconS: sidenavWidth > 40}">category</mat-icon>
+        <div *ngIf="sidenavWidth > 80">
+          <span class="buttonDesc">Category</span>
+        </div>
       </div>
-    </div>
-  </button>
-  <br>
-  <button mat-button routerLink="/notes">
-    <div class="iconContainer">
-      <mat-icon class="iconS">description</mat-icon>
-      <div>
-        <span class="buttonDesc">Note</span>
+    </button>
+    <br>
+    <button mat-button routerLink="/notes">
+      <div class="iconContainer">
+        <mat-icon class="icon-color" [ngClass]="{iconS: sidenavWidth > 40}">description</mat-icon>
+        <div *ngIf="sidenavWidth > 80">
+          <span class="buttonDesc">Note</span>
+        </div>
       </div>
-    </div>
-  </button>
-  <mat-divider></mat-divider>
-  <mat-card-subtitle style="color: rgba(0,0,0,0.54); padding: 16px 0 0 16px">Management</mat-card-subtitle>
-  <button mat-button routerLink="#">
-    <div class="iconContainer">
-      <mat-icon class="iconS">delete</mat-icon>
-      <div>
-        <span class="buttonDesc">Trash</span>
+    </button>
+    <mat-divider></mat-divider>
+    <mat-card-subtitle style="color: rgba(0,0,0,0.54); padding: 16px 0 0 16px" *ngIf="sidenavWidth > 80">Management</mat-card-subtitle>
+    <button mat-button routerLink="#">
+      <div class="iconContainer">
+        <mat-icon class="icon-color" [ngClass]="{iconS: sidenavWidth > 40}">delete</mat-icon>
+        <div *ngIf="sidenavWidth > 80">
+          <span class="buttonDesc">Trash</span>
+        </div>
       </div>
-    </div>
-  </button>
-  <br>
-  <button mat-button routerLink="#">
-    <div class="iconContainer">
-      <mat-icon class="iconS">settings</mat-icon>
-      <div>
-        <span class="buttonDesc">Settings</span>
+    </button>
+    <br>
+    <button mat-button routerLink="#">
+      <div class="iconContainer">
+        <mat-icon class="icon-color" [ngClass]="{iconS: sidenavWidth > 40}">settings</mat-icon>
+        <div *ngIf="sidenavWidth > 80">
+          <span class="buttonDesc">Settings</span>
+        </div>
       </div>
-    </div>
-  </button>
-</div>
+    </button>
+  </div>
+</mat-sidenav>

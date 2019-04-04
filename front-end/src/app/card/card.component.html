@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div style="display: flex">
   <app-side-bar *ngIf="sideNavService.hideSideNav" class="sidebar"></app-side-bar>
-  <div>
+  <div style="margin-left: 80px">
     <h2 class="category-space card-section">My category</h2>
     <div class="card-container">
       <div *ngFor="let card of cards">
