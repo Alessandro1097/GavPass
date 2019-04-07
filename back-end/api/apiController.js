@@ -5,12 +5,18 @@ module.exports = function (app) {
     Documentation(app);
 
     // APIs
-    var Categories = require('./categories.controller');
-    Categories(app);
+    var users = require('./users.controller');
+    users(app);
 
-    var Users = require('./users.controller');
-    Users(app);
+    var categories = require('./categories.controller');
+    categories(app);
 
-    var Sites = require('./sites.controller');
-    Sites(app);
+    var sites = require('./sites.controller');
+    sites(app);
+
+    var noteCategories = require('./noteCategories.controller');
+    noteCategories(app);
+
+    var notes = require('./notes.controller');
+    notes(app);
 };
