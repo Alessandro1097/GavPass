@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div style="display: flex">
   <app-side-bar *ngIf="sideNavService.hideSideNav" class="sidebar"></app-side-bar>
-  <div class="card-section" style="width: 100%">
+  <div [style.marginLeft.px]=sideBarService.sidebarWidth class="card-section" style="width: 100%">
     <div class="d-flex">
       <a routerLink="/">
         <button mat-icon-button class="button-back cursor-pointer">

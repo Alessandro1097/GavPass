@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { SidenavService } from '../_services/sidenav.service';
+import { SidebarService } from '../_services/sidebar.service';
 
 @Component({
   selector: 'app-card-detail',
@@ -29,9 +30,9 @@ export class CardDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private cardService: CardService,
     private siteService: SiteService,
-    private location: Location,
     public dialog: MatDialog,
     public sideNavService: SidenavService,
+    public sideBarService: SidebarService
   ) { }
 
   ngOnInit() {

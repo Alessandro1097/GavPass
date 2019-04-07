@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { SidebarService } from '../_services/sidebar.service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent {
   options: FormGroup;
   sidenavWidth = 70;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder,
+    public sidebarService: SidebarService
+    ) {
     this.options = fb.group({
       bottom: 0,
       fixed: true,
@@ -18,14 +21,10 @@ export class SideBarComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   increase() {
     this.sidenavWidth = 300;
   }
   decrease() {
     this.sidenavWidth = 70;
-    console.log('decrease sidenav width');
   }
 }

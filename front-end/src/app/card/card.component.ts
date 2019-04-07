@@ -1,3 +1,4 @@
+import { SidebarService } from './../_services/sidebar.service';
 import {Router} from '@angular/router';
 import {SiteService} from '../_services/site.service';
 import {CardService} from '../_services/card.service';
@@ -9,25 +10,11 @@ import {FormControl, Validators} from '@angular/forms';
 import {siteType} from '../type-site';
 import {MatSnackBar} from '@angular/material';
 import { SidenavService } from '../_services/sidenav.service';
-import { trigger, transition, state, animate, style, AnimationEvent } from '@angular/animations';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
-  animations: [
-    trigger('childAnimation', [
-      state('open', style({
-        width: '400px',
-      })),
-      state('closed', style({
-        display: 'none',
-      })),
-      transition('* => *', [
-        animate('1s')
-      ]),
-    ]),
-  ],
 })
 export class CardComponent implements OnInit {
 
@@ -35,6 +22,7 @@ export class CardComponent implements OnInit {
     private cardService: CardService,
     public dialog: MatDialog,
     public sideNavService: SidenavService,
+    public sideBarService: SidebarService
   ) {
   }
 
@@ -213,7 +201,6 @@ export class DeleteCategoryComponent {
   constructor(
     public dialogRef: MatDialogRef<DeleteCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private siteService: SiteService,
     private cardService: CardService,
     private snackBar: MatSnackBar
   ) {
