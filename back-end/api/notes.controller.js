@@ -8,7 +8,7 @@ module.exports = function (app) {
     // Select
     app.get('/api/Notes', function (req, res, next) {
         authService.checkToken(req, res, function (verifiedUser, req, res) {
-            service.getAll()
+            service.getAll(verifiedUser)
                 .then(result => res.json(result))
                 .catch(err => next(err));
         });
