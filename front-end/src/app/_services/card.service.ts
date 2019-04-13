@@ -3,7 +3,6 @@ import { cardType } from '../type-card-container';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs-compat/add/operator/do';
-import { catchError, map, tap } from 'rxjs/operators';
 
 const currentToken = localStorage.getItem('currentUser');
 let currentT = '';
