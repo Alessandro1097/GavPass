@@ -14,7 +14,7 @@ import { noteType } from '../_services/note-type';
 export class NoteComponent implements OnInit {
 
   note: noteType[];
-  noteCategoies: noteTypeCategories[];
+  noteCategories: noteTypeCategories[];
   noteNames: noteTypeCategories[];
 
   constructor(
@@ -29,19 +29,19 @@ export class NoteComponent implements OnInit {
     this.getNotesCategories();
   }
 
-  getNotesCategories(): void {
+  getNotes(): void {
     this.noteService.getNote().subscribe(notes => this.note = notes);
   }
 
-  getNotes(): void {
-    this.noteService.getCategoryNoteList().subscribe(noteCategoies => this.noteCategoies = noteCategoies);
+  getNotesCategories(): void {
+    this.noteService.getCategoryNoteList().subscribe(noteCategories => this.noteCategories = noteCategories);
   }
 
   getNotesName(): void {
     this.noteService.getNoteName().subscribe(noteName => this.noteNames = noteName);
   }
 
-  get datae() { return JSON.stringify(this.noteCategoies); }
+  get datae() { return JSON.stringify(this.noteCategories); }
   get data() { return JSON.stringify(this.noteNames); }
   get piru() { return JSON.stringify(this.note); }
 }
