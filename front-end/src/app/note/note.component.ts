@@ -6,8 +6,9 @@ import {SidenavService} from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../_services/note-type';
 import {AddSiteComponent} from '../card/card.component';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import { DialogData } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note',
@@ -66,8 +67,8 @@ export class AddNoteComponent {
   constructor(
     public dialogRef: MatDialogRef<AddNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private cardService: CardService,
-    private siteService: SiteService,
+    // private cardService: CardService,
+    // private siteService: SiteService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -86,7 +87,7 @@ export class AddNoteComponent {
   }
 
   onSubmit() {
-    const currentToken = localStorage.getItem('currentUser');
+    /** const currentToken = localStorage.getItem('currentUser');
     const user = JSON.parse(currentToken).user;
     const url = this.url.value.trim();
     const name = this.name.value.trim();
@@ -102,11 +103,11 @@ export class AddNoteComponent {
       }
     }
     this.router.navigate([`/detail/${selectedCategory}`]);
-    this.openSnackSuccess(selectedCategory);
+    this.openSnackSuccess(selectedCategory);*/
   }
 
   getErrorMessage() {
-    return this.url.hasError('required') ? 'You must enter a value' :
-      this.url.hasError('email') ? 'Not a valid email' : '';
+    /** return this.url.hasError('required') ? 'You must enter a value' :
+      this.url.hasError('email') ? 'Not a valid email' : '';*/
   }
 }
