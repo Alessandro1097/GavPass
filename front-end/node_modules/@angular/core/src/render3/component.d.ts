@@ -8,15 +8,18 @@
 import { Type } from '../core';
 import { Injector } from '../di/injector';
 import { Sanitizer } from '../sanitization/security';
-import { ComponentDef, ComponentDefInternal, ComponentType } from './interfaces/definition';
-import { RElement, RendererFactory3 } from './interfaces/renderer';
-import { RootContext } from './interfaces/view';
+import { ComponentDef, ComponentType } from './interfaces/definition';
+import { PlayerHandler } from './interfaces/player';
+import { RElement, RNode, Renderer3, RendererFactory3 } from './interfaces/renderer';
+import { LViewData, RootContext } from './interfaces/view';
 /** Options that control how the component should be bootstrapped. */
 export interface CreateComponentOptions {
     /** Which renderer factory to use. */
     rendererFactory?: RendererFactory3;
     /** A custom sanitizer instance */
     sanitizer?: Sanitizer;
+    /** A custom animation player handler */
+    playerHandler?: PlayerHandler;
     /**
      * Host element on which the component will be bootstrapped. If not specified,
      * the component definition's `tag` is used to query the existing DOM for the
@@ -37,7 +40,7 @@ export interface CreateComponentOptions {
      * features list because there's no way of knowing when the component will be used as
      * a root component.
      */
-    hostFeatures?: (<T>(component: T, componentDef: ComponentDef<T, string>) => void)[];
+    hostFeatures?: HostFeature[];
     /**
      * A function which is used to schedule change detection work in the future.
      *
@@ -51,6 +54,8 @@ export interface CreateComponentOptions {
      */
     scheduler?: (work: () => void) => void;
 }
+/** See CreateComponentOptions.hostFeatures */
+declare type HostFeature = (<T>(component: T, componentDef: ComponentDef<T>) => void);
 export declare const NULL_INJECTOR: Injector;
 /**
  * Bootstraps a Component into an existing host element and returns an instance
@@ -66,7 +71,24 @@ export declare const NULL_INJECTOR: Injector;
  * @param options Optional parameters which control bootstrapping
  */
 export declare function renderComponent<T>(componentType: ComponentType<T> | Type<T>, opts?: CreateComponentOptions): T;
-export declare function createRootContext(scheduler: (workFn: () => void) => void): RootContext;
+/**
+ * Creates the root component view and the root component node.
+ *
+ * @param rNode Render host element.
+ * @param def ComponentDef
+ * @param rootView The parent view where the host node is stored
+ * @param renderer The current renderer
+ * @param sanitizer The sanitizer, if provided
+ *
+ * @returns Component view created
+ */
+export declare function createRootComponentView(rNode: RElement | null, def: ComponentDef<any>, rootView: LViewData, renderer: Renderer3, sanitizer?: Sanitizer | null): LViewData;
+/**
+ * Creates a root component and sets it up with features and host bindings. Shared by
+ * renderComponent() and ViewContainerRef.createComponent().
+ */
+export declare function createRootComponent<T>(hostRNode: RNode | null, componentView: LViewData, componentDef: ComponentDef<T>, rootView: LViewData, rootContext: RootContext, hostFeatures: HostFeature[] | null): any;
+export declare function createRootContext(scheduler: (workFn: () => void) => void, playerHandler?: PlayerHandler | null): RootContext;
 /**
  * Used to enable lifecycle hooks on the root component.
  *
@@ -80,7 +102,7 @@ export declare function createRootContext(scheduler: (workFn: () => void) => voi
  * renderComponent(AppComponent, {features: [RootLifecycleHooks]});
  * ```
  */
-export declare function LifecycleHooksFeature(component: any, def: ComponentDefInternal<any>): void;
+export declare function LifecycleHooksFeature(component: any, def: ComponentDef<any>): void;
 /**
  * Retrieve the host element of the component.
  *
@@ -118,3 +140,4 @@ export declare function getRenderedText(component: any): string;
  * @returns Promise which resolves when the component is rendered.
  */
 export declare function whenRendered(component: any): Promise<null>;
+export {};
