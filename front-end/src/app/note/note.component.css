@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=UnifrakturMaguntia);
+
 .float {
   position:fixed;
   width:60px;
@@ -11,4 +13,18 @@
 .attributes-card {
   background-color: white;
   cursor: pointer;
+}
+
+
+/*note css*/
+
+.sticky {
+  margin-top: 30px;
+  padding: 2em;
+  background: #EE9;
+  display: inline-block;
+  height: 15em;
+  width: 15em;
+  box-shadow: 0.2em 0.3em 0.5em #757513;
+  font-size: 15px
 }
