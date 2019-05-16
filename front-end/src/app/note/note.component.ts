@@ -60,6 +60,11 @@ export class NoteComponent implements OnInit {
   }
 }
 
+@Component({
+  selector: './app-add-note',
+  templateUrl: './add-note.component.html',
+})
+
 export class AddNoteComponent {
   @Input() card: cardType;
   notes: noteType[];
