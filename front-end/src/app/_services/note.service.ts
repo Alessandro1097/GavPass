@@ -23,6 +23,7 @@ export class NoteService {
   private categoryNote = 'http://localhost:3000/api/Notes';
   private categoryNoteList = 'http://localhost:3000/api/NoteCategories';
   private categoryNoteName = 'http://localhost:3000/api/NoteCategories/name';
+  private GroupCategory = 'http://localhost:3000/api/Notes/GroupCategory';
 
   constructor(private http: HttpClient) { }
 

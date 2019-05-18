@@ -49,7 +49,7 @@ export class NoteComponent implements OnInit {
   get data() { return JSON.stringify(this.noteNames); }
 
   addNote() {
-    const dialogRef = this.dialog.open(AddSiteComponent, {
+    const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
       data: {
 

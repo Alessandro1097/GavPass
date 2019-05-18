@@ -1,1 +1,40 @@
-ciao
+<div class="top-bar">
+    <h3 class="title-modal">Aggiungi una nota</h3>
+    <button class="close-modal-button" (click)="closeDialog()">
+        <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
+    </button>
+</div>
+
+<!-- fix parametri note -->
+<div class="padding-modal position-relative">
+    <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+        <div class="user-container">
+            <mat-form-field class="name-width">
+                <input matInput #inputName placeholder="Nome:" [formControl]="name" required>
+                <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="name-width">
+                <mat-select placeholder="Scegli categoria" [formControl]="category" required>
+                    <mat-option *ngFor="let categoriesName of cards" #optionCategory value="{{categoriesName._id}}">
+                        {{categoriesName.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="category.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="site-section">
+            <mat-form-field class="name-width">
+                <input matInput #inputPassword placeholder="Password:" type="password" [formControl]="password"
+                    [type]="hide ? 'password' : 'text'" required>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field class="note-section">
+            <textarea matInput #inputNote [formControl]="note" placeholder="Note"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
+    </form>
+    <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
+
+</div>
