@@ -14,6 +14,30 @@ module.exports = function (app) {
         });
     });
 
+    // Select grouped by categories
+    app.get('/api/Notes/GroupCategory', function (req, res, next) {
+
+        authService.checkToken(req, res, function (verifiedUser, req, res) {
+            categoryService.getAll(verifiedUser)
+                .then(result => getNotes(result, verifiedUser, req, res))
+                .catch(err => next(err));
+        });
+
+        function getNotes(categories, verifiedUser, req, res) {
+
+            service.getAll(verifiedUser)
+                .then(result => groupNotes(result, categories, verifiedUser, req, res))
+                .catch(err => next(err));
+        }
+
+        function groupNotes(notes, categories, user, req, res) {
+
+            service.groupByCategory(notes, categories)
+                .then(result => res.json(result))
+                .catch(err => next(err));
+        }
+    });
+
     // Get by ID
     app.get('/api/Notes/getById/:id', function (req, res, next) {
         authService.checkToken(req, res, function (verifiedUser, req, res) {

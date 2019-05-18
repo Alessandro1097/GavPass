@@ -7,6 +7,7 @@ module.exports = {
     getAll,
     getById,
     getByCategory,
+    groupByCategory,
     insert,
     update,
     deleteById
@@ -33,7 +34,29 @@ async function getByCategory(categoryId, user) {
     return notes.find({ category: categoryId, user: user }, function (err, result) {
         if (err) throw err;
         return result;
+    }).sort({ title: 1 });
+};
+
+// Get notes grouped by Category
+async function groupByCategory(allNotes, allCategories) {
+
+    var result = [];
+
+    allCategories.forEach(function (category) {
+
+        var element = {
+            category: category.name,
+            notes: allNotes.filter(isSon)
+        };
+
+        result.push(element);
+
+        function isSon(element, index, array) {
+            return element.category == category.id;
+        }
     });
+
+    return result;
 };
 
 // Insert
