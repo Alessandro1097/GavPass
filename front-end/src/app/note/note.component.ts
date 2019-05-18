@@ -1,12 +1,12 @@
 import { noteTypeCategories } from '../type-note-categories';
 import { NoteService } from '../_services/note.service';
-import {Component, Input, OnInit, Inject} from '@angular/core';
-import {cardType} from '../type-card-container';
-import {SidenavService} from '../_services/sidenav.service';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { cardType } from '../type-card-container';
+import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../_services/note-type';
-import {AddSiteComponent} from '../card/card.component';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import { AddSiteComponent } from '../card/card.component';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DialogData } from '../app.component';
 import { Router } from '@angular/router';
 

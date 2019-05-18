@@ -15,7 +15,6 @@
   cursor: pointer;
 }
 
-
 /*note css*/
 
 .sticky {
@@ -27,4 +26,8 @@
   width: 15em;
   box-shadow: 0.2em 0.3em 0.5em #757513;
   font-size: 15px
+}
+
+.margin {
+  margin-bottom: 15px;
 }

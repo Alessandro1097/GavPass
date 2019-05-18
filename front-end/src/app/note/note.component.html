@@ -4,11 +4,19 @@
   <div class="card-section" style="width: 100%" [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h3 mat-subheader>Notes</h3>
     <mat-divider></mat-divider>
-    <div class="sticky" *ngFor="let nota of note">
-      <mat-icon mat-list-icon style="float: right; cursor: pointer">close</mat-icon>
-      <h3>{{nota.title}}</h3>
-      {{nota.text}}
-    </div>
+    <mat-card class="example-card" *ngFor="let noteCategory of noteCategories" style="margin-top: 30px;">
+      <mat-card-header [ngClass]="{margin: !collapsed}" (click)="collapsed=!collapsed" style="cursor: pointer">
+        <h3>{{noteCategory.name}}</h3>
+      </mat-card-header>
+      <mat-card-content *ngIf="!collapsed">
+        <mat-divider></mat-divider>
+        <div class="sticky" *ngFor="let nota of note" style="margin-top: 30px;">
+          <mat-icon mat-list-icon style="float: right; cursor: pointer">close</mat-icon>
+          <h3>{{nota.title}}</h3>
+          {{nota.text}}
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <nav class="container">
