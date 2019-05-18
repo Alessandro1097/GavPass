@@ -59,7 +59,7 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/NoteCategories/delete/:id', function (req, res, next) {
-        // TODO - Cancella tutte le sue note
+        // TODO - Cancella tutte le sue note OR azzera la categoria
         authService.checkToken(req, res, function (verifiedUser, req, res) {
             service.deleteById(req.params.id)
                 .then(res.json({ message: '1 document deleted' }))

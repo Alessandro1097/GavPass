@@ -18,7 +18,7 @@
       </mat-form-field>
       <mat-form-field class="name-width">
         <mat-select placeholder="Scegli categoria" [formControl]="category" required>
-          <mat-option *ngFor="let categoriesName of data.name" #optionCategory value="{{categoriesName._id}}">
+          <mat-option *ngFor="let categoriesName of cards" #optionCategory value="{{categoriesName._id}}">
             {{categoriesName.name}}
           </mat-option>
         </mat-select>

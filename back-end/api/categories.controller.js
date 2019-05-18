@@ -1,5 +1,6 @@
 // Request of the service
 const service = require('./category.service');
+const siteService = require('./site.service');
 const authService = require('./auth.service');
 
 module.exports = function (app) {
@@ -59,11 +60,17 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/Categories/delete/:id', function (req, res, next) {
-        // TODO - Cancella tutti i suoi siti
         authService.checkToken(req, res, function (verifiedUser, req, res) {
             service.deleteById(req.params.id)
-                .then(res.json({ message: '1 document deleted' }))
+                .then(result => deleteSites(req.params.id, verifiedUser, req, res))
                 .catch(err => next(err));
         });
+
+        function deleteSites(categoryId, user, req, res) {
+
+            siteService.deleteByCategory(categoryId, user)
+                .then(res.json({ message: 'Category and sites deleted' }))
+                .catch(err => next(err));
+        }
     });
 };

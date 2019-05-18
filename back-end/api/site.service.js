@@ -9,16 +9,16 @@ module.exports = {
     getByCategory,
     insert,
     update,
-    deleteById
+    deleteById,
+    deleteByCategory
 };
 
 // Select
 async function getAll(user) {
-    // TODO - Ordina per nome
     return sites.find({ user: user }, function (err, result) {
         if (err) throw err;
         return result;
-    });
+    }).sort({ name: 1 });
 };
 
 // Get by ID
@@ -73,6 +73,14 @@ async function update(id, url, name, category, username, pwd, note) {
 // Delete by ID
 async function deleteById(id) {
     return sites.findByIdAndRemove(new ObjectId(id), function (err, result) {
+        if (err) throw err;
+        return result;
+    });
+};
+
+// Delete by Category
+async function deleteByCategory(categoryId, user) {
+    return sites.deleteMany({ category: categoryId, user: user }, function (err, result) {
         if (err) throw err;
         return result;
     });

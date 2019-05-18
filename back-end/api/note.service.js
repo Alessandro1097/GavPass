@@ -14,11 +14,10 @@ module.exports = {
 
 // Select
 async function getAll(user) {
-    // TODO - Ordina per nome
     return notes.find({ user: user }, function (err, result) {
         if (err) throw err;
         return result;
-    });
+    }).sort({ title: 1 });
 };
 
 // Get by ID

@@ -17,29 +17,26 @@ module.exports = {
 
 // Select
 async function getAll(user) {
-    // TODO - Ordina per nome
     return categories.find({ user: user }, function (err, result) {
         if (err) throw err;
         return result;
-    });
+    }).sort({ name: 1 });
 };
 
 // Get Name
 async function getName(user) {
-    // TODO - Ordina per nome
     return categories.find({ user: user }, { _id: 0, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
-    });
+    }).sort({ name: 1 });
 };
 
 // Get Name & Id
 async function getNameId(user) {
-    // TODO - Ordina per nome
     return categories.find({ user: user }, { _id: 1, name: 1 }, function (err, result) {
         if (err) throw err;
         return result;
-    });
+    }).sort({ name: 1 });
 };
 
 // Get by ID
