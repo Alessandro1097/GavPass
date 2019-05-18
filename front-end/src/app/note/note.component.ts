@@ -17,9 +17,7 @@ import { Router } from '@angular/router';
 })
 export class NoteComponent implements OnInit {
 
-  note: noteType[];
-  noteCategories: noteTypeCategories[];
-  noteNames: noteTypeCategories[];
+  categoriesNote: noteTypeCategories[];
 
   constructor(
     private noteService: NoteService,
@@ -30,23 +28,13 @@ export class NoteComponent implements OnInit {
 
   ngOnInit() {
     this.getNotes();
-    this.getNotesName();
-    this.getNotesCategories();
   }
 
   getNotes(): void {
-    this.noteService.getNote().subscribe(notes => this.note = notes);
+    this.noteService.getNote().subscribe(categoriesNote => this.categoriesNote = categoriesNote);
   }
 
-  getNotesCategories(): void {
-    this.noteService.getCategoryNoteList().subscribe(noteCategories => this.noteCategories = noteCategories);
-  }
-
-  getNotesName(): void {
-    this.noteService.getNoteName().subscribe(noteName => this.noteNames = noteName);
-  }
-
-  get data() { return JSON.stringify(this.noteNames); }
+  get data() { return JSON.stringify(this.categoriesNote); }
 
   addNote() {
     const dialogRef = this.dialog.open(AddNoteComponent, {

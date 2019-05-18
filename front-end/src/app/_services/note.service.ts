@@ -20,25 +20,13 @@ const httpOptions = {
 })
 export class NoteService {
 
-  private categoryNote = 'http://localhost:3000/api/Notes';
-  private categoryNoteList = 'http://localhost:3000/api/NoteCategories';
-  private categoryNoteName = 'http://localhost:3000/api/NoteCategories/name';
-  private GroupCategory = 'http://localhost:3000/api/Notes/GroupCategory';
+  private groupCategory = 'http://localhost:3000/api/Notes/GroupCategory';
 
   constructor(private http: HttpClient) { }
 
   /** GET: get all the data about the notes */
-  getNote(): Observable<noteType[]> {
-    return this.http.get<noteType[]>(this.categoryNote, httpOptions);
+  getNote(): Observable<noteTypeCategories[]> {
+    return this.http.get<noteTypeCategories[]>(this.groupCategory, httpOptions);
   }
 
-  /** GET: get all the data about the category of the notes */
-  getCategoryNoteList(): Observable<noteTypeCategories[]> {
-    return this.http.get<noteTypeCategories[]>(this.categoryNoteList, httpOptions);
-  }
-
-  /** GET: get all the names of the notes */
-  getNoteName(): Observable<noteTypeCategories[]> {
-    return this.http.get<noteTypeCategories[]>(this.categoryNoteName, httpOptions);
-  }
 }
