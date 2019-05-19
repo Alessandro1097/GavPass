@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class NoteComponent implements OnInit {
 
   categoriesNote: noteTypeCategories[];
+  collapsed = [];
 
   constructor(
     private noteService: NoteService,
