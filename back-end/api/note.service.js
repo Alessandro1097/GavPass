@@ -44,15 +44,25 @@ async function groupByCategory(allNotes, allCategories) {
 
     allCategories.forEach(function (category) {
 
+        var categoryNotes = allNotes.filter(isSon);
+
+        if( categoryNotes.length == 0 ) return;
+
+        allNotes = allNotes.filter( isNotSon );
+
         var element = {
             category: category.name,
-            notes: allNotes.filter(isSon)
+            notes: categoryNotes
         };
 
         result.push(element);
 
         function isSon(element, index, array) {
             return element.category == category.id;
+        }
+
+        function isNotSon(element, index, array) {
+            return element.category != category.id;
         }
     });
 
