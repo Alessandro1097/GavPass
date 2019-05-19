@@ -4,9 +4,9 @@
   <div class="card-section" style="width: 100%" [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h3 mat-subheader>Notes</h3>
     <mat-divider></mat-divider>
-    <mat-card *ngFor="let categoryNote of categoriesNote; let i = index;" class="space-note" [attr.data-index]="i">
-      <mat-card-header [ngClass]="{margin: !collapsed[i]}" (click)="collapsed[i] = !collapsed[i];" style="cursor: pointer">
-        <h3>{{categoryNote.category}}</h3>
+    <mat-card *ngFor="let categoryNote of categoriesNote; let i = index;" class="space-note" [attr.data-index]="i" style="padding: 0;">
+      <mat-card-header [ngClass]="{margin: !collapsed[i]}" (click)="collapsed[i] = !collapsed[i];" style="cursor: pointer; background-color: #3f51b5;">
+        <h3 style="color: white;">{{categoryNote.category}}</h3>
       </mat-card-header>
       <mat-card-content *ngIf="!collapsed[i]">
         <mat-divider></mat-divider>
