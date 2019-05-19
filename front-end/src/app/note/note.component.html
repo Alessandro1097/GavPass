@@ -5,10 +5,10 @@
     <h3 mat-subheader>Notes</h3>
     <mat-divider></mat-divider>
     <mat-card *ngFor="let categoryNote of categoriesNote; let i = index;" class="space-note" [attr.data-index]="i" style="padding: 0;">
-      <mat-card-header [ngClass]="{margin: !collapsed[i]}" (click)="collapsed[i] = !collapsed[i];" style="cursor: pointer; background-color: #3f51b5;">
+      <mat-card-header (click)="collapsed[i] = !collapsed[i];" style="cursor: pointer; background-color: #3f51b5;">
         <h3 style="color: white;">{{categoryNote.category}}</h3>
       </mat-card-header>
-      <mat-card-content *ngIf="!collapsed[i]">
+      <mat-card-content *ngIf="!collapsed[i]" style="padding: 0 30px 30px 30px;">
         <mat-divider></mat-divider>
         <div class="sticky" *ngFor="let noteCategory of categoryNote.notes" style="margin-top: 30px;">
           <mat-icon mat-list-icon style="float: right; cursor: pointer">close</mat-icon>

@@ -22,7 +22,8 @@ Once you have done that you'll be able to use GavPass.
 # Per Alessandro
 TODO : 
 - cerca che mostra sia siti che categorie
-- se cancello una categoria, nel drop-down la vedo ancora (A.G.)
+- handling of untagged category
+- trash (mostly backend)
 
 FIXME:
 - validazione del form modifica sito da correggere e controlli che bloccano il continua in caso di errore 
