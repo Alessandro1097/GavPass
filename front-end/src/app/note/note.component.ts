@@ -4,11 +4,12 @@ import { Component, Input, OnInit, Inject } from '@angular/core';
 import { cardType } from '../type-card-container';
 import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
-import { noteType } from '../_services/note-type';
+import { noteType } from '../note-type';
 import { AddSiteComponent } from '../card/card.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DialogData } from '../app.component';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-note',
@@ -58,6 +59,8 @@ export class AddNoteComponent {
   @Input() card: cardType;
   notes: noteType[];
 
+  url = new FormControl('', [Validators.required]);
+
   constructor(
     public dialogRef: MatDialogRef<AddNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -100,8 +103,8 @@ export class AddNoteComponent {
     this.openSnackSuccess(selectedCategory);
   } */
 
-  /** getErrorMessage() {
+  getErrorMessage() {
     return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Not a valid email' : '';
-  }*/
+  }
 }

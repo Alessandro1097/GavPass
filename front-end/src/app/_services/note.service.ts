@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { noteTypeCategories } from '../type-note-categories';
 import { cardType } from '../type-card-container';
-import { noteType } from './note-type';
+import { noteType } from '../note-type';
 
 const currentToken = localStorage.getItem('currentUser');
 let currentT = '';
