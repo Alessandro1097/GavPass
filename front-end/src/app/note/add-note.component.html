@@ -8,9 +8,25 @@
 <!-- fix parametri note -->
 <div class="padding-modal position-relative">
     <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
-        <mat-form-field class="form-url">
-            <input matInput #inputUrl placeholder="URL:" [formControl]="url" required>
-            <mat-error *ngIf="url.invalid">{{getErrorMessage()}}</mat-error>
+        <div class="user-container">
+            <mat-form-field class="name-width">
+                <input matInput #inputTitle placeholder="TITLE:" [formControl]="title" required>
+                <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="name-width">
+                <mat-select placeholder="Scegli categoria" [formControl]="category" required>
+                    <mat-option *ngFor="let categoriesName of noteCategories" #optionCategory
+                        value="{{categoriesName._id}}">
+                        {{categoriesName.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="category.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field class="note-section">
+            <textarea matInput #inputNote [formControl]="description" placeholder="Description"></textarea>
         </mat-form-field>
+        <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
     </form>
+    <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
 </div>

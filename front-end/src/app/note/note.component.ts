@@ -55,11 +55,14 @@ export class NoteComponent implements OnInit {
   templateUrl: './add-note.component.html',
 })
 
-export class AddNoteComponent {
+export class AddNoteComponent implements OnInit {
   @Input() card: cardType;
   notes: noteType[];
+  noteCategories: noteTypeCategories[];
 
-  url = new FormControl('', [Validators.required]);
+  title = new FormControl('', [Validators.required]);
+  category = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<AddNoteComponent>,
@@ -67,44 +70,44 @@ export class AddNoteComponent {
     // private cardService: CardService,
     // private siteService: SiteService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private noteService: NoteService
   ) {
+  }
+
+  ngOnInit() {
+    this.getNotesCategories();
   }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  openSnackSuccess(selectedCategory): void {
-    const messageAddedCategory = 'Site added to: ' + selectedCategory;
+  getNotesCategories(): void {
+    this.noteService.getCategoryNoteList().subscribe(noteCategories => this.noteCategories = noteCategories);
+  }
+
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Site added to: ';
     this.snackBar.open(messageAddedCategory, 'Okay!', {
       duration: 3000,
       panelClass: ['green-snackbar']
     });
   }
 
-  /** onSubmit() {
+   onSubmit() {
     const currentToken = localStorage.getItem('currentUser');
     const user = JSON.parse(currentToken).user;
-    const url = this.url.value.trim();
-    const name = this.name.value.trim();
+    const title = this.title.value.trim();
+    const text = this.description.value.trim();
     const category = this.category.value.trim();
-    const username = this.username.value.trim();
-    const pwd = this.password.value.trim();
-    const note = this.note.value.trim();
-    let selectedCategory;
-    this.siteService.addSite({user, url, name, category, username, pwd, note} as siteType).subscribe(site => site);
-    for (let index = 0; index < this.cards.length; index++) {
-      if (this.cards[index]._id === category) {
-        selectedCategory = this.cards[index].name;
-      }
-    }
-    this.router.navigate([`/detail/${selectedCategory}`]);
-    this.openSnackSuccess(selectedCategory);
-  } */
+    console.log(user, title, text, category);
+    this.noteService.addNote({user, category, text, title} as noteType).subscribe(note => note);
+    this.openSnackSuccess();
+  }
 
   getErrorMessage() {
-    return this.url.hasError('required') ? 'You must enter a value' :
-      this.url.hasError('email') ? 'Not a valid email' : '';
+    return this.title.hasError('required') ? 'You must enter a value' :
+      this.title.hasError('email') ? 'Not a valid email' : '';
   }
 }

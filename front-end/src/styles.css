@@ -360,3 +360,7 @@ span.rotate {
 .mat-form-field-label-wrapper {
   overflow: visible !important;
 }
+
+.mat-option-text {
+  overflow: visible !important;
+}

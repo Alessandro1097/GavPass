@@ -21,12 +21,24 @@ const httpOptions = {
 export class NoteService {
 
   private groupCategory = 'http://localhost:3000/api/Notes/GroupCategory';
+  private categoryNoteList = 'http://localhost:3000/api/NoteCategories';
+  private postNota = 'http://localhost:3000/api/Notes/save';
 
   constructor(private http: HttpClient) { }
 
   /** GET: get all the data about the notes */
   getNote(): Observable<noteTypeCategories[]> {
     return this.http.get<noteTypeCategories[]>(this.groupCategory, httpOptions);
+  }
+
+  /** GET: get all the data about the category of the notes */
+  getCategoryNoteList(): Observable<noteTypeCategories[]> {
+    return this.http.get<noteTypeCategories[]>(this.categoryNoteList, httpOptions);
+  }
+
+  /* POST: send the site on the server */
+  addNote(note: noteType): Observable<noteType> {
+    return this.http.post<noteType>(this.postNota, note, httpOptions);
   }
 
 }
