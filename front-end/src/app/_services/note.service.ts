@@ -23,6 +23,7 @@ export class NoteService {
   private groupCategory = 'http://localhost:3000/api/Notes/GroupCategory';
   private categoryNoteList = 'http://localhost:3000/api/NoteCategories';
   private postNota = 'http://localhost:3000/api/Notes/save';
+  private deleteNoteById = 'http://localhost:3000/api/Notes/delete';
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,13 @@ export class NoteService {
   /* POST: send the site on the server */
   addNote(note: noteType): Observable<noteType> {
     return this.http.post<noteType>(this.postNota, note, httpOptions);
+  }
+
+  /* DELETE: delete the note from the server */
+  deleteNote(note: noteType): Observable<any> {
+    const id = note._id;
+    const url = `${this.deleteNoteById}/${id}`;
+    return this.http.delete(url, httpOptions);
   }
 
 }

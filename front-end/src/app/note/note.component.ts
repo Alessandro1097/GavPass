@@ -26,6 +26,7 @@ export class NoteComponent implements OnInit {
     public sideNavService: SidenavService,
     public sideBarService: SidebarService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -41,11 +42,33 @@ export class NoteComponent implements OnInit {
   addNote() {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
-      data: {
-
-      }
     });
     dialogRef.afterClosed().subscribe(() => {
+      this.getNotes();
+      this.openSnackSuccess();
+    });
+  }
+
+  deleteNote(noteId): void {
+    console.log(noteId);
+    const _id = noteId;
+    this.noteService.deleteNote({ _id } as noteType).subscribe(note => note);
+    this.getNotes();
+    this.openSnackSuccessDelete();
+  }
+
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Note added succesfully!';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['green-snackbar']
+    });
+  }
+  openSnackSuccessDelete(): void {
+    const messageAddedCategory = 'Note deleted succesfully!';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['red-snackbar']
     });
   }
 }
@@ -67,8 +90,6 @@ export class AddNoteComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    // private cardService: CardService,
-    // private siteService: SiteService,
     private router: Router,
     private snackBar: MatSnackBar,
     private noteService: NoteService
@@ -87,23 +108,14 @@ export class AddNoteComponent implements OnInit {
     this.noteService.getCategoryNoteList().subscribe(noteCategories => this.noteCategories = noteCategories);
   }
 
-  openSnackSuccess(): void {
-    const messageAddedCategory = 'Site added to: ';
-    this.snackBar.open(messageAddedCategory, 'Okay!', {
-      duration: 3000,
-      panelClass: ['green-snackbar']
-    });
-  }
-
-   onSubmit() {
+  onSubmit() {
     const currentToken = localStorage.getItem('currentUser');
     const user = JSON.parse(currentToken).user;
     const title = this.title.value.trim();
     const text = this.description.value.trim();
     const category = this.category.value.trim();
     console.log(user, title, text, category);
-    this.noteService.addNote({user, category, text, title} as noteType).subscribe(note => note);
-    this.openSnackSuccess();
+    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
   }
 
   getErrorMessage() {
