@@ -42,10 +42,21 @@ export class NoteComponent implements OnInit {
   addNote() {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
+      height: '50%'
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getNotes();
-      this.openSnackSuccess();
+    });
+  }
+
+  addNoteCategories() {
+    const dialogRef = this.dialog.open(AddNoteCategoriesComponent, {
+      width: '60%',
+      height: '40%'
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getNotes();
+      // this.openSnackSuccess();
     });
   }
 
@@ -57,13 +68,6 @@ export class NoteComponent implements OnInit {
     this.openSnackSuccessDelete();
   }
 
-  openSnackSuccess(): void {
-    const messageAddedCategory = 'Note added succesfully!';
-    this.snackBar.open(messageAddedCategory, 'Okay!', {
-      duration: 3000,
-      panelClass: ['green-snackbar']
-    });
-  }
   openSnackSuccessDelete(): void {
     const messageAddedCategory = 'Note deleted succesfully!';
     this.snackBar.open(messageAddedCategory, 'Okay!', {
@@ -79,7 +83,6 @@ export class NoteComponent implements OnInit {
 })
 
 export class AddNoteComponent implements OnInit {
-  @Input() card: cardType;
   notes: noteType[];
   noteCategories: noteTypeCategories[];
 
@@ -90,9 +93,8 @@ export class AddNoteComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -116,10 +118,53 @@ export class AddNoteComponent implements OnInit {
     const category = this.category.value.trim();
     console.log(user, title, text, category);
     this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
+    this.openSnackSuccess();
+  }
+
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Note added succesfully!';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['green-snackbar']
+    });
   }
 
   getErrorMessage() {
     return this.title.hasError('required') ? 'You must enter a value' :
       this.title.hasError('email') ? 'Not a valid email' : '';
   }
+}
+
+@Component({
+  selector: './app-add-note-categories',
+  templateUrl: './add-note-categories.component.html',
+})
+
+export class AddNoteCategoriesComponent implements OnInit {
+
+  constructor(
+    public dialogRef: MatDialogRef<AddNoteCategoriesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private noteService: NoteService,
+  ) {
+  }
+
+  ngOnInit() {}
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  /* TODO: submit della nuova categoria
+  onSubmit() {
+    const currentToken = localStorage.getItem('currentUser');
+    const user = JSON.parse(currentToken).user;
+    const title = this.title.value.trim();
+    const text = this.description.value.trim();
+    const category = this.category.value.trim();
+    console.log(user, title, text, category);
+    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
+    this.openSnackSuccess();
+  }
+   */
 }

@@ -11,7 +11,7 @@ import { CardComponent, AddSiteComponent, AddCategoryComponent, DeleteCategoryCo
 import { AppRoutingModule } from './app-routing.module';
 // tslint:disable-next-line:max-line-length
 import { CardDetailComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent } from './card-detail/card-detail.component';
-import { NoteComponent, AddNoteComponent } from './note/note.component';
+import { NoteComponent, AddNoteComponent, AddNoteCategoriesComponent } from './note/note.component';
 import { MatDialogModule } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -38,6 +38,7 @@ import { NotFound404Component } from './not-found404/not-found404.component';
     NavBarComponent,
     SideBarComponent,
     AddNoteComponent,
+    AddNoteCategoriesComponent,
     NotFound404Component
   ],
   imports: [
@@ -52,7 +53,7 @@ import { NotFound404Component } from './not-found404/not-found404.component';
     MatDialogModule
   ],
   // tslint:disable-next-line:max-line-length
-  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategoryComponent, DeleteCategoryComponent, AddNoteComponent],
+  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategoryComponent, DeleteCategoryComponent, AddNoteComponent, AddNoteCategoriesComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

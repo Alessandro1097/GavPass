@@ -24,6 +24,8 @@ TODO :
 - cerca che mostra sia siti che categorie
 - handling of untagged category
 - trash (mostly backend)
+- crea nuova categoria (note)
 
 FIXME:
 - validazione del form modifica sito da correggere e controlli che bloccano il continua in caso di errore 
+- cambia design nel "crea nota"
