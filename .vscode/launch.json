@@ -9,7 +9,7 @@
             "type": "node", // chrome
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/back-end\\index.js"
+            "program": "${workspaceFolder}/back-end/index.js"
         }
     ]
 }

@@ -1,7 +1,6 @@
-import { noteTypeCategories } from '../type-note-categories';
+
 import { NoteService } from '../_services/note.service';
 import { Component, Input, OnInit, Inject } from '@angular/core';
-import { cardType } from '../type-card-container';
 import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../note-type';
@@ -18,7 +17,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class NoteComponent implements OnInit {
 
-  categoriesNote: noteTypeCategories[];
+  categoriesNote: noteType[];
   collapsed = [];
 
   constructor(
@@ -37,9 +36,7 @@ export class NoteComponent implements OnInit {
     this.noteService.getNote().subscribe(categoriesNote => this.categoriesNote = categoriesNote);
   }
 
-  get data() { return JSON.stringify(this.categoriesNote); }
-
-  addNote() {
+  addNotep() {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
       height: '50%'
@@ -56,6 +53,8 @@ export class NoteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getNotes();
+      
+      console.log();
       // this.openSnackSuccess();
     });
   }
@@ -84,7 +83,7 @@ export class NoteComponent implements OnInit {
 
 export class AddNoteComponent implements OnInit {
   notes: noteType[];
-  noteCategories: noteTypeCategories[];
+  noteCategories: noteType[];
 
   title = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
@@ -115,9 +114,8 @@ export class AddNoteComponent implements OnInit {
     const user = JSON.parse(currentToken).user;
     const title = this.title.value.trim();
     const text = this.description.value.trim();
-    const category = this.category.value.trim();
-    console.log(user, title, text, category);
-    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
+    const name = this.category.value.trim();
+    this.noteService.addNote({ user, name, text, title } as noteType).subscribe(note => note);
     this.openSnackSuccess();
   }
 
@@ -142,6 +140,8 @@ export class AddNoteComponent implements OnInit {
 
 export class AddNoteCategoriesComponent implements OnInit {
 
+  newCategory = new FormControl('', [Validators.required]);
+
   constructor(
     public dialogRef: MatDialogRef<AddNoteCategoriesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -155,16 +155,12 @@ export class AddNoteCategoriesComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  /* TODO: submit della nuova categoria
   onSubmit() {
     const currentToken = localStorage.getItem('currentUser');
     const user = JSON.parse(currentToken).user;
-    const title = this.title.value.trim();
-    const text = this.description.value.trim();
-    const category = this.category.value.trim();
-    console.log(user, title, text, category);
-    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
-    this.openSnackSuccess();
+    console.log(this.newCategory.value.trim());
+    const name = this.newCategory.value.trim();
+    this.noteService.addNoteCategory({ name } as noteType).subscribe(newCategoryName => newCategoryName);
+    this.closeDialog();
   }
-   */
 }

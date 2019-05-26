@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { noteTypeCategories } from '../type-note-categories';
-import { cardType } from '../type-card-container';
 import { noteType } from '../note-type';
 
 const currentToken = localStorage.getItem('currentUser');
@@ -29,13 +27,13 @@ export class NoteService {
   constructor(private http: HttpClient) { }
 
   /** GET: get all the data about the notes */
-  getNote(): Observable<noteTypeCategories[]> {
-    return this.http.get<noteTypeCategories[]>(this.groupCategory, httpOptions);
+  getNote(): Observable<noteType[]> {
+    return this.http.get<noteType[]>(this.groupCategory, httpOptions);
   }
 
   /** GET: get all the data about the category of the notes */
-  getCategoryNoteList(): Observable<noteTypeCategories[]> {
-    return this.http.get<noteTypeCategories[]>(this.categoryNoteList, httpOptions);
+  getCategoryNoteList(): Observable<noteType[]> {
+    return this.http.get<noteType[]>(this.categoryNoteList, httpOptions);
   }
 
   /* POST: send the note on the server */
@@ -44,8 +42,8 @@ export class NoteService {
   }
 
   /* POST: send the category of the note on the server */
-  addNoteCategory(noteCategory: noteTypeCategories): Observable<noteTypeCategories> {
-    return this.http.post<noteTypeCategories>(this.postCategoryNota, noteCategory, httpOptions);
+  addNoteCategory(noteCategory: noteType): Observable<noteType> {
+    return this.http.post<noteType>(this.postCategoryNota, noteCategory, httpOptions);
   }
 
   /* DELETE: delete the note from the server */

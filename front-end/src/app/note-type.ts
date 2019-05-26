@@ -1,8 +1,8 @@
 // tslint:disable-next-line:class-name
 export class noteType {
-    user?: string;
     _id: number;
+    user?: string;
     text: string;
     title: string;
-    category: string;
+    name: string;
 }
