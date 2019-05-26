@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { noteType } from '../note-type';
+import { noteTypeCategories } from '../type-note-categories';
 
 const currentToken = localStorage.getItem('currentUser');
 let currentT = '';
@@ -32,8 +33,8 @@ export class NoteService {
   }
 
   /** GET: get all the data about the category of the notes */
-  getCategoryNoteList(): Observable<noteType[]> {
-    return this.http.get<noteType[]>(this.categoryNoteList, httpOptions);
+  getCategoryNoteList(): Observable<noteTypeCategories[]> {
+    return this.http.get<noteTypeCategories[]>(this.categoryNoteList, httpOptions);
   }
 
   /* POST: send the note on the server */
@@ -42,8 +43,8 @@ export class NoteService {
   }
 
   /* POST: send the category of the note on the server */
-  addNoteCategory(noteCategory: noteType): Observable<noteType> {
-    return this.http.post<noteType>(this.postCategoryNota, noteCategory, httpOptions);
+  addNoteCategory(noteCategory: noteTypeCategories): Observable<noteTypeCategories> {
+    return this.http.post<noteTypeCategories>(this.postCategoryNota, noteCategory, httpOptions);
   }
 
   /* DELETE: delete the note from the server */

@@ -9,6 +9,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/
 import { DialogData } from '../app.component';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { noteTypeCategories } from '../type-note-categories';
 
 @Component({
   selector: 'app-note',
@@ -53,14 +54,10 @@ export class NoteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getNotes();
-      
-      console.log();
-      // this.openSnackSuccess();
     });
   }
 
   deleteNote(noteId): void {
-    console.log(noteId);
     const _id = noteId;
     this.noteService.deleteNote({ _id } as noteType).subscribe(note => note);
     this.getNotes();
@@ -83,7 +80,7 @@ export class NoteComponent implements OnInit {
 
 export class AddNoteComponent implements OnInit {
   notes: noteType[];
-  noteCategories: noteType[];
+  noteCategories: noteTypeCategories[];
 
   title = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
@@ -114,8 +111,8 @@ export class AddNoteComponent implements OnInit {
     const user = JSON.parse(currentToken).user;
     const title = this.title.value.trim();
     const text = this.description.value.trim();
-    const name = this.category.value.trim();
-    this.noteService.addNote({ user, name, text, title } as noteType).subscribe(note => note);
+    const category = this.category.value.trim();
+    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
     this.openSnackSuccess();
   }
 
@@ -158,9 +155,8 @@ export class AddNoteCategoriesComponent implements OnInit {
   onSubmit() {
     const currentToken = localStorage.getItem('currentUser');
     const user = JSON.parse(currentToken).user;
-    console.log(this.newCategory.value.trim());
     const name = this.newCategory.value.trim();
-    this.noteService.addNoteCategory({ name } as noteType).subscribe(newCategoryName => newCategoryName);
+    this.noteService.addNoteCategory({ name } as noteTypeCategories).subscribe(newCategoryName => newCategoryName);
     this.closeDialog();
   }
 }

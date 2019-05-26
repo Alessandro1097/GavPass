@@ -4,5 +4,5 @@ export class noteType {
     user?: string;
     text: string;
     title: string;
-    name: string;
+    category: string;
 }
