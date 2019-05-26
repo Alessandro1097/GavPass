@@ -46,7 +46,8 @@ async function groupByCategory(allNotes, allCategories) {
 
         var categoryNotes = allNotes.filter(isSon);
 
-        if( categoryNotes.length == 0 ) return;
+        // FIXME - Se è vuota la visualizziamo comunque
+        // if( categoryNotes.length == 0 ) return;
 
         allNotes = allNotes.filter( isNotSon );
 
