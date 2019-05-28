@@ -8,6 +8,10 @@ module.exports = function (app) {
     var users = require('./users.controller');
     users(app);
 
+    // TODO - Nascondi questo e tutte le API senza controlli
+    var tokens = require('./tokens.controller');
+    tokens(app);
+
     var categories = require('./categories.controller');
     categories(app);
 

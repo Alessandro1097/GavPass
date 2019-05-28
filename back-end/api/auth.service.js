@@ -5,39 +5,56 @@ const secretConfig = require('../config/secret.json');
 const tokenService = require('./token.service');
 
 module.exports = {
+    getToken,
     checkToken,
     login,
     logout
 };
 
+function getToken(req) {
+
+    var key = req.get('Authorization');
+    if (key) key = key.replace('Bearer ', '');
+
+    return key;
+}
+
 async function checkToken(req, res, apiFunction) {
-    
-    var token = req.get('Authorization');
-    token = token.replace('Bearer ', '');
 
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+    var key = getToken(req);
+    if ( ! key ) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
-    jwt.verify(token, secretConfig.secret, function (err, decoded) {
-        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    tokenService.getByKey(key)
+        .then(result => checkTokenData(result, req, res))
+        .catch(err => next(err));
 
-        tokenService.getUser(req)
-            .then(result => apiFunction(result.user, req, res))
-            .catch(err => next(err));
-    });
+    function checkTokenData(token, req, res) {
+        
+        jwt.verify(token.key, secretConfig.secret, function (err, decoded) {
+            
+            if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+            var today = new Date();
+            if (today >= token.expiryDate) return res.status(500).send({ auth: false, message: 'Token expired.' });
+
+            // Call the function required
+            apiFunction(token.user, req, res);
+        });
+    }
 }
 
 async function login(user, req, res) {
 
     var badResult = { auth: false, token: null };
 
-    if (!user) {
+    if ( ! user ) {
         res.status(404).send('No user found.');
         return badResult;
     }
 
     var passwordIsValid = bcrypt.compareSync(req.body.pwd, user.pwd);
 
-    if (!passwordIsValid) {
+    if ( ! passwordIsValid ) {
         res.status(401).send(badResult);
         return badResult;
     }
@@ -54,7 +71,6 @@ async function login(user, req, res) {
 
 async function logout(res) {
 
-    // TODO - Update token table
     var goodResult = { auth: false, token: null };
 
     // The token must expire on its own

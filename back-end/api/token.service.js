@@ -6,9 +6,10 @@ var tokens = require('../models/Token');
 module.exports = {
     getAll,
     getById,
-    getUser,
+    getByKey,
     insert,
     update,
+    expire,
     deleteById
 };
 
@@ -28,24 +29,19 @@ async function getById(id) {
     });
 };
 
-// Get User by Token
-async function getUser(req) {
-
-    var token = req.get('Authorization');
-    token = token.replace('Bearer ', '');
-
-    return tokens.findOne({ "token": token }, { _id: 0, user: 1 }, function (err, result, user) {
+// Get by Key
+async function getByKey(key) {
+    return tokens.findOne({ key: key }, function (err, result) {
         if (err) throw err;
         return result;
     });
 };
 
 // Insert
-async function insert(gtoken, user, state, effectiveDate, expiryDate) {
+async function insert(key, user, effectiveDate, expiryDate) {
     var newRec = tokens({
-    token: gtoken,
+    key: key,
     user: user,
-    state: state, // 0-Non valido; 1-Valido; 2-Scaduto
     effectiveDate: new Date(effectiveDate),
     expiryDate: new Date(expiryDate)
     });
@@ -57,14 +53,27 @@ async function insert(gtoken, user, state, effectiveDate, expiryDate) {
 };
 
 // Update
-async function update(id, state, effectiveDate, expiryDate) {
+async function update(id, effectiveDate, expiryDate) {
     tokens.findByIdAndUpdate(new ObjectId(id), {
-        state: state, // 0-Non valido; 1-Valido; 2-Scaduto
         effectiveDate: new Date(effectiveDate),
         expiryDate: new Date(expiryDate)
     }, function (err, result) {
         if (err) throw err;
         return result;
+    });
+};
+
+// Update expiry date by Key
+async function expire(key, expiryDate) {
+    return tokens.findOne({ key: key }, function (err, token) {
+        if (err) throw err;
+
+        token.expiryDate = expiryDate;
+
+        return token.save(function (err, result) {
+            if (err) throw err;
+            return result;
+        });
     });
 };
 

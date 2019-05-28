@@ -10,7 +10,8 @@ module.exports = {
     groupByCategory,
     insert,
     update,
-    deleteById
+    deleteById,
+    deleteByCategory
 };
 
 // Select
@@ -44,10 +45,7 @@ async function groupByCategory(allNotes, allCategories) {
 
     allCategories.forEach(function (category) {
 
-        var categoryNotes = allNotes.filter(isSon);
-
-        // FIXME - Se è vuota la visualizziamo comunque
-        // if( categoryNotes.length == 0 ) return;
+        var categoryNotes = allNotes.filter( isSon );
 
         allNotes = allNotes.filter( isNotSon );
 
@@ -100,6 +98,14 @@ async function update(id, category, text, title) {
 // Delete by ID
 async function deleteById(id) {
     return notes.findByIdAndRemove(new ObjectId(id), function (err, result) {
+        if (err) throw err;
+        return result;
+    });
+};
+
+// Delete by Category
+async function deleteByCategory(categoryId, user) {
+    return notes.deleteMany({ category: categoryId, user: user }, function (err, result) {
         if (err) throw err;
         return result;
     });

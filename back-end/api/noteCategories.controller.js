@@ -1,5 +1,6 @@
 // Request of the service
 const service = require('./noteCategory.service');
+const noteService = require('./note.service');
 const authService = require('./auth.service');
 
 module.exports = function (app) {
@@ -59,11 +60,18 @@ module.exports = function (app) {
 
     // Delete
     app.delete('/api/NoteCategories/delete/:id', function (req, res, next) {
-        // TODO - Cancella tutte le sue note OR azzera la categoria
         authService.checkToken(req, res, function (verifiedUser, req, res) {
             service.deleteById(req.params.id)
-                .then(res.json({ message: '1 document deleted' }))
+                .then(result => deleteNotes(req.params.id, verifiedUser, req, res))
                 .catch(err => next(err));
         });
+
+        // Delete its notes
+        function deleteNotes(categoryId, user, req, res) {
+
+            noteService.deleteByCategory(categoryId, user)
+                .then(res.json({ message: 'Category and notes deleted' }))
+                .catch(err => next(err));
+        }
     });
 };

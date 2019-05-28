@@ -66,6 +66,7 @@ module.exports = function (app) {
                 .catch(err => next(err));
         });
 
+        // Delete its sites
         function deleteSites(categoryId, user, req, res) {
 
             siteService.deleteByCategory(categoryId, user)

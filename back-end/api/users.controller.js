@@ -2,6 +2,7 @@
 const service = require('./user.service');
 const authService = require('./auth.service');
 const categoryService = require('./category.service');
+const noteCategoryService = require('./noteCategory.service');
 const tokenService = require('./token.service');
 
 module.exports = function (app) {
@@ -23,12 +24,12 @@ module.exports = function (app) {
         function createToken(loginResult) {
 
             // If the authentication fails
-            if (!loginResult.auth) return;
+            if ( ! loginResult.auth ) return;
 
             var today = new Date();
-            var exp = new Date(today.getFullYear() + 1, today.getMonth(), today.getDay())
+            var exp = new Date(today.getFullYear() + 1, today.getMonth(), today.getDay());
 
-            tokenService.insert(loginResult.token, loginResult.user, 1, today, exp)
+            tokenService.insert(loginResult.token, loginResult.user, today, exp)
                 .then(result => result)
                 .catch(err => next(err));
         }
@@ -38,20 +39,18 @@ module.exports = function (app) {
     app.post('/api/Users/logout', function (req, res, next) {
 
         authService.logout(res)
-            .then(result => tokenExpired(result, req.body.email))
+            .then(result => tokenExpired(result, res))
             .catch(err => next(err));
 
-        function tokenExpired(logoutResult, tokenId) {
+        function tokenExpired(logoutResult, res) {
 
             // If the log-out fails
             if (logoutResult.auth) return;
 
-            service.getById(req.params.id)
-                .then(result => res.json(result))
-                .catch(err => next(err));
-
-            // TODO - Aggiorna solo data scadenza (e prendi in ingresso il token, non l'id su DB)
-            tokenService.deleteById(tokenId)
+            var key = authService.getToken(req);
+            var today = new Date();
+            
+            tokenService.expire(key, today)
                 .then(result => result)
                 .catch(err => next(err));
         }
@@ -87,8 +86,17 @@ module.exports = function (app) {
                 .catch(err => next(err));
         }
 
+        // Add default site categories
         function insertSuccessful(user, res) {
             categoryService.insertDefaultCategories(user)
+                .then(result => insertCategoriesSuccessful(req.body.email, res))
+                .catch(err => next(err));
+            ;
+        }
+
+        // Add default note categories
+        function insertCategoriesSuccessful(user, res) {
+            noteCategoryService.insertDefaultCategories(user)
                 .then(res.json({ message: '1 document inserted' }))
                 .catch(err => next(err));
             ;

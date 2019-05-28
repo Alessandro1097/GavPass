@@ -11,6 +11,7 @@ module.exports = {
     getNameId,
     insert,
     update,
+    insertDefaultCategories,
     deleteById
 };
 
@@ -74,6 +75,21 @@ async function update(id, name) {
     }, function (err, result) {
         if (err) throw err;
         return result;
+    });
+};
+
+// Insert default categories
+async function insertDefaultCategories(user) {
+
+    var defaultCategories = [
+        {
+            name: "Untagged",
+            user: user
+        }
+    ];
+
+    categories.create(defaultCategories, function (err, results) {
+        if (err) throw err;
     });
 };
 
