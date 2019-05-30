@@ -40,7 +40,8 @@ export class NoteComponent implements OnInit {
   addNotep() {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
-      height: '50%'
+      height: '75%',
+      panelClass: 'sticky-note'
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getNotes();
@@ -96,6 +97,18 @@ export class AddNoteComponent implements OnInit {
 
   ngOnInit() {
     this.getNotesCategories();
+  }
+
+  submit() {
+    const currentToken = localStorage.getItem('currentUser');
+    const user = JSON.parse(currentToken).user;
+    const title = this.title.value.trim();
+    const text = this.description.value.trim();
+    const category = this.category.value.trim();
+    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
+    this.closeDialog();
+    this.openSnackSuccess();
+    // TODO: open the category selected
   }
 
   closeDialog(): void {

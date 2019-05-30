@@ -1,13 +1,15 @@
-<div class="top-bar">
-    <h3 class="title-modal">Aggiungi una nota</h3>
-    <button class="close-modal-button" (click)="closeDialog()">
-        <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
-    </button>
-</div>
+<form #siteForm="ngForm">
+    <div class="top-bar-note">
+        <button class="close-modal-button-note left-note" (click)="closeDialog()">
+            <img src="../../assets/baseline_close_black_48dp.png" alt="chiudi" width="24" height="24">
+        </button>
+        <h3 class="title-modal-note">Aggiungi una nota</h3>
+        <button class="close-modal-button-note right-note" (click)="submit()">
+            <img src="../../assets/baseline_done_black_48dp.png" alt="chiudi" width="24" height="24">
+        </button>
+    </div>
 
-<!-- fix parametri note -->
-<div class="padding-modal position-relative">
-    <form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+    <div class="padding-modal position-relative">
         <div class="user-container">
             <mat-form-field class="name-width">
                 <input matInput #inputTitle placeholder="TITLE:" [formControl]="title" required>
@@ -15,7 +17,8 @@
             </mat-form-field>
             <mat-form-field class="name-width">
                 <mat-select placeholder="Scegli categoria" [formControl]="category" required>
-                    <mat-option *ngFor="let categoriesName of noteCategories" #optionCategory value="{{categoriesName._id}}">
+                    <mat-option *ngFor="let categoriesName of noteCategories" #optionCategory
+                        value="{{categoriesName._id}}">
                         {{categoriesName.name}}
                     </mat-option>
                 </mat-select>
@@ -23,9 +26,7 @@
             </mat-form-field>
         </div>
         <mat-form-field class="note-section">
-            <textarea matInput #inputNote [formControl]="description" placeholder="Description"></textarea>
+            <textarea matInput #inputNote [formControl]="description" placeholder="Description" style="height: 200px !important"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
-    </form>
-    <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
-</div>
+    </div>
+</form>
