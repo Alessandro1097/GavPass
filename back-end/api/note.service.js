@@ -50,6 +50,7 @@ async function groupByCategory(allNotes, allCategories) {
         allNotes = allNotes.filter( isNotSon );
 
         var element = {
+            _id: category._id,
             category: category.name,
             notes: categoryNotes
         };

@@ -1,13 +1,10 @@
-
 import { NoteService } from '../_services/note.service';
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../note-type';
-import { AddSiteComponent } from '../card/card.component';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DialogData } from '../app.component';
-import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { noteTypeCategories } from '../type-note-categories';
 
@@ -72,6 +69,21 @@ export class NoteComponent implements OnInit {
       panelClass: ['red-snackbar']
     });
   }
+
+  deleteCategory(id) {
+    console.log(id);
+    // this.noteService.deleteCategory({ id } as noteType).subscribe(category => category);
+    this.openSnackSuccess();
+  }
+
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Category successfully deleted!';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['red-snackbar']
+    });
+  }
+
 }
 
 @Component({
@@ -105,9 +117,13 @@ export class AddNoteComponent implements OnInit {
     const title = this.title.value.trim();
     const text = this.description.value.trim();
     const category = this.category.value.trim();
-    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
-    this.closeDialog();
-    this.openSnackSuccess();
+    if (title !== '' && text !== '' && category !== '') {
+      this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
+      this.closeDialog();
+      this.openSnackSuccess();
+    } else {
+      this.getErrorMessage();
+    }
     // TODO: open the category selected
   }
 
@@ -117,16 +133,6 @@ export class AddNoteComponent implements OnInit {
 
   getNotesCategories(): void {
     this.noteService.getCategoryNoteList().subscribe(noteCategories => this.noteCategories = noteCategories);
-  }
-
-  onSubmit() {
-    const currentToken = localStorage.getItem('currentUser');
-    const user = JSON.parse(currentToken).user;
-    const title = this.title.value.trim();
-    const text = this.description.value.trim();
-    const category = this.category.value.trim();
-    this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
-    this.openSnackSuccess();
   }
 
   openSnackSuccess(): void {

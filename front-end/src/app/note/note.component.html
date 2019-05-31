@@ -4,14 +4,19 @@
   <div class="card-section" style="width: 100%" [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h3 mat-subheader>Notes</h3>
     <mat-divider></mat-divider>
-    <mat-card *ngFor="let categoryNote of categoriesNote; let i = index;" class="space-note" [attr.data-index]="i" style="padding: 0;">
-      <mat-card-header (click)="collapsed[i] = !collapsed[i];" style="cursor: pointer; background-color: #3f51b5; box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px">
-        <h3 style="color: white;">{{categoryNote.category}}</h3>
+    <mat-card *ngFor="let categoryNote of categoriesNote; let i = index;" class="space-note" [attr.data-index]="i"
+      style="padding: 0;">
+      <mat-card-header style="cursor: pointer; background-color: #3f51b5; box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px;">
+        <h3 style="color: white; width: 93%;" (click)="collapsed[i] = !collapsed[i];">{{categoryNote.category}}</h3>
+        <button class="delete-category" (click)="deleteCategory(categoryNote._id)">
+          <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
+        </button>
       </mat-card-header>
       <mat-card-content *ngIf="collapsed[i]" style="padding: 0 30px 30px 30px;">
         <mat-divider></mat-divider>
         <div class="sticky" *ngFor="let noteCategory of categoryNote.notes" style="margin-top: 30px;">
-          <mat-icon mat-list-icon style="float: right; cursor: pointer" (click)="deleteNote(this.noteCategory._id)">close</mat-icon>
+          <mat-icon mat-list-icon style="float: right; cursor: pointer" (click)="deleteNote(this.noteCategory._id)">
+            close</mat-icon>
           <h3>{{noteCategory.title}}</h3>
           {{noteCategory.text}}
         </div>

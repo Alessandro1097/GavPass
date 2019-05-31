@@ -110,6 +110,15 @@ a {
   cursor: pointer;
 }
 
+.delete-category {
+  border: none;
+  cursor: pointer;
+  background-color: #3f51b5;
+  position: absolute;
+  right: 0;
+  top: 18px;
+}
+
 .left-note {
   left: 24px;
 }

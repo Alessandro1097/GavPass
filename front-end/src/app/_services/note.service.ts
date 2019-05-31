@@ -54,4 +54,6 @@ export class NoteService {
     return this.http.delete(url, httpOptions);
   }
 
+  // TODO:  deleteCategory(categoryNote): Observable<any> {}
+
 }
