@@ -70,9 +70,11 @@ export class NoteComponent implements OnInit {
     });
   }
 
-  deleteCategory(id) {
-    console.log(id);
-    // this.noteService.deleteCategory({ id } as noteType).subscribe(category => category);
+  deleteCategory(categoryId): void {
+    const _id = categoryId;
+    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(category => category);
+    this.collapsed = [];
+    this.getNotes();
     this.openSnackSuccess();
   }
 
