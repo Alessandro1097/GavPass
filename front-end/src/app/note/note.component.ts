@@ -72,9 +72,8 @@ export class NoteComponent implements OnInit {
 
   deleteCategory(categoryId): void {
     const _id = categoryId;
-    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(category => category);
+    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(categoriesNote => this.categoriesNote = categoriesNote);
     this.collapsed = [];
-    this.getNotes();
     this.openSnackSuccess();
   }
 
