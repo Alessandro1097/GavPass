@@ -57,8 +57,9 @@ export class NoteComponent implements OnInit {
 
   deleteNote(noteId): void {
     const _id = noteId;
-    this.noteService.deleteNote({ _id } as noteType).subscribe(note => note);
-    this.getNotes();
+    this.noteService.deleteNote({ _id } as noteType).subscribe(note => {
+      this.getNotes();
+    });
     this.openSnackSuccessDelete();
   }
 
@@ -72,9 +73,9 @@ export class NoteComponent implements OnInit {
 
   deleteCategory(categoryId): void {
     const _id = categoryId;
-    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(category => {
-      this.getNotes();
-    });
+    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(categoriesNote => {
+        this.getNotes();
+      });
     this.collapsed = [];
     this.openSnackSuccess();
   }
