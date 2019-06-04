@@ -1,5 +1,5 @@
 import { NoteService } from '../_services/note.service';
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../note-type';
@@ -7,6 +7,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/
 import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 import { noteTypeCategories } from '../type-note-categories';
+import { DeleteNoteComponent } from './delete-note-category/delete-note-category.component';
 
 @Component({
   selector: 'app-note',
@@ -45,6 +46,18 @@ export class NoteComponent implements OnInit {
     });
   }
 
+  openDeleteNote(categoryId) {
+    const dialogRef = this.dialog.open(DeleteNoteComponent, {
+      width: '60%',
+      data: {
+        categoryId: categoryId
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getNotes();
+    });
+  }
+
   addNoteCategories() {
     const dialogRef = this.dialog.open(AddNoteCategoriesComponent, {
       width: '60%',
@@ -69,15 +82,6 @@ export class NoteComponent implements OnInit {
       duration: 3000,
       panelClass: ['red-snackbar']
     });
-  }
-
-  deleteCategory(categoryId): void {
-    const _id = categoryId;
-    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(categoriesNote => {
-        this.getNotes();
-      });
-    this.collapsed = [];
-    this.openSnackSuccess();
   }
 
   openSnackSuccess(): void {

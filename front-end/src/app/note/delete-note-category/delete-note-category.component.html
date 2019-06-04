@@ -1,0 +1,17 @@
+<div class="top-bar-delete" xmlns="http://www.w3.org/1999/html">
+  <h3 class="title-modal">Elimina categoria</h3>
+  <button class="close-modal-button-delete" (click)="closeDialog()">
+    <img src="../../assets/baseline_close_white_48dp.png" alt="chiudi" width="24" height="24">
+  </button>
+</div>
+<div class="padding-modal position-relative">
+  <mat-card-title class="ma">
+    <p>Vuoi davvero eliminare questa categoria?</p>
+  </mat-card-title>
+
+  <div class="d-flex content-flex-end">
+    <button mat-raised-button (click)="closeDialog()" class="mr-20">Annulla</button>
+    <button mat-raised-button (click)="deleteCategoryNote()" class="delete-button white">Elimina
+    </button>
+  </div>
+</div>

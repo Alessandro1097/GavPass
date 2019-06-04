@@ -20,6 +20,7 @@ import { SingUpComponent } from './sing-up/sing-up.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
+import { DeleteNoteComponent } from './note/delete-note-category/delete-note-category.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NotFound404Component } from './not-found404/not-found404.component';
     SideBarComponent,
     AddNoteComponent,
     AddNoteCategoriesComponent,
-    NotFound404Component
+    NotFound404Component,
+    DeleteNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,7 @@ import { NotFound404Component } from './not-found404/not-found404.component';
     MatDialogModule
   ],
   // tslint:disable-next-line:max-line-length
-  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategoryComponent, DeleteCategoryComponent, AddNoteComponent, AddNoteCategoriesComponent],
+  entryComponents: [CardComponent, CardDetailComponent, AddSiteComponent, ModifySiteInsideComponent, AddSiteInsideComponent, DeleteSiteComponent, AddCategoryComponent, DeleteCategoryComponent, AddNoteComponent, AddNoteCategoriesComponent, DeleteNoteComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
