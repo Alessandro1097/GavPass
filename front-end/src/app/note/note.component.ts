@@ -7,7 +7,8 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/
 import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 import { noteTypeCategories } from '../type-note-categories';
-import { DeleteNoteComponent } from './delete-note-category/delete-note-category.component';
+import { DeleteNoteCategoryComponent } from './delete-note-category/delete-note-category.component';
+import { DeleteNoteComponent } from './delete-note/delete-note.component';
 
 @Component({
   selector: 'app-note',
@@ -46,8 +47,8 @@ export class NoteComponent implements OnInit {
     });
   }
 
-  openDeleteNote(categoryId) {
-    const dialogRef = this.dialog.open(DeleteNoteComponent, {
+  openDeleteNoteCategory(categoryId) {
+    const dialogRef = this.dialog.open(DeleteNoteCategoryComponent, {
       width: '60%',
       data: {
         categoryId: categoryId
@@ -67,13 +68,16 @@ export class NoteComponent implements OnInit {
       this.getNotes();
     });
   }
-
-  deleteNote(noteId): void {
-    const _id = noteId;
-    this.noteService.deleteNote({ _id } as noteType).subscribe(note => {
+  deleteNote(noteId) {
+    const dialogRef = this.dialog.open(DeleteNoteComponent, {
+      width: '60%',
+      data: {
+        noteId: noteId
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
       this.getNotes();
     });
-    this.openSnackSuccessDelete();
   }
 
   openSnackSuccessDelete(): void {

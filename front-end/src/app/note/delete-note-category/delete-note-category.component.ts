@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DialogData } from 'src/app/app.component';
 import { noteType } from 'src/app/note-type';
@@ -10,36 +10,32 @@ import { noteTypeCategories } from 'src/app/type-note-categories';
   templateUrl: './delete-note-category.component.html',
   styleUrls: ['./delete-note-category.component.css']
 })
-export class DeleteNoteComponent implements OnInit {
+export class DeleteNoteCategoryComponent {
 
   categoriesNote: noteType[];
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteNoteComponent>,
+    public dialogRef: MatDialogRef<DeleteNoteCategoryComponent>,
     private noteService: NoteService,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
-
-  ngOnInit() {
-  }
 
   getNotes(): void {
     this.noteService.getNote().subscribe(categoriesNote => this.categoriesNote = categoriesNote);
   }
 
   deleteCategoryNote(): void {
-    console.log(this);
-     const _id = this.data.categoryId;
-     this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(categoriesNote => {
+    const _id = this.data.categoryId;
+    this.noteService.deleteCategoryNote({ _id } as noteTypeCategories).subscribe(categoriesNote => {
       this.getNotes();
       this.closeDialog();
-  });
+    });
     this.openSnackSuccessDelete();
   }
 
   openSnackSuccessDelete(): void {
-    const messageAddedCategory = 'Note deleted succesfully!';
+    const messageAddedCategory = 'Category note deleted succesfully!';
     this.snackBar.open(messageAddedCategory, 'Okay!', {
       duration: 3000,
       panelClass: ['red-snackbar']

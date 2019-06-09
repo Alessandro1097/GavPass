@@ -19,6 +19,7 @@ export interface DialogData {
     note: string
   };
   categoryId: number;
+  noteId: number;
 }
 
 @Component({
