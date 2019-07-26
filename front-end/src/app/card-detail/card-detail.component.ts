@@ -25,6 +25,7 @@ export class CardDetailComponent implements OnInit {
   cardsName: cardType[];
   sites: siteType[];
   rightCategory: string;
+  emptySites: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +55,10 @@ export class CardDetailComponent implements OnInit {
   getSites(): void {
     const name = this.route.snapshot.paramMap.get('name');
     this.rightCategory = name;
-    this.siteService.getSites(name).subscribe(sites => this.sites = sites);
+    this.siteService.getSites(name).subscribe(sites => {
+      this.sites = sites;
+      sites.length === 0 ? this.emptySites = true : this.emptySites = false;
+    } );
   }
 
   openModalDelete(currentSiteId): void {

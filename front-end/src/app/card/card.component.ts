@@ -35,11 +35,15 @@ export class CardComponent implements OnInit {
   }
 
   getCards(): void {
-    this.cardService.getCards().subscribe(cards => this.cards = cards);
+    this.cardService.getCards().subscribe((cards) => {
+      this.cards = cards;
+    });
   }
 
   getCategoriesName(): void {
-    this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
+    this.cardService.getCategoriesName().subscribe(
+      cardsName => this.cardsName = cardsName
+    );
   }
 
   addCategory(): void {
@@ -47,7 +51,7 @@ export class CardComponent implements OnInit {
       width: '60%',
       height: '38%'
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getCards();
     });
   }
