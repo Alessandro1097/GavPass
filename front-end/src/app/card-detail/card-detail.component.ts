@@ -58,7 +58,7 @@ export class CardDetailComponent implements OnInit {
     this.siteService.getSites(name).subscribe(sites => {
       this.sites = sites;
       sites.length === 0 ? this.emptySites = true : this.emptySites = false;
-    } );
+    });
   }
 
   openModalDelete(currentSiteId): void {
@@ -169,18 +169,21 @@ export class ModifySiteInsideComponent implements OnInit {
     const _id = this.data.attributes._id;
     let selectedCategory;
     category === '' ? category = data : category = category;
-    this.siteService.addSite({ _id, user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
-    for (let index = 0; index < this.cardsName.length; index++) {
-      if (this.cardsName[index]._id === category) {
-        selectedCategory = this.cardsName[index].name;
+    if (url && name && category && username && pwd) {
+      this.siteService.addSite({ _id, user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+      for (let index = 0; index < this.cardsName.length; index++) {
+        if (this.cardsName[index]._id === category) {
+          selectedCategory = this.cardsName[index].name;
+        }
       }
-    }
-    if (this.data.currentCategory === selectedCategory) {
-      this.openSnackSuccess();
-    } else {
-      const urlToGo = `/detail/${selectedCategory}`;
-      this.router.navigate([urlToGo]);
-      this.openSnackSuccess(selectedCategory);
+      if (this.data.currentCategory === selectedCategory) {
+        this.openSnackSuccess();
+      } else {
+        const urlToGo = `/detail/${selectedCategory}`;
+        this.router.navigate([urlToGo]);
+        this.openSnackSuccess(selectedCategory);
+        this.closeDialog();
+      }
     }
   }
 
@@ -255,18 +258,21 @@ export class AddSiteInsideComponent implements OnInit {
     const data = this.data.currentCategoryId;
     let selectedCategory;
     category === '' ? category = data : category = category;
-    this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
-    for (let index = 0; index < this.cardsName.length; index++) {
-      if (this.cardsName[index]._id === category) {
-        selectedCategory = this.cardsName[index].name;
+    if (url && name && category && username && pwd) {
+      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+      for (let index = 0; index < this.cardsName.length; index++) {
+        if (this.cardsName[index]._id === category) {
+          selectedCategory = this.cardsName[index].name;
+        }
       }
-    }
-    if (this.data.currentCategory === selectedCategory) {
-      this.openSnackSuccess();
-    } else {
-      const urlToGo = `/detail/${selectedCategory}`;
-      this.router.navigate([urlToGo]);
-      this.openSnackSuccess(selectedCategory);
+      if (this.data.currentCategory === selectedCategory) {
+        this.openSnackSuccess();
+      } else {
+        const urlToGo = `/detail/${selectedCategory}`;
+        this.router.navigate([urlToGo]);
+        this.openSnackSuccess(selectedCategory);
+        this.closeDialog();
+      }
     }
   }
 

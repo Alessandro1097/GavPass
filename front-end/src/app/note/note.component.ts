@@ -131,10 +131,8 @@ export class AddNoteComponent implements OnInit {
     const category = this.category.value.trim();
     if (title && text && category) {
       this.noteService.addNote({ user, category, text, title } as noteType).subscribe(note => note);
-      this.closeDialog();
       this.openSnackSuccess();
-    } else {
-      this.getErrorMessage();
+      this.closeDialog();
     }
   }
 

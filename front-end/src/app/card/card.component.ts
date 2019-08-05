@@ -153,8 +153,6 @@ export class AddSiteComponent implements OnInit {
       this.closeDialog();
       this.openSnackSuccess(selectedCategory);
       this.router.navigate([`/detail/${selectedCategory}`]);
-    } else {
-      this.getErrorMessage();
     }
   }
 
