@@ -1,14 +1,14 @@
 import { SidebarService } from './../_services/sidebar.service';
-import {Router} from '@angular/router';
-import {SiteService} from '../_services/site.service';
-import {CardService} from '../_services/card.service';
-import {Component, Inject, OnInit, Input} from '@angular/core';
-import {cardType} from '../type-card-container';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {DialogData} from '../app.component';
-import {FormControl, Validators} from '@angular/forms';
-import {siteType} from '../type-site';
-import {MatSnackBar} from '@angular/material';
+import { Router } from '@angular/router';
+import { SiteService } from '../_services/site.service';
+import { CardService } from '../_services/card.service';
+import { Component, Inject, OnInit, Input } from '@angular/core';
+import { cardType } from '../type-card-container';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { DialogData } from '../app.component';
+import { FormControl, Validators } from '@angular/forms';
+import { siteType } from '../type-site';
+import { MatSnackBar } from '@angular/material';
 import { SidenavService } from '../_services/sidenav.service';
 
 @Component({
@@ -141,14 +141,21 @@ export class AddSiteComponent implements OnInit {
     const pwd = this.password.value.trim();
     const note = this.note.value.trim();
     let selectedCategory;
-    this.siteService.addSite({user, url, name, category, username, pwd, note} as siteType).subscribe(site => site);
-    for (let index = 0; index < this.cards.length; index++) {
-      if (this.cards[index]._id === category) {
-        selectedCategory = this.cards[index].name;
+    console.log(category);
+    // tslint:disable-next-line:max-line-length
+    if (url && name && category && pwd && username) {
+      this.siteService.addSite({ user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+      for (let index = 0; index < this.cards.length; index++) {
+        if (this.cards[index]._id === category) {
+          selectedCategory = this.cards[index].name;
+        }
       }
+      this.closeDialog();
+      this.openSnackSuccess(selectedCategory);
+      this.router.navigate([`/detail/${selectedCategory}`]);
+    } else {
+      this.getErrorMessage();
     }
-    this.router.navigate([`/detail/${selectedCategory}`]);
-    this.openSnackSuccess(selectedCategory);
   }
 
   getErrorMessage() {
@@ -192,7 +199,7 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit() {
     const name = this.newCategory.value.trim();
-    this.cardService.addCategory({name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
+    this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
     this.openSnackSuccess();
   }
 }

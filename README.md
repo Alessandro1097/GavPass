@@ -11,7 +11,7 @@ You can also delete and update your site.
 
 ## Technical description
 
-We decided to use NodeJs as backend, so it handles the API, and as a frontend we decided to use Angular 7.
+We decided to use NodeJs as backend and as a frontend we decided to use Angular 7.
 
 To start using the application you have to download node: <https://nodejs.org/it/>
 To start the frontend go to the folder front-end and run: <b>npm install</b>, and after that <b>ng serve -o</b>.
@@ -26,5 +26,4 @@ TODO :
 - trash (mostly backend)
 
 FIXME:
-- validazione del form modifica sito da correggere e controlli che bloccano il continua in caso di errore 
-- sidebar fix 
+- validazione del form modifica sito da correggere e controlli che bloccano il continua in caso di errore
