@@ -5,6 +5,7 @@
   <div [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h2 class="category-space card-section">My category</h2>
     <div class="card-container">
+      <p *ngIf="emptyCards">You didn't insert any category yet!</p>
       <div *ngFor="let card of cards">
         <mat-card class="example-card">
           <mat-card-header>

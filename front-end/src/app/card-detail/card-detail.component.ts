@@ -117,7 +117,6 @@ export class ModifySiteInsideComponent implements OnInit {
   note = new FormControl('', []);
   hide = true;
   site: siteType;
-  categoryShow = false;
   cardsName: cardType[];
 
   constructor(
@@ -135,10 +134,6 @@ export class ModifySiteInsideComponent implements OnInit {
 
   getCategoriesName(): void {
     this.cardService.getCategoriesName().subscribe(cardsName => this.cardsName = cardsName);
-  }
-
-  setCategory() {
-    this.categoryShow = true;
   }
 
   closeDialog() {
@@ -209,7 +204,6 @@ export class AddSiteInsideComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   note = new FormControl('', []);
   hide = true;
-  categoryShow = false;
   cardsName: cardType[];
 
   constructor(
@@ -223,10 +217,6 @@ export class AddSiteInsideComponent implements OnInit {
 
   ngOnInit() {
     this.getCategoriesName();
-  }
-
-  setCategory() {
-    this.categoryShow = true;
   }
 
   getCategoriesName(): void {
