@@ -25,8 +25,6 @@ export class NavBarComponent implements OnInit {
 
   getRouteSituation() {
     const route = this.router.url;
-    console.log(route);
-    // this.router.url === '/' ? console.log('siamo nelle categorie') : console.log('siamo nei siti');
     switch (this.router.url) {
       case '/':
         console.log('siamo nelle categorie');
