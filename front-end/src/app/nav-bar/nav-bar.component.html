@@ -7,7 +7,7 @@
     <a routerLink="/">
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
     </a>
-    <input type="text" class="search-style" placeholder="Cerca" />
+    <input type="text" class="search-style" placeholder="Cerca {{rappresentativeElement}}" />
     <mat-select placeholder="{{username}}" style="width: 300px; margin-top: 20px">
       <mat-option [routerLink]="['/login']" style="text-align: center">
         Logout

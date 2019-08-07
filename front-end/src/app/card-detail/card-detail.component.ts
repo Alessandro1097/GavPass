@@ -2,7 +2,6 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { cardType } from '../type-card-container';
 import { siteType } from '../type-site';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { CardService } from '../_services/card.service';
 import { SiteService } from '../_services/site.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
@@ -169,26 +168,24 @@ export class ModifySiteInsideComponent implements OnInit {
     const _id = this.data.attributes._id;
     let selectedCategory;
     category === '' ? category = data : category = category;
-    if (url && name && category && username && pwd) {
-      this.siteService.addSite({ _id, user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
-      for (let index = 0; index < this.cardsName.length; index++) {
-        if (this.cardsName[index]._id === category) {
-          selectedCategory = this.cardsName[index].name;
-        }
+    this.siteService.addSite({ _id, user, url, name, category, username, pwd, note } as siteType).subscribe(site => site);
+    for (let index = 0; index < this.cardsName.length; index++) {
+      if (this.cardsName[index]._id === category) {
+        selectedCategory = this.cardsName[index].name;
       }
-      if (this.data.currentCategory === selectedCategory) {
-        this.openSnackSuccess();
-      } else {
-        const urlToGo = `/detail/${selectedCategory}`;
-        this.router.navigate([urlToGo]);
-        this.openSnackSuccess(selectedCategory);
-        this.closeDialog();
-      }
+    }
+    if (this.data.currentCategory === selectedCategory) {
+      this.openSnackSuccess();
+    } else {
+      const urlToGo = `/detail/${selectedCategory}`;
+      this.router.navigate([urlToGo]);
+      this.openSnackSuccess(selectedCategory);
+      this.closeDialog();
     }
   }
 
   getErrorMessage() {
-    return this.url.hasError('required') ? 'Inserire email' :
+    return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Email non valida' : '';
   }
 }
@@ -277,7 +274,7 @@ export class AddSiteInsideComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.url.hasError('required') ? 'Inserire email' :
+    return this.url.hasError('required') ? 'You must enter a value' :
       this.url.hasError('email') ? 'Email non valida' : '';
   }
 }
