@@ -23,7 +23,7 @@
     </div>
 
     <nav class="container">
-      <a target="_blank" tooltip="Aggiugi sito" class="buttons" (click)="addSite()">
+      <a target="_blank" tooltip="Aggiugi sito" class="buttons" (click)="addSite()" *ngIf="showButtonAddSite">
         <mat-icon class="center-icon-add">description</mat-icon>
       </a>
       <a tooltip="Aggiungi categoria" class="buttons" (click)="addCategory()">

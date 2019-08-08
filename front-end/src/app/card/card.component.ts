@@ -29,6 +29,7 @@ export class CardComponent implements OnInit {
   cards: cardType[];
   cardsName: cardType[];
   emptyCards: boolean;
+  showButtonAddSite: boolean;
 
   ngOnInit() {
     this.getCards();
@@ -38,7 +39,13 @@ export class CardComponent implements OnInit {
   getCards(): void {
     this.cardService.getCards().subscribe((cards) => {
       this.cards = cards;
-      cards.length === 0 ? this.emptyCards = true : this.emptyCards = false;
+      if (cards.length === 0) {
+        this.emptyCards = true;
+        this.showButtonAddSite = false;
+      } else {
+        this.emptyCards = false;
+        this.showButtonAddSite = true;
+      }
     });
   }
 
