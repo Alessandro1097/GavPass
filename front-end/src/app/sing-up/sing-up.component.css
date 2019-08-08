@@ -2,3 +2,9 @@
     width: 500px;
     height: 60px;
 }
+
+.arrow-positioning {
+    position: absolute;
+    top: 25px;
+    left: 25px
+}
