@@ -264,6 +264,7 @@ export class AddSiteInsideComponent implements OnInit {
       }
       if (this.data.currentCategory === selectedCategory) {
         this.openSnackSuccess();
+        this.closeDialog();
       } else {
         const urlToGo = `/detail/${selectedCategory}`;
         this.router.navigate([urlToGo]);
