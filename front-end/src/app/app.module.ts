@@ -43,7 +43,7 @@ import { DeleteNoteComponent } from './note/delete-note/delete-note.component';
     AddNoteCategoriesComponent,
     NotFound404Component,
     DeleteNoteCategoryComponent,
-    DeleteNoteComponent
+    DeleteNoteComponent,
   ],
   imports: [
     BrowserModule,
