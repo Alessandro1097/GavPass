@@ -22,6 +22,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { DeleteNoteCategoryComponent } from './note/delete-note-category/delete-note-category.component';
 import { DeleteNoteComponent } from './note/delete-note/delete-note.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DeleteNoteComponent } from './note/delete-note/delete-note.component';
     NotFound404Component,
     DeleteNoteCategoryComponent,
     DeleteNoteComponent,
+    PasswordRecoveryComponent,
   ],
   imports: [
     BrowserModule,

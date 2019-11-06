@@ -35,6 +35,20 @@ module.exports = function (app) {
         }
     });
 
+    app.post('/api/Users/checkEmail', function(req, res, next){
+        service.checkEmailExist(req.body.emailUser, res)
+            .then(result => piru(result, res))
+            .catch(err => next(err));
+
+        function piru(result, res) {
+            if(result === 1){
+                res.json({ message: 'Invieremo una mail al seguente indirizzo mail.' })
+            } else {
+                res.json({ message: 'Sei sicuro che la mail sia corretta? :(' })
+            }
+        }
+    });
+
     // Logout
     app.post('/api/Users/logout', function (req, res, next) {
 

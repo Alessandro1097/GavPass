@@ -8,7 +8,8 @@ module.exports = {
     getByEmail,
     insert,
     update,
-    deleteById
+    deleteById,
+    checkEmailExist
 };
 
 // Select
@@ -71,5 +72,16 @@ async function deleteById(id) {
     return users.findByIdAndRemove(new ObjectId(id), function (err, result) {
         if (err) throw err;
         return result;
+    });
+};
+
+async function checkEmailExist(email) {
+    return users.count({ email: email }, function (err, count) {
+        if (err) throw err;
+        if (count > 0) {
+            return count;
+        } else {
+            return count;
+        }
     });
 };

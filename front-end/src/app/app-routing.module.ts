@@ -1,3 +1,4 @@
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardComponent} from './card/card.component';
@@ -10,6 +11,7 @@ import {NotFound404Component} from './not-found404/not-found404.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'recover-password', component: PasswordRecoveryComponent },
   { path: 'sing-up', component: SingUpComponent },
   { path: 'notes', component: NoteComponent },
   { path: 'detail/:name', component: CardDetailComponent },

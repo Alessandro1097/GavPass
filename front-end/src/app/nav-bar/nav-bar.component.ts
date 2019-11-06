@@ -27,15 +27,12 @@ export class NavBarComponent implements OnInit {
     const route = this.router.url;
     switch (this.router.url) {
       case '/':
-        console.log('siamo nelle categorie');
         this.rappresentativeElement = 'nelle categorie';
         break;
       case '/notes':
-          console.log('siamo nelle note');
           this.rappresentativeElement = 'nelle note';
       break;
       default:
-        console.log('siamo nei siti');
         this.rappresentativeElement = 'nei siti';
     }
   }

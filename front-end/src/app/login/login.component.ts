@@ -43,15 +43,17 @@ export class LoginComponent implements OnInit {
     const pwd = this.pwd.value.trim();
 
     this.loading = true;
-    this.authenticationService.login(email, pwd)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
+    if (email && pwd) {
+      this.authenticationService.login(email, pwd)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate([this.returnUrl]);
+          },
+          error => {
+            this.error = error;
+            this.loading = false;
+          });
+    }
   }
 }

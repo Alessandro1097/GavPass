@@ -23,9 +23,10 @@
 
             <div class="d-flex content-space-between">
                 <p class="mt-0">Non ti sei ancora iscritto? <a routerLink="/sing-up">Clicca qui.</a></p>
-                <div>
-                    <button mat-raised-button color="primary" [disabled]="loading">Login</button>
-                </div>
+                <p class="mt-0"><a routerLink="/recover-password">Hai dimenticato la password?</a></p>
+            </div>
+            <div class="d-flex content-center" appearance="outline">
+                <button mat-raised-button color="primary" class="py-2">Login</button>
             </div>
             <div *ngIf="error">{{error}}</div>
         </form>

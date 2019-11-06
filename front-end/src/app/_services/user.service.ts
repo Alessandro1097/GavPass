@@ -11,11 +11,16 @@ const httpOptions = {
 export class UserService {
 
     private createUserUrl = 'http://localhost:3000/api/Users/save';
+    private recoverForgottenEmail = 'http://localhost:3000/api/Users/checkEmail';
 
     constructor(private http: HttpClient) { }
 
     createUser(user: User): Observable<User> {
         return this.http.post<User>(this.createUserUrl, user, httpOptions);
+    }
+
+    recoverEmail(email): Observable<User> {
+        return this.http.post<User>(this.recoverForgottenEmail, email, httpOptions);
     }
 
 }
