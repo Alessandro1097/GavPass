@@ -4,7 +4,9 @@ const authService = require('./auth.service');
 const categoryService = require('./category.service');
 const noteCategoryService = require('./noteCategory.service');
 const tokenService = require('./token.service');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
+const emailCredential = require('../config/emailCredentials.json');
+var generator = require('generate-password');
 
 module.exports = function (app) {
 
@@ -38,32 +40,37 @@ module.exports = function (app) {
 
     app.post('/api/Users/checkEmail', function(req, res, next){
         service.checkEmailExist(req.body.emailUser, res)
-            .then(result => checkResponse(result, res))
+            .then(result => checkResponse(result, res, req.body.emailUser))
             .catch(err => next(err));
 
-        function checkResponse(result, res) {
+        function checkResponse(result, res, email) {
             if(result === 1){
                 res.json({ message: 'Invieremo una mail al seguente indirizzo mail con una password temporanea.' })
-                sendEmail();
+                sendEmail(email);
             } else {
                 res.json({ message: 'Sei sicuro che la mail sia corretta? :(' })
             }
         }
 
-        function sendEmail() {
+        function sendEmail(email) {
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'gavpass10@gmail.com',
-                    pass: 'GavPass8!?'
+                    user: emailCredential.username,
+                    pass: emailCredential.password
                 }
+            });
+
+            var password = generator.generate({
+                length: 15,
+                numbers: true
             });
             
             const mailOptions = {
-                from: 'gavpass10@gmail.com', // sender address
-                to: 'cavuoti.alessandro@tuttomail.com', // list of receivers
-                subject: 'Reset password GavPass', // Subject line
-                html: '<p>Utilizza questa password per effettuare l\'accesso al tuo account: <b>prova</b></p>'// plain text body
+                from: emailCredential.username,
+                to: email,
+                subject: 'Reset password GavPass',
+                html: '<p>Questa è la password temporanea per effettuare il tuo prossimo accesso: <b>' + password + '</b></p>'
             };
             
             transporter.sendMail(mailOptions, function (err, info) {

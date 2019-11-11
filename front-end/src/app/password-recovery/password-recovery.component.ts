@@ -12,16 +12,16 @@ export class PasswordRecoveryComponent {
 
   constructor(
     private userService: UserService
-  ) {}
+  ) { }
   responseEmail: User;
   userEmail = new FormControl('', [Validators.required]);
 
   onSubmit() {
     const emailUser = this.userEmail.value;
-    this.userService.recoverEmail({ emailUser } as User).subscribe((email) => {
-      this.responseEmail = email;
-      console.log('risposta immagino: ', this.responseEmail.message);
-    });
+    if (emailUser !== '' && emailUser !== null) {
+      this.userService.recoverEmail({ emailUser } as User).subscribe((email) => {
+        this.responseEmail = email;
+      });
+    }
   }
-
 }

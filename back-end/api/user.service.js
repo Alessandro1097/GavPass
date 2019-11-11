@@ -78,10 +78,6 @@ async function deleteById(id) {
 async function checkEmailExist(email) {
     return users.count({ email: email }, function (err, count) {
         if (err) throw err;
-        if (count > 0) {
-            return count;
-        } else {
-            return count;
-        }
+        return count;
     });
 };
