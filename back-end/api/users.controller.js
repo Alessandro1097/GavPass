@@ -4,6 +4,7 @@ const authService = require('./auth.service');
 const categoryService = require('./category.service');
 const noteCategoryService = require('./noteCategory.service');
 const tokenService = require('./token.service');
+var nodemailer = require('nodemailer');
 
 module.exports = function (app) {
 
@@ -37,15 +38,40 @@ module.exports = function (app) {
 
     app.post('/api/Users/checkEmail', function(req, res, next){
         service.checkEmailExist(req.body.emailUser, res)
-            .then(result => piru(result, res))
+            .then(result => checkResponse(result, res))
             .catch(err => next(err));
 
-        function piru(result, res) {
+        function checkResponse(result, res) {
             if(result === 1){
-                res.json({ message: 'Invieremo una mail al seguente indirizzo mail.' })
+                res.json({ message: 'Invieremo una mail al seguente indirizzo mail con una password temporanea.' })
+                sendEmail();
             } else {
                 res.json({ message: 'Sei sicuro che la mail sia corretta? :(' })
             }
+        }
+
+        function sendEmail() {
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'gavpass10@gmail.com',
+                    pass: 'GavPass8!?'
+                }
+            });
+            
+            const mailOptions = {
+                from: 'gavpass10@gmail.com', // sender address
+                to: 'cavuoti.alessandro@tuttomail.com', // list of receivers
+                subject: 'Reset password GavPass', // Subject line
+                html: '<p>Utilizza questa password per effettuare l\'accesso al tuo account: <b>prova</b></p>'// plain text body
+            };
+            
+            transporter.sendMail(mailOptions, function (err, info) {
+                if(err)
+                  console.log(err)
+                else
+                  console.log(info);
+            });
         }
     });
 
