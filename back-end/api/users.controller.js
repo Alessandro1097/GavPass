@@ -124,7 +124,7 @@ module.exports = function (app) {
         if (req.body._id) {
             // Update
             service.update(req.body._id, req.body.email, req.body.phone)
-                .then(res.json({ message: '1 document updated' }))
+                .then(res.json({ message: 'La registrazione è avvenuta con successo!' }))
                 .catch(err => next(err));
         } else {
             // Insert

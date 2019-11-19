@@ -222,8 +222,16 @@ a {
   justify-content: space-between;
 }
 
+.content-space-around {
+  justify-content: space-around;
+}
+
 .delete-button {
   background-color: #ba3f3f;
+}
+
+.w-80 {
+  width: 80%;
 }
 
 .w-100 {
@@ -232,6 +240,10 @@ a {
 
 .w-500 {
   width: 500px;
+}
+
+.w-50 {
+  width: 50%;
 }
 
 .card-authentication {

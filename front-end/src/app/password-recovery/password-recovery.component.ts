@@ -1,6 +1,6 @@
 import { User } from './../_models/user';
 import { UserService } from './../_services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -11,14 +11,20 @@ import { Validators, FormControl } from '@angular/forms';
 export class PasswordRecoveryComponent {
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
   ) { }
   responseEmail: User;
-  userEmail = new FormControl('', [Validators.required]);
+  userEmail = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    return this.userEmail.hasError('required') ? 'You must enter a value' :
+      this.userEmail.hasError('email') ? 'Not a valid email' :
+        '';
+  }
 
   onSubmit() {
     const emailUser = this.userEmail.value;
-    if (emailUser !== '' && emailUser !== null) {
+    if (this.userEmail.status !== 'INVALID') {
       this.userService.recoverEmail({ emailUser } as User).subscribe((email) => {
         this.responseEmail = email;
       });

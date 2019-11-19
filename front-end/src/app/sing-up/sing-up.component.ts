@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { User } from '../_models/user';
 
@@ -16,7 +16,6 @@ export class SingUpComponent {
   phone = new FormControl('', [Validators.required]);
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService
   ) { }
@@ -41,7 +40,7 @@ export class SingUpComponent {
     const pwd = this.pwd.value.trim();
     const phone = this.phone.value.trim();
     const role = 'user';
-    if (email && pwd && phone) {
+    if (this.email.status !== 'INVALID' && pwd && phone) {
       this.userService.createUser({ email, pwd, phone, role} as User).subscribe(user => user);
       this.router.navigate([`/login`]);
       // aggiungere un messaggio che dica che la registrazione è andata a buon fine e di controllare la mail

@@ -202,10 +202,17 @@ export class AddCategoryComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  getErrorMessage() {
+    return this.newCategory.hasError('required') ? 'You must enter a value' : '';
+  }
+
   onSubmit() {
     const name = this.newCategory.value.trim();
-    this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
-    this.openSnackSuccess();
+    if (name) {
+      this.cardService.addCategory({ name, } as cardType).subscribe(categoryToAdd => categoryToAdd);
+      this.openSnackSuccess();
+      this.closeDialog();
+    }
   }
 }
 

@@ -9,9 +9,10 @@
         <mat-card-title class="ma">
             <mat-form-field class="form-url">
                 <input matInput placeholder="Nome categoria" [formControl]="newCategory">
+                <mat-error *ngIf="newCategory.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </mat-card-title>
-        <button mat-raised-button color="primary" class="save-button" (click)="closeDialog()">Salva</button>
+        <button mat-raised-button color="primary" class="save-button">Salva</button>
     </form>
     <button mat-raised-button class="button-space undo-button" (click)="closeDialog()">Annulla</button>
 </div>

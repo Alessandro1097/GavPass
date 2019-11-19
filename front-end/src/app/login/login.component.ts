@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     const pwd = this.pwd.value.trim();
 
     this.loading = true;
-    if (email && pwd) {
+    if (this.email.status !== 'INVALID' && this.pwd.status !== 'INVALID') {
       this.authenticationService.login(email, pwd)
         .pipe(first())
         .subscribe(

@@ -163,7 +163,7 @@ export class AddNoteComponent implements OnInit {
   templateUrl: './add-note-categories.component.html',
 })
 
-export class AddNoteCategoriesComponent implements OnInit {
+export class AddNoteCategoriesComponent {
 
   newCategory = new FormControl('', [Validators.required]);
 
@@ -171,20 +171,32 @@ export class AddNoteCategoriesComponent implements OnInit {
     public dialogRef: MatDialogRef<AddNoteCategoriesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private noteService: NoteService,
+    private snackBar: MatSnackBar
   ) {
   }
 
-  ngOnInit() {}
+  getErrorMessage() {
+    return this.newCategory.hasError('required') ? 'You must enter a value' : '';
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
+  openSnackSuccess(): void {
+    const messageAddedCategory = 'Category added succesfully!';
+    this.snackBar.open(messageAddedCategory, 'Okay!', {
+      duration: 3000,
+      panelClass: ['green-snackbar']
+    });
+  }
+
   onSubmit() {
-    const currentToken = localStorage.getItem('currentUser');
-    const user = JSON.parse(currentToken).user;
     const name = this.newCategory.value.trim();
-    this.noteService.addNoteCategory({ name } as noteTypeCategories).subscribe(newCategoryName => newCategoryName);
-    this.closeDialog();
+    if (name) {
+      this.noteService.addNoteCategory({ name } as noteTypeCategories).subscribe(newCategoryName => newCategoryName);
+      this.closeDialog();
+      this.openSnackSuccess();
+    }
   }
 }
