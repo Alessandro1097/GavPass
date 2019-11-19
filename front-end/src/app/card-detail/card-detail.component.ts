@@ -10,7 +10,6 @@ import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 
 @Component({
@@ -31,7 +30,6 @@ export class CardDetailComponent implements OnInit {
     private cardService: CardService,
     private siteService: SiteService,
     public dialog: MatDialog,
-    public sideNavService: SidenavService,
     public sideBarService: SidebarService
   ) { }
 

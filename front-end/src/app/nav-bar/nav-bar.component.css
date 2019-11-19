@@ -22,3 +22,7 @@
 .side-width {
   width: 300px;
 }
+
+.mat-select-arrow {
+  color: white !important;
+}

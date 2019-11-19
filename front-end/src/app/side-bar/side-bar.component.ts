@@ -21,6 +21,8 @@ export class SideBarComponent {
     });
   }
 
+  // TODO: controllare che anche dopo il click la sidebar rimanga aperta
+
   increase() {
     this.sidenavWidth = 300;
   }

@@ -9,7 +9,6 @@ import { DialogData } from '../app.component';
 import { FormControl, Validators } from '@angular/forms';
 import { siteType } from '../type-site';
 import { MatSnackBar } from '@angular/material';
-import { SidenavService } from '../_services/sidenav.service';
 
 @Component({
   selector: 'app-card',
@@ -21,7 +20,6 @@ export class CardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     public dialog: MatDialog,
-    public sideNavService: SidenavService,
     public sideBarService: SidebarService
   ) {
   }

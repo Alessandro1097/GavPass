@@ -1,6 +1,5 @@
 import { NoteService } from '../_services/note.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { SidenavService } from '../_services/sidenav.service';
 import { SidebarService } from '../_services/sidebar.service';
 import { noteType } from '../note-type';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
@@ -22,7 +21,6 @@ export class NoteComponent implements OnInit {
 
   constructor(
     private noteService: NoteService,
-    public sideNavService: SidenavService,
     public sideBarService: SidebarService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -36,7 +34,7 @@ export class NoteComponent implements OnInit {
     this.noteService.getNote().subscribe(categoriesNote => this.categoriesNote = categoriesNote);
   }
 
-  addNotep() {
+  addNote() {
     const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '60%',
       height: '75%',

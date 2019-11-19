@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div style="display: flex">
-  <app-side-bar *ngIf="sideNavService.hideSideNav" class="sidebar"></app-side-bar>
+  <app-side-bar class="sidebar"></app-side-bar>
   <div class="card-section" style="width: 100%" [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h3 mat-subheader>Notes</h3>
     <mat-divider></mat-divider>
@@ -26,11 +26,9 @@
   </div>
 
   <nav class="container">
-    <!-- TODO: create addNote method-->
-    <a target="_blank" tooltip="Aggiugi nota" class="buttons" (click)="addNotep()">
+    <a target="_blank" tooltip="Aggiugi nota" class="buttons" (click)="addNote()">
       <mat-icon class="center-icon-add">description</mat-icon>
     </a>
-    <!-- TODO: create addCategoryNote method-->
     <a tooltip="Aggiungi categoria" class="buttons" (click)="addNoteCategories()">
       <mat-icon class="center-icon-add">folder</mat-icon>
     </a>
