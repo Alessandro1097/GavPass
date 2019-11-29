@@ -22,7 +22,6 @@ export class NavBarComponent implements OnInit {
   }
 
   getRouteSituation() {
-    const route = this.router.url;
     switch (this.router.url) {
       case '/':
         this.rappresentativeElement = 'nelle categorie';
