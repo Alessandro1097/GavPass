@@ -23,4 +23,8 @@ export class UserService {
         return this.http.post<User>(this.recoverForgottenEmail, email, httpOptions);
     }
 
+    checkStatusUser(): boolean {
+        if (localStorage.getItem('currentUser')) { return true; } return false;
+    }
+
 }

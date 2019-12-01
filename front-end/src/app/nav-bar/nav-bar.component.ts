@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,10 +15,10 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.getUsername();
     this.getRouteSituation();
   }
 
@@ -34,13 +35,4 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  getUsername() {
-    const currentToken = localStorage.getItem('currentUser');
-    if (currentToken) {
-      this.username = JSON.parse(currentToken).user;
-      this.logged = true;
-    } else {
-      this.logged = false;
-    }
-  }
 }

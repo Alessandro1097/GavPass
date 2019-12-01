@@ -1,5 +1,5 @@
 <mat-sidenav mode="side" class="example-sidenav" [style.width.px]=sidenavWidth opened="true" (mouseenter)="increase(); sidebarService.openSidebar()"
-             (mouseleave)="decrease(); sidebarService.closeSidebar()" style="height: 100%; position: fixed; z-index: 1;">
+             (mouseleave)="decrease(); sidebarService.closeSidebar()" style="height: 100%; position: fixed; z-index: 1;" *ngIf="userService.checkStatusUser()">
   <div>
     <button mat-button routerLink="/">
       <div class="iconContainer">

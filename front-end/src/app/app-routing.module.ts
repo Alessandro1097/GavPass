@@ -7,7 +7,7 @@ import { NoteComponent } from './note/note.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
-import {NotFound404Component} from './not-found404/not-found404.component';
+import { NotFound404Component } from './not-found404/not-found404.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'sing-up', component: SingUpComponent },
   { path: 'notes', component: NoteComponent },
   { path: 'detail/:name', component: CardDetailComponent },
-  { path: '', component: CardComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'cards', component: CardComponent },
   { path: '**', component: NotFound404Component }
 ];
 

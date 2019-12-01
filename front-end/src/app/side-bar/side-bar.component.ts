@@ -1,3 +1,4 @@
+import { UserService } from './../_services/user.service';
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { SidebarService } from '../_services/sidebar.service';
@@ -12,7 +13,8 @@ export class SideBarComponent {
   sidenavWidth = 70;
 
   constructor(fb: FormBuilder,
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,
+    public userService: UserService
     ) {
     this.options = fb.group({
       bottom: 0,
@@ -20,7 +22,6 @@ export class SideBarComponent {
       top: 0
     });
   }
-
   // TODO: controllare che anche dopo il click la sidebar rimanga aperta
 
   increase() {

@@ -1,5 +1,5 @@
 <!-- Toolbar -->
-<div *ngIf="logged">
+<div *ngIf="userService.checkStatusUser()">
   <div class="top-bar-login example-toolbar">
     <a routerLink="/">
       <img src="../assets/logo.png" alt="" width="200" class="cursor-pointer logo-placement">
