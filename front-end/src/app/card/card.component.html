@@ -1,7 +1,5 @@
-<app-nav-bar></app-nav-bar>
 <div style="display: flex">
   <img class="spinner" *ngIf="loading" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-  <app-side-bar class="sidebar"></app-side-bar>
   <div [style.marginLeft.px]=sideBarService.sidebarWidth>
     <h2 class="category-space card-section">My category</h2>
     <div class="card-container">

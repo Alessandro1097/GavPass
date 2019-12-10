@@ -1,7 +1,7 @@
 <mat-sidenav mode="side" class="example-sidenav" [style.width.px]=sidenavWidth opened="true" (mouseenter)="increase(); sidebarService.openSidebar()"
              (mouseleave)="decrease(); sidebarService.closeSidebar()" style="height: 100%; position: fixed; z-index: 1;" *ngIf="userService.checkStatusUser()">
   <div>
-    <button mat-button routerLink="/">
+    <button mat-button routerLink="/cards">
       <div class="iconContainer">
         <mat-icon class="icon-color" [ngClass]="{iconS: sidenavWidth > 40}">category</mat-icon>
         <div *ngIf="sidenavWidth > 80">

@@ -1,30 +1,50 @@
-import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { NavBarService } from './../_services/nav-bar.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import { Router, Event } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
 
   public username;
   public rappresentativeElement;
-  logged: boolean;
+  private observerRouter: Subscription;
 
   constructor(
     private router: Router,
+    private navBarService: NavBarService,
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.getRouteSituation();
+    // observable on router
+    this.observerRouter = this.router.events.subscribe(
+      () => {
+        this.getRouteSituation();
+      }
+    );
+    this.getUsername();
+  }
+
+  ngOnDestroy() {
+    this.observerRouter.unsubscribe();
+  }
+
+  getUsername() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.username = currentUser.user;
   }
 
   getRouteSituation() {
-    switch (this.router.url) {
-      case '/':
+    const url = this.router.url;
+    switch (url) {
+      case '/cards':
+        if (url) {}
         this.rappresentativeElement = 'nelle categorie';
         break;
       case '/notes':
@@ -32,6 +52,7 @@ export class NavBarComponent implements OnInit {
       break;
       default:
         this.rappresentativeElement = 'nei siti';
+      break;
     }
   }
 
